@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.NewCustomerController">
+   <left>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #B3EBE5;" BorderPane.alignment="CENTER">
+         <children>
+            <Text fill="#141414" layoutX="67.0" layoutY="123.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ADD" textAlignment="CENTER" wrappingWidth="66.568359375">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Text>
+            <Text layoutX="38.0" layoutY="199.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CUSTOMER" textAlignment="CENTER">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Text>
+            <Line endX="86.0" layoutX="96.0" layoutY="226.0" startX="-78.5" />
+            <Text fill="#141414" layoutX="66.0" layoutY="158.0" strokeType="OUTSIDE" strokeWidth="0.0" text="NEW" textAlignment="CENTER" wrappingWidth="66.568359375">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Text>
+         </children>
+      </AnchorPane>
+   </left>
+   <center>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <Text layoutX="29.0" layoutY="154.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Text>
+            <Text layoutX="27.0" layoutY="111.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Customer ID">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Text>
+            <Text layoutX="26.0" layoutY="252.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Street Address">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Text>
+            <Text layoutX="26.0" layoutY="298.0" strokeType="OUTSIDE" strokeWidth="0.0" text="City">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Text>
+            <Text layoutX="22.0" layoutY="340.0" strokeType="OUTSIDE" strokeWidth="0.0" text="State / Province">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Text>
+            <Text layoutX="21.0" layoutY="384.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Postal Code">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Text>
+            <Text layoutX="24.0" layoutY="434.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Country">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Text>
+            <Text layoutX="25.0" layoutY="480.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Division ID">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Text>
+            <Text layoutX="26.0" layoutY="202.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Phone Number">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Text>
+            <Button layoutX="276.0" layoutY="577.0" mnemonicParsing="false" onAction="#saveAddNewCustomer" prefHeight="36.0" prefWidth="89.0" text="Save" />
+            <ChoiceBox fx:id="addNewCustomerDivisionId" layoutX="168.0" layoutY="460.0" prefHeight="25.0" prefWidth="191.0" />
+            <TextField fx:id="addNewCustomerId" disable="true" layoutX="202.0" layoutY="92.0" promptText="Auto-Generated" />
+            <Button layoutX="171.0" layoutY="577.0" mnemonicParsing="false" onAction="#cancelAddNewCustomer" prefHeight="36.0" prefWidth="89.0" text="Cancel" />
+            <TextField fx:id="addNewCustomerName" layoutX="175.0" layoutY="134.0" prefHeight="25.0" prefWidth="176.0" />
+            <TextField fx:id="addNewCustomerPhone" layoutX="175.0" layoutY="182.0" prefHeight="25.0" prefWidth="176.0" />
+            <TextField fx:id="addNewCustomerAddress" layoutX="175.0" layoutY="232.0" prefHeight="25.0" prefWidth="176.0" />
+            <TextField fx:id="addNewCustomerCity" layoutX="175.0" layoutY="278.0" prefHeight="25.0" prefWidth="176.0" />
+            <TextField fx:id="addNewCustomerStateProvince" layoutX="175.0" layoutY="320.0" prefHeight="25.0" prefWidth="176.0" />
+            <ChoiceBox fx:id="addNewCustomerCountry" layoutX="168.0" layoutY="414.0" prefHeight="25.0" prefWidth="191.0" />
+            <TextField fx:id="addNewCustomerPostalCode" layoutX="175.0" layoutY="364.0" prefHeight="25.0" prefWidth="176.0" />
+         </children>
+      </AnchorPane>
+   </center>
+</BorderPane>

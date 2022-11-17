@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="980.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.ReportsByMonthController">
+   <left>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #B3EBE5;" BorderPane.alignment="CENTER">
+         <children>
+            <Text layoutX="18.0" layoutY="62.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Appointments" textAlignment="CENTER" wrappingWidth="165.576171875">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Text>
+            <Button layoutX="66.0" layoutY="176.0" mnemonicParsing="false" onAction="#homeButtonApptsByMonth" prefHeight="39.0" prefWidth="67.0" text="Home" />
+            <Button layoutX="42.0" layoutY="240.0" mnemonicParsing="false" onAction="#backToReportsApptByMonth" prefHeight="40.0" prefWidth="117.0" text="Back To Reports" />
+            <Line endX="79.0" layoutX="102.0" layoutY="132.0" startX="-82.0">
+               <effect>
+                  <DropShadow />
+               </effect>
+            </Line>
+            <Text layoutX="18.0" layoutY="102.0" strokeType="OUTSIDE" strokeWidth="0.0" text="By Month" textAlignment="CENTER" wrappingWidth="165.576171875">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Text>
+         </children>
+      </AnchorPane>
+   </left>
+   <center>
+      <TableView fx:id="appointmentsByMonthTableView" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+        <columns>
+          <TableColumn fx:id="monthName" prefWidth="101.0" text="Month" />
+          <TableColumn fx:id="apptTypeMonth" prefWidth="134.0" text="Appointment Type" />
+            <TableColumn fx:id="totalNumAppts" minWidth="0.0" prefWidth="81.0" text="Total" />
+        </columns>
+      </TableView>
+   </center>
+</BorderPane>

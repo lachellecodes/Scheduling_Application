@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="980.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.ReportsByUserController">
+   <left>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #B3EBE5;" BorderPane.alignment="CENTER">
+         <children>
+            <Text layoutX="18.0" layoutY="62.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Appointments" textAlignment="CENTER" wrappingWidth="165.576171875">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Text>
+            <Button layoutX="66.0" layoutY="209.0" mnemonicParsing="false" onAction="#homeButtonFromApptByUsers" prefHeight="39.0" prefWidth="67.0" text="Home" />
+            <Button layoutX="41.0" layoutY="271.0" mnemonicParsing="false" onAction="#backToReportsButtonFromApptByUsers" prefHeight="40.0" prefWidth="117.0" text="Back To Reports" />
+            <Line endX="79.0" layoutX="102.0" layoutY="171.0" startX="-82.0">
+               <effect>
+                  <DropShadow />
+               </effect>
+            </Line>
+            <Text layoutX="17.0" layoutY="129.0" strokeType="OUTSIDE" strokeWidth="0.0" text="For Users" textAlignment="CENTER" wrappingWidth="165.576171875">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Text>
+            <Text layoutX="18.0" layoutY="94.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Schedule" textAlignment="CENTER" wrappingWidth="165.576171875">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Text>
+         </children>
+      </AnchorPane>
+   </left>
+   <center>
+      <TableView fx:id="apptsByUsersTableView" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+        <columns>
+          <TableColumn fx:id="users" prefWidth="75.0" text="User" />
+          <TableColumn fx:id="usersApptId" prefWidth="71.0" text="Appt ID" />
+            <TableColumn fx:id="usersApptTitle" minWidth="0.0" prefWidth="79.0" text="Title" />
+            <TableColumn fx:id="usersApptType" prefWidth="75.0" text="Type" />
+            <TableColumn fx:id="usersApptDescription" prefWidth="94.0" text="Description" />
+            <TableColumn fx:id="usersApptStartDate" prefWidth="83.0" text="Start Date" />
+            <TableColumn fx:id="usersApptStartTime" prefWidth="68.0" text="Start Time" />
+            <TableColumn fx:id="usersApptEndDate" prefWidth="72.0" text="End Date" />
+            <TableColumn fx:id="usersApptEndTime" prefWidth="69.0" text="End Time" />
+            <TableColumn fx:id="usersApptCustomerId" prefWidth="109.0" text="Customer ID" />
+        </columns>
+      </TableView>
+   </center>
+</BorderPane>

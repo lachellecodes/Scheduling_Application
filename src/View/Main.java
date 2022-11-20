@@ -15,7 +15,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("Dashboard.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("LoginScreen.fxml"));
         primaryStage.setTitle("Timely Team Scheduling Application");
         primaryStage.setScene(new Scene(root, 1200, 600));
         primaryStage.show();
@@ -27,9 +27,6 @@ public class Main extends Application {
         DBConnection.openConnection();
         launch(args);
 
-
-
-        //ResourceBundle rb = ResourceBundle.getBundle("src/Nat_fr.properties", Locale.getDefault());
 
         DBConnection.closeConnection();
 

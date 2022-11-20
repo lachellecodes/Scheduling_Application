@@ -24,11 +24,14 @@ public abstract class DBConnection {
             System.out.println("Connection successful!");
 
         }
-        catch(Exception e)
+        catch(SQLException e)
 
         {
             e.printStackTrace();
             //System.out.println("Error:" + e.getMessage());
+        }
+        catch (ClassNotFoundException e){
+            e.printStackTrace();
         }
     }
 
@@ -40,11 +43,10 @@ public abstract class DBConnection {
     public static void closeConnection() {
         try {
             connection.close();
-            System.out.println("Connection closed!");
+            //System.out.println("Connection closed!");
         }
         catch(Exception e)
         {
-            e.printStackTrace();
             //System.out.println("Error:" + e.getMessage());
         }
     }

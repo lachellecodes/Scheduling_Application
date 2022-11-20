@@ -22,20 +22,24 @@ public class LoginController implements Initializable {
         private Label zoneIdLabel;
 
         @FXML
+        private Label loginTitleLabel;
+
+        @FXML
         void loginButton(ActionEvent event) {
 
         }
 
     Locale currentLocale = Locale.getDefault();
 
-    ResourceBundle rb = ResourceBundle.getBundle("Resources/Nat_en.properties\n" +
-            "Resources/Nat_fr.properties", currentLocale);
+    ResourceBundle rb = ResourceBundle.getBundle("Resources/Nat", currentLocale);
 
     private void setLanguage () {
 
             userIdLabel.setText(rb.getString("userIdLabel"));
             passwordLabel.setText(rb.getString("passwordLabel"));
             zoneIdLabel.setText(rb.getString("zoneIdLabel"));
+            loginTitleLabel.setText(rb.getString("loginTitleLabel"));
+
 
     }
 

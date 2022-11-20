@@ -15,7 +15,7 @@
    <right>
       <AnchorPane prefHeight="400.0" prefWidth="332.0" BorderPane.alignment="CENTER">
          <children>
-            <Label alignment="CENTER" layoutX="59.0" layoutY="47.0" prefHeight="32.0" prefWidth="214.0" text="Secure Login" textAlignment="CENTER">
+            <Label fx:id="loginTitleLabel" alignment="CENTER" layoutX="59.0" layoutY="47.0" prefHeight="32.0" prefWidth="214.0" text="Secure Login" textAlignment="CENTER">
                <font>
                   <Font name="Trebuchet MS" size="20.0" />
                </font>
@@ -23,12 +23,12 @@
                   <InnerShadow />
                </effect>
             </Label>
-            <Label fx:id="userIdLabel" layoutX="60.0" layoutY="132.0" text="User ID">
+            <Label fx:id="userIdLabel" layoutX="36.0" layoutY="132.0" text="User ID">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
-            <Label fx:id="passwordLabel" layoutX="60.0" layoutY="181.0" text="Password">
+            <Label fx:id="passwordLabel" layoutX="30.0" layoutY="181.0" text="Password">
                <font>
                   <Font size="14.0" />
                </font>
@@ -36,7 +36,7 @@
             <TextField layoutX="130.0" layoutY="129.0" />
             <PasswordField layoutX="132.0" layoutY="178.0" />
             <Button layoutX="73.0" layoutY="286.0" mnemonicParsing="false" onAction="#loginButton" prefHeight="30.0" prefWidth="187.0" style="-fx-background-color: #B3EbE5;" text="Login" textFill="#111010" />
-            <Label fx:id="zoneIdLabel" layoutX="65.0" layoutY="230.0" text="Zone ID">
+            <Label fx:id="zoneIdLabel" layoutX="35.0" layoutY="231.0" text="Zone ID">
                <font>
                   <Font size="14.0" />
                </font>

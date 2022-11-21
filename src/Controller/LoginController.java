@@ -3,9 +3,14 @@ package Controller;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
 
 import java.net.URL;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
@@ -25,7 +30,28 @@ public class LoginController implements Initializable {
         private Label loginTitleLabel;
 
         @FXML
+        private PasswordField passwordText;
+
+        @FXML
+        private TextField userIDtext;
+
+        public void validateUser ()  {
+
+            String verifyLogin = "SELECT count(1) FROM users WHERE User_Name = '" + userIDtext.getText()+"' AND Password  = '"+passwordText.getText() +"'";
+
+
+        }
+
+        @FXML
         void loginButton(ActionEvent event) {
+
+            if(userIDtext.getText().isBlank()== false && passwordText.getText().isBlank()==false)
+            {
+                Alert alert = new Alert (Alert.AlertType.ERROR, "Please enter a username and password.");
+                alert.showAndWait();
+            }
+
+            else
 
         }
 

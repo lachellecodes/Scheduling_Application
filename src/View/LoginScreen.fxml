@@ -33,8 +33,8 @@
                   <Font size="14.0" />
                </font>
             </Label>
-            <TextField layoutX="130.0" layoutY="129.0" />
-            <PasswordField layoutX="132.0" layoutY="178.0" />
+            <TextField fx:id="userIDtext" layoutX="130.0" layoutY="129.0" />
+            <PasswordField fx:id="passwordText" layoutX="132.0" layoutY="178.0" />
             <Button layoutX="73.0" layoutY="286.0" mnemonicParsing="false" onAction="#loginButton" prefHeight="30.0" prefWidth="187.0" style="-fx-background-color: #B3EbE5;" text="Login" textFill="#111010" />
             <Label fx:id="zoneIdLabel" layoutX="35.0" layoutY="231.0" text="Zone ID">
                <font>

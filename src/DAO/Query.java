@@ -1,4 +1,4 @@
 package DAO;
 
-public class Query {
+public abstract class Query {
 }

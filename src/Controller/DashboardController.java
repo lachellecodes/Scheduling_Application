@@ -2,6 +2,7 @@ package Controller;
 
 
 
+import DAO.DBConnection;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -51,6 +52,8 @@ public class DashboardController implements Initializable {
 
     @FXML
     void exitButton(ActionEvent event) {
+        DBConnection.closeConnection();
+
         System.exit(0);
 
     }

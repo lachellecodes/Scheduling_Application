@@ -43,11 +43,11 @@ public abstract class DBConnection {
     public static void closeConnection() {
         try {
             connection.close();
-            //System.out.println("Connection closed!");
+            System.out.println("Connection closed!");
         }
         catch(Exception e)
         {
-            //System.out.println("Error:" + e.getMessage());
+            System.out.println("Error:" + e.getMessage());
         }
     }
 }

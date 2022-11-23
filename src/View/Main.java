@@ -26,13 +26,14 @@ public class Main extends Application {
     }
 
 
+
     public static void main(String[] args) {
 
         DBConnection.openConnection();
         launch(args);
 
 
-       // DBConnection.closeConnection();
+       DBConnection.closeConnection();
 
 
     }

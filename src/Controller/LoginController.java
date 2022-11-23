@@ -21,6 +21,8 @@ import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.TimeZone;
 
+/** This class is a controller for the log in screen and provides all logic for sign in actions, error messages and local time zone. */
+
 public class LoginController implements Initializable {
 
 
@@ -48,10 +50,10 @@ public class LoginController implements Initializable {
         @FXML
         private Button loginButton;
 
-
+        /** Gets the default time zone for the user's locale.*/
         private  TimeZone userTimeZone = TimeZone.getDefault();
 
-
+        /** Loads the next screen (Dashboard) after log in if user is successfully verified. */
         public void loadDashboard (ActionEvent event) throws IOException {
             Parent parent = FXMLLoader.load(getClass().getResource("/View/Dashboard.fxml"));
             Scene scene = new Scene(parent);
@@ -59,7 +61,9 @@ public class LoginController implements Initializable {
             stage.setScene(scene);
             stage.show();
         }
-
+        /** A method to verify if user enters the correct information. Gets text entered into the username and password field on
+         * the log in form. Uses a SQL prepared statement to match these strings against database. If there is a match, returns
+         * a true Boolean variable. */
         public Boolean validateUser () throws SQLException {
             
             Boolean userVerified = false;
@@ -87,7 +91,9 @@ public class LoginController implements Initializable {
             return userVerified;
 
         }
-
+        /** Method that handles the login in button action. Displays an alert message if the user ID and password fields are blank.
+         * Calls the validateUser method to validate credentials. If user is validated calls the loadDashboard method to go
+         * to the next screen. If user is not validated, displays an error message to enter a valid user ID and password.*/
         @FXML
         void loginButton(ActionEvent event) throws SQLException, IOException {
 
@@ -110,15 +116,19 @@ public class LoginController implements Initializable {
 
             }
         }
-
+    /** Gets the users current locale. */
     Locale currentLocale = Locale.getDefault();
 
+    /** Specifies location of resource bundle for supported languages.*/
     ResourceBundle rb = ResourceBundle.getBundle("Resources/Nat", currentLocale);
 
+
+    /** A getter for the users current Time Zone. */
     public TimeZone getUserTimeZone(){
         return userTimeZone;
     }
 
+    /** A method to get the language on the login in screen to users locale. */
     private void setLanguage () {
 
             userIdLabel.setText(rb.getString("userIdLabel"));
@@ -132,7 +142,8 @@ public class LoginController implements Initializable {
 
 
 
-
+    /** Upon initialization of the login screen calls the setLanguage method to set Text to default locale language.
+     * Calls method to get users Time Zone and sets the text in the Time Zone box to that. */
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

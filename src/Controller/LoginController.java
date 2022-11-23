@@ -8,6 +8,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -38,7 +39,10 @@ public class LoginController implements Initializable {
 
         @FXML
         private TextField userIDtext;
-        
+
+        @FXML
+        private Text messageText;
+
         public void loadDashboard (ActionEvent event) throws IOException {
             Parent parent = FXMLLoader.load(getClass().getResource("/View/Dashboard.fxml"));
             Scene scene = new Scene(parent);
@@ -47,54 +51,51 @@ public class LoginController implements Initializable {
             stage.show();
         }
 
-        public void validateUser () throws SQLException {
+        public Boolean validateUser () throws SQLException {
             
             Boolean userVerified = false;
 
-            String user = userIdLabel.getText();
+            String user = userIDtext.getText();
             String password = passwordText.getText();
 
             String verifyLogin = "SELECT * FROM users WHERE User_Name = '" + user + "' AND Password  = '"+password + "'";
+            System.out.println(verifyLogin);
             try{
 
              PreparedStatement ps= DBConnection.connection.prepareStatement(verifyLogin);
              ResultSet rs = ps.executeQuery();
-             //TODO why does it let me enter any name and password and still logs in
+
              while(rs.next()){
+                 System.out.println("Wow");
                  String userName = rs.getString("User_Name");
                  String userPassword = rs.getString("Password");
-                 if(rs.getString(userName).equals(user) && rs.getString(userPassword).equals(password) ){
-                     userVerified = true;
-                     
-                 }
-                 
-                 else{
-                     Alert alert = new Alert(Alert.AlertType.ERROR, " Invalid username or password. Please try again.");
-                 }
-             }
+                 userVerified = true;}
+
             }
             catch (Exception e){
                 e.printStackTrace();
             }
-
+            return userVerified;
 
         }
 
         @FXML
         void loginButton(ActionEvent event) throws SQLException, IOException {
 
-            if(userIDtext.getText().isBlank()== true && passwordText.getText().isBlank()==true)
-            {
-                Alert alert = new Alert (Alert.AlertType.ERROR, "Please enter a username and password.");
-                alert.showAndWait();
-            }
+            if (userIDtext.getText().isBlank() == true || passwordText.getText().isBlank() == true) {
+                messageText.setText("Please enter a username and password.");
+                Alert alert = new Alert(Alert.AlertType.ERROR, "Please enter a username and password.");
+                alert.show();
+            } else {
+                if (validateUser()) {
+                    loadDashboard(event);
 
-            else{
-                validateUser();
-                loadDashboard(event);
-                
-            }
+                } else {
+                    Alert alert = new Alert(Alert.AlertType.ERROR, " Invalid username or password. Please try again.");
+                    alert.show();
+                }
 
+            }
         }
 
     Locale currentLocale = Locale.getDefault();

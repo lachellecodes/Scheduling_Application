@@ -10,6 +10,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="520.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.LoginController">
    <right>
@@ -35,13 +36,18 @@
             </Label>
             <TextField fx:id="userIDtext" layoutX="130.0" layoutY="129.0" />
             <PasswordField fx:id="passwordText" layoutX="132.0" layoutY="178.0" />
-            <Button layoutX="73.0" layoutY="286.0" mnemonicParsing="false" onAction="#loginButton" prefHeight="30.0" prefWidth="187.0" style="-fx-background-color: #B3EbE5;" text="Login" textFill="#111010" />
+            <Button layoutX="73.0" layoutY="303.0" mnemonicParsing="false" onAction="#loginButton" prefHeight="30.0" prefWidth="187.0" style="-fx-background-color: #B3EbE5;" text="Sign In" textFill="#111010" />
             <Label fx:id="zoneIdLabel" layoutX="35.0" layoutY="231.0" text="Zone ID">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
             <TextField disable="true" layoutX="132.0" layoutY="228.0" />
+            <Text fx:id="messageText" layoutX="67.0" layoutY="279.0" strokeType="OUTSIDE" strokeWidth="0.0">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Text>
          </children>
       </AnchorPane>
    </right>

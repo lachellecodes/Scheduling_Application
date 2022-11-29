@@ -4,17 +4,21 @@ import Model.Customers;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.net.URL;
 import java.time.LocalDateTime;
+import java.util.ResourceBundle;
 
-public class CustomerInfoController {
+public class CustomerInfoController implements Initializable {
 
         @FXML
         private TableView<Customers> customerTableView;
@@ -86,6 +90,21 @@ public class CustomerInfoController {
 
 
         }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+
+        customerTableId.setCellValueFactory( new PropertyValueFactory<>("customerID"));
+        customerTableName.setCellValueFactory(new PropertyValueFactory<>("customerName"));
+        customerTableAddress.setCellValueFactory(new PropertyValueFactory<>("address"));
+        customerTablePostalCode.setCellValueFactory(new PropertyValueFactory<>("postalCode"));
+        customerTablePhone.setCellValueFactory(new PropertyValueFactory<>("phone"));
+        customerTableCreateDate.setCellValueFactory(new PropertyValueFactory<>("createDate"));
+        customerTableCreatedBy.setCellValueFactory(new PropertyValueFactory<>("createdBy"));
+    }
+
+
+
 
 }
 

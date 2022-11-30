@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 
 public class Customers {
 
-    int customerID;
+    int customerId;
     String customerName;
     String address;
     String postalCode;
@@ -13,10 +13,10 @@ public class Customers {
     String createdBy;
     LocalDateTime updatedDate;
     String updatedBy;
-    int divsionID;
+    int divsionId;
 
-    public Customers(int customerID, String customerName, String address, String postalCode, String phone, LocalDateTime createDate, String createdBy, LocalDateTime updatedDate, String updatedBy, int divsionID) {
-        this.customerID = customerID;
+    public Customers(int customerId, String customerName, String address, String postalCode, String phone, LocalDateTime createDate, String createdBy, LocalDateTime updatedDate, String updatedBy, int divsionId) {
+        this.customerId = customerId;
         this.customerName = customerName;
         this.address = address;
         this.postalCode = postalCode;
@@ -25,15 +25,15 @@ public class Customers {
         this.createdBy = createdBy;
         this.updatedDate = updatedDate;
         this.updatedBy = updatedBy;
-        this.divsionID = divsionID;
+        this.divsionId = divsionId;
     }
 
-    public int getCustomerID() {
-        return customerID;
+    public int getCustomerId() {
+        return customerId;
     }
 
-    public void setCustomerID(int customerID) {
-        this.customerID = customerID;
+    public void setCustomerId(int customerId) {
+        this.customerId = customerId;
     }
 
     public String getCustomerName() {
@@ -100,11 +100,11 @@ public class Customers {
         this.updatedBy = updatedBy;
     }
 
-    public int getDivsionID() {
-        return divsionID;
+    public int getDivsionId() {
+        return divsionId;
     }
 
-    public void setDivsionID(int divsionID) {
-        this.divsionID = divsionID;
+    public void setDivsionId(int divsionId) {
+        this.divsionId = divsionId;
     }
 }

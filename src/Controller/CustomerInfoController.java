@@ -1,6 +1,7 @@
 package Controller;
 
 import Model.Customers;
+import DAO.CustomerDAO;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -15,6 +16,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.util.ResourceBundle;
 
@@ -91,9 +93,17 @@ public class CustomerInfoController implements Initializable {
 
         }
 
+
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        //TODO why does it keep getting the list of all customers over and over? should i move this method from initialize?
 
+        try {
+            customerTableView.setItems(CustomerDAO.getAllCustomers());
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
         customerTableId.setCellValueFactory( new PropertyValueFactory<>("customerID"));
         customerTableName.setCellValueFactory(new PropertyValueFactory<>("customerName"));
         customerTableAddress.setCellValueFactory(new PropertyValueFactory<>("address"));
@@ -101,6 +111,8 @@ public class CustomerInfoController implements Initializable {
         customerTablePhone.setCellValueFactory(new PropertyValueFactory<>("phone"));
         customerTableCreateDate.setCellValueFactory(new PropertyValueFactory<>("createDate"));
         customerTableCreatedBy.setCellValueFactory(new PropertyValueFactory<>("createdBy"));
+
+
     }
 
 

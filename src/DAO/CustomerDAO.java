@@ -17,7 +17,9 @@ public class CustomerDAO {
 
         ObservableList<Customers> allCustomers = FXCollections.observableArrayList();
 
-        String query = "SELECT * FROM client_schedule.customers ";
+        String query = "SELECT * FROM customers, first_level_divisions, countries \n" +
+                        "WHERE customers.Division_ID = first_level_divisions.Division_ID \n" +
+                        "AND countries.Country_ID = first_level_divisions.Country_ID";
         PreparedStatement ps = DBConnection.connection.prepareStatement(query);
         ResultSet rs= ps.executeQuery();
         while (rs.next()){
@@ -26,8 +28,9 @@ public class CustomerDAO {
             String address = rs.getString("Address");
             String postalCode = rs.getString("Postal_Code");
             String  phone = rs.getString("Phone");
+            String country = rs.getString("Country");
             int divsionId = rs.getInt("Division_ID");
-            Customers customer = new Customers(customerId, customerName, address, postalCode, phone,  divsionId );
+            Customers customer = new Customers(customerId, customerName, address, postalCode, phone,  divsionId, country);
             allCustomers.add(customer);
 
         }

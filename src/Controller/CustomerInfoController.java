@@ -24,13 +24,13 @@ public class CustomerInfoController implements Initializable {
 
 
     @FXML
-        private TableView<Customers> customerTableView;
+    private TableView<Customers> customerTableView;
 
     @FXML
     private TableColumn<Customers, String> customerTableAddress;
 
     @FXML
-    private TableColumn <?,?> customerTableCountry;
+    private TableColumn <Customers,String> customerTableCountry;
 
 
     @FXML
@@ -91,7 +91,6 @@ public class CustomerInfoController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        //TODO why does it keep getting the list of all customers over and over? should i move this method from initialize?
 
         try {
             customerTableView.setItems(CustomerDAO.getAllCustomers());
@@ -104,9 +103,8 @@ public class CustomerInfoController implements Initializable {
         customerTablePostalCode.setCellValueFactory(new PropertyValueFactory<>("postalCode"));
         customerTablePhone.setCellValueFactory(new PropertyValueFactory<>("phone"));
         customerTableDivisionId.setCellValueFactory(new PropertyValueFactory<>("divsionId"));
-        //TODO get rid of of create ad update, add country and division id
-        //customerTableCreateDate.setCellValueFactory(new PropertyValueFactory<>("createDate"));
-        //customerTableCreatedBy.setCellValueFactory(new PropertyValueFactory<>("createdBy"));
+        customerTableCountry.setCellValueFactory(new PropertyValueFactory<>("country"));
+
 
 
     }

@@ -11,15 +11,25 @@ public class Customers {
     String address;
     String postalCode;
     String phone;
+    String country;
     int divsionId;
 
-    public Customers(int customerId, String customerName, String address, String postalCode, String phone,  int divsionId) {
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
+    public Customers(int customerId, String customerName, String address, String postalCode, String phone, int divsionId, String country) {
         this.customerId = customerId;
         this.customerName = customerName;
         this.address = address;
         this.postalCode = postalCode;
         this.phone = phone;
         this.divsionId = divsionId;
+        this.country=country;
     }
 
     public int getCustomerId() {

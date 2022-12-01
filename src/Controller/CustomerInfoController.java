@@ -22,17 +22,16 @@ import java.util.ResourceBundle;
 
 public class CustomerInfoController implements Initializable {
 
-        @FXML
+
+    @FXML
         private TableView<Customers> customerTableView;
 
     @FXML
     private TableColumn<Customers, String> customerTableAddress;
 
     @FXML
-    private TableColumn<Customers, LocalDateTime> customerTableCreateDate;
+    private TableColumn <?,?> customerTableCountry;
 
-    @FXML
-    private TableColumn<Customers, String> customerTableCreatedBy;
 
     @FXML
     private TableColumn<Customers, Integer> customerTableDivisionId;
@@ -40,11 +39,6 @@ public class CustomerInfoController implements Initializable {
     @FXML
     private TableColumn<Customers, Integer> customerTableId;
 
-    @FXML
-    private TableColumn<Customers, LocalDateTime> customerTableLastUpdate;
-
-    @FXML
-    private TableColumn<Customers, String> customerTableLastUpdatedBy;
 
     @FXML
     private TableColumn<Customers, String> customerTableName;
@@ -104,13 +98,15 @@ public class CustomerInfoController implements Initializable {
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-        customerTableId.setCellValueFactory( new PropertyValueFactory<>("customerID"));
+        customerTableId.setCellValueFactory( new PropertyValueFactory<>("customerId"));
         customerTableName.setCellValueFactory(new PropertyValueFactory<>("customerName"));
         customerTableAddress.setCellValueFactory(new PropertyValueFactory<>("address"));
         customerTablePostalCode.setCellValueFactory(new PropertyValueFactory<>("postalCode"));
         customerTablePhone.setCellValueFactory(new PropertyValueFactory<>("phone"));
-        customerTableCreateDate.setCellValueFactory(new PropertyValueFactory<>("createDate"));
-        customerTableCreatedBy.setCellValueFactory(new PropertyValueFactory<>("createdBy"));
+        customerTableDivisionId.setCellValueFactory(new PropertyValueFactory<>("divsionId"));
+        //TODO get rid of of create ad update, add country and division id
+        //customerTableCreateDate.setCellValueFactory(new PropertyValueFactory<>("createDate"));
+        //customerTableCreatedBy.setCellValueFactory(new PropertyValueFactory<>("createdBy"));
 
 
     }

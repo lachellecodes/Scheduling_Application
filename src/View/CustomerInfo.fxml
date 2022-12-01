@@ -28,15 +28,12 @@
       <TableView fx:id="customerTableView" prefHeight="480.0" prefWidth="745.0" BorderPane.alignment="CENTER">
         <columns>
           <TableColumn fx:id="customerTableId" prefWidth="75.0" text="ID" />
-          <TableColumn fx:id="customerTableName" prefWidth="75.0" text="Name" />
-            <TableColumn fx:id="customerTableAddress" prefWidth="110.0" text="Address" />
-            <TableColumn fx:id="customerTablePostalCode" prefWidth="82.0" text="Postal Code" />
-            <TableColumn fx:id="customerTablePhone" prefWidth="67.0" text="Phone" />
-            <TableColumn fx:id="customerTableCreateDate" prefWidth="86.0" text="Created Date" />
-            <TableColumn fx:id="customerTableCreatedBy" minWidth="2.0" prefWidth="77.0" text="Created By" />
-            <TableColumn fx:id="customerTableLastUpdate" prefWidth="82.0" text="Last Update" />
-            <TableColumn fx:id="customerTableLastUpdatedBy" prefWidth="104.0" text="Last Updated By" />
-            <TableColumn fx:id="customerTableDivisionId" minWidth="2.0" prefWidth="91.0" text="Division ID" />
+          <TableColumn fx:id="customerTableName" prefWidth="113.0" text="Name" />
+            <TableColumn fx:id="customerTableAddress" prefWidth="175.0" text="Address" />
+            <TableColumn fx:id="customerTablePostalCode" prefWidth="77.0" text="Postal Code" />
+            <TableColumn fx:id="customerTablePhone" prefWidth="85.0" text="Phone" />
+            <TableColumn fx:id="customerTableCountry" minWidth="0.0" prefWidth="99.0" text="Country" />
+            <TableColumn fx:id="customerTableDivisionId" minWidth="2.0" prefWidth="98.0" text="Division ID" />
         </columns>
       </TableView>
    </center>

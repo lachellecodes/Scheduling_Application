@@ -1,5 +1,7 @@
 package Model;
 
+import javafx.scene.control.ComboBox;
+
 import java.time.LocalDateTime;
 
 public class Customers {
@@ -9,22 +11,14 @@ public class Customers {
     String address;
     String postalCode;
     String phone;
-    LocalDateTime createDate;
-    String createdBy;
-    LocalDateTime updatedDate;
-    String updatedBy;
     int divsionId;
 
-    public Customers(int customerId, String customerName, String address, String postalCode, String phone, LocalDateTime createDate, String createdBy, LocalDateTime updatedDate, String updatedBy, int divsionId) {
+    public Customers(int customerId, String customerName, String address, String postalCode, String phone,  int divsionId) {
         this.customerId = customerId;
         this.customerName = customerName;
         this.address = address;
         this.postalCode = postalCode;
         this.phone = phone;
-        this.createDate = createDate;
-        this.createdBy = createdBy;
-        this.updatedDate = updatedDate;
-        this.updatedBy = updatedBy;
         this.divsionId = divsionId;
     }
 
@@ -68,37 +62,6 @@ public class Customers {
         this.phone = phone;
     }
 
-    public LocalDateTime getCreateDate() {
-        return createDate;
-    }
-
-    public void setCreateDate(LocalDateTime createDate) {
-        this.createDate = createDate;
-    }
-
-    public String getCreatedBy() {
-        return createdBy;
-    }
-
-    public void setCreatedBy(String createdBy) {
-        this.createdBy = createdBy;
-    }
-
-    public LocalDateTime getUpdatedDate() {
-        return updatedDate;
-    }
-
-    public void setUpdatedDate(LocalDateTime updatedDate) {
-        this.updatedDate = updatedDate;
-    }
-
-    public String getUpdatedBy() {
-        return updatedBy;
-    }
-
-    public void setUpdatedBy(String updatedBy) {
-        this.updatedBy = updatedBy;
-    }
 
     public int getDivsionId() {
         return divsionId;

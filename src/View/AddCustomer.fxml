@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
@@ -81,7 +81,6 @@
                </font>
             </Text>
             <Button layoutX="276.0" layoutY="577.0" mnemonicParsing="false" onAction="#saveAddNewCustomer" prefHeight="36.0" prefWidth="89.0" text="Save" />
-            <ChoiceBox fx:id="addNewCustomerDivisionId" layoutX="168.0" layoutY="460.0" prefHeight="25.0" prefWidth="191.0" />
             <TextField fx:id="addNewCustomerId" disable="true" layoutX="202.0" layoutY="92.0" promptText="Auto-Generated" />
             <Button layoutX="171.0" layoutY="577.0" mnemonicParsing="false" onAction="#cancelAddNewCustomer" prefHeight="36.0" prefWidth="89.0" text="Cancel" />
             <TextField fx:id="addNewCustomerName" layoutX="175.0" layoutY="134.0" prefHeight="25.0" prefWidth="176.0" />
@@ -89,8 +88,9 @@
             <TextField fx:id="addNewCustomerAddress" layoutX="175.0" layoutY="232.0" prefHeight="25.0" prefWidth="176.0" />
             <TextField fx:id="addNewCustomerCity" layoutX="175.0" layoutY="278.0" prefHeight="25.0" prefWidth="176.0" />
             <TextField fx:id="addNewCustomerStateProvince" layoutX="175.0" layoutY="320.0" prefHeight="25.0" prefWidth="176.0" />
-            <ChoiceBox fx:id="addNewCustomerCountry" layoutX="168.0" layoutY="414.0" prefHeight="25.0" prefWidth="191.0" />
             <TextField fx:id="addNewCustomerPostalCode" layoutX="175.0" layoutY="364.0" prefHeight="25.0" prefWidth="176.0" />
+            <ComboBox fx:id="addNewCustomerCountry" layoutX="167.0" layoutY="414.0" onAction="#countryComboBoxAction" prefHeight="25.0" prefWidth="190.0" />
+            <ComboBox fx:id="addNewCustomerDivisionId" layoutX="167.0" layoutY="460.0" prefHeight="25.0" prefWidth="193.0" />
          </children>
       </AnchorPane>
    </center>

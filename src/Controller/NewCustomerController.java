@@ -1,5 +1,10 @@
 package Controller;
 
+import DAO.CountryDAO;
+import Model.Countries;
+import Model.FirstLevelDivisions;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -7,10 +12,14 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.sql.SQLException;
+
+import static DAO.CountryDAO.getCountries;
 
 public class NewCustomerController {
 
@@ -22,10 +31,10 @@ public class NewCustomerController {
         private TextField addNewCustomerCity;
 
         @FXML
-        private ChoiceBox<?> addNewCustomerCountry;
+        private ComboBox<Countries> addNewCustomerCountry;
 
         @FXML
-        private ChoiceBox<?> addNewCustomerDivisionId;
+        private ComboBox<FirstLevelDivisions> addNewCustomerDivisionId;
 
         @FXML
         private TextField addNewCustomerId;
@@ -42,6 +51,8 @@ public class NewCustomerController {
         @FXML
         private TextField addNewCustomerStateProvince;
 
+        private ObservableList <Countries> countryList = FXCollections.observableArrayList();
+
         @FXML
         void cancelAddNewCustomer(ActionEvent event) throws IOException {
 
@@ -50,6 +61,17 @@ public class NewCustomerController {
             Stage stage = (Stage) ((Button)event.getSource()).getScene().getWindow();
             stage.setScene(scene);
             stage.show();
+
+        }
+
+        @FXML
+        void countryComboBoxAction(ActionEvent event) throws SQLException {
+
+                countryList = CountryDAO.getCountries();
+                addNewCustomerCountry.setItems(countryList);
+
+
+            Countries selectedCountry = addNewCustomerCountry.getSelectionModel().getSelectedItem();
 
         }
 

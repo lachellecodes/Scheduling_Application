@@ -11,11 +11,13 @@ import java.sql.SQLException;
 public class CountryDAO {
 
 
-    public static ObservableList <Countries> getCountries () throws SQLException {
+
+
+    public static ObservableList<Countries> getAllCountries () throws SQLException {
 
         ObservableList<Countries> allCountries = FXCollections.observableArrayList();
 
-        String query = "SELECT * FROM client_schedule.countries";
+        String query = "SELECT Country_ID, Country FROM countries";
         PreparedStatement ps = DBConnection.connection.prepareStatement(query);
         ResultSet rs = ps.executeQuery();
         while(rs.next()){

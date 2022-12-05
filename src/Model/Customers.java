@@ -1,9 +1,5 @@
 package Model;
 
-import javafx.scene.control.ComboBox;
-
-import java.time.LocalDateTime;
-
 public class Customers {
 
     int customerId;
@@ -12,7 +8,9 @@ public class Customers {
     String postalCode;
     String phone;
     String country;
-    int divsionId;
+    int divisionId;
+
+
 
     public String getCountry() {
         return country;
@@ -22,14 +20,18 @@ public class Customers {
         this.country = country;
     }
 
-    public Customers(int customerId, String customerName, String address, String postalCode, String phone, int divsionId, String country) {
-        this.customerId = customerId;
+    public Customers( int customerId, String customerName, String address, String postalCode, String phone,  int divisionId, String country) {
+        this.customerId=customerId;
         this.customerName = customerName;
         this.address = address;
         this.postalCode = postalCode;
         this.phone = phone;
-        this.divsionId = divsionId;
+        this.divisionId = divisionId;
         this.country=country;
+    }
+
+    public Customers (){
+
     }
 
     public int getCustomerId() {
@@ -73,11 +75,11 @@ public class Customers {
     }
 
 
-    public int getDivsionId() {
-        return divsionId;
+    public int getDivisionId() {
+        return divisionId;
     }
 
-    public void setDivsionId(int divsionId) {
-        this.divsionId = divsionId;
+    public void setDivisionId(int divisionId) {
+        this.divisionId = divisionId;
     }
 }

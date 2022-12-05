@@ -45,32 +45,22 @@
                   <Font size="18.0" />
                </font>
             </Text>
-            <Text layoutX="26.0" layoutY="252.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Street Address">
+            <Text layoutX="28.0" layoutY="251.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Street Address">
                <font>
                   <Font size="18.0" />
                </font>
             </Text>
-            <Text layoutX="26.0" layoutY="298.0" strokeType="OUTSIDE" strokeWidth="0.0" text="City">
+            <Text layoutX="28.0" layoutY="327.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Postal Code">
                <font>
                   <Font size="18.0" />
                </font>
             </Text>
-            <Text layoutX="22.0" layoutY="340.0" strokeType="OUTSIDE" strokeWidth="0.0" text="State / Province">
+            <Text fx:id="a" layoutX="33.0" layoutY="395.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Country">
                <font>
                   <Font size="18.0" />
                </font>
             </Text>
-            <Text layoutX="21.0" layoutY="384.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Postal Code">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </Text>
-            <Text layoutX="24.0" layoutY="434.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Country">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </Text>
-            <Text layoutX="25.0" layoutY="480.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Division ID">
+            <Text layoutX="33.0" layoutY="454.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Division ID">
                <font>
                   <Font size="18.0" />
                </font>
@@ -86,11 +76,9 @@
             <TextField fx:id="addNewCustomerName" layoutX="175.0" layoutY="134.0" prefHeight="25.0" prefWidth="176.0" />
             <TextField fx:id="addNewCustomerPhone" layoutX="175.0" layoutY="182.0" prefHeight="25.0" prefWidth="176.0" />
             <TextField fx:id="addNewCustomerAddress" layoutX="175.0" layoutY="232.0" prefHeight="25.0" prefWidth="176.0" />
-            <TextField fx:id="addNewCustomerCity" layoutX="175.0" layoutY="278.0" prefHeight="25.0" prefWidth="176.0" />
-            <TextField fx:id="addNewCustomerStateProvince" layoutX="175.0" layoutY="320.0" prefHeight="25.0" prefWidth="176.0" />
-            <TextField fx:id="addNewCustomerPostalCode" layoutX="175.0" layoutY="364.0" prefHeight="25.0" prefWidth="176.0" />
-            <ComboBox fx:id="addNewCustomerCountry" layoutX="167.0" layoutY="414.0" onAction="#countryComboBoxAction" prefHeight="25.0" prefWidth="190.0" />
-            <ComboBox fx:id="addNewCustomerDivisionId" layoutX="167.0" layoutY="460.0" prefHeight="25.0" prefWidth="193.0" />
+            <TextField fx:id="addNewCustomerPostalCode" layoutX="172.0" layoutY="307.0" prefHeight="25.0" prefWidth="176.0" />
+            <ComboBox fx:id="addNewCustomerCountry" layoutX="168.0" layoutY="375.0" onAction="#countryComboBoxAction" prefHeight="25.0" prefWidth="190.0" />
+            <ComboBox fx:id="addNewCustomerDivisionId" layoutX="167.0" layoutY="434.0" prefHeight="25.0" prefWidth="193.0" />
          </children>
       </AnchorPane>
    </center>

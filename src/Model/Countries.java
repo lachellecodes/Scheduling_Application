@@ -26,6 +26,7 @@ public class Countries {
         this.countryName = countryName;
     }
 
+    /** Turns the list of Countries in visible names for the country combo box.*/
     @Override
     public String toString (){
         return countryName;

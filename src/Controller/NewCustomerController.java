@@ -2,7 +2,7 @@ package Controller;
 
 import DAO.CountryDAO;
 import DAO.CustomerDAO;
-import DAO.FirstLevelDivsionsDAO;
+import DAO.FirstLevelDivisionsDAO;
 import Model.Countries;
 import Model.Customers;
 import Model.FirstLevelDivisions;
@@ -57,6 +57,9 @@ public class NewCustomerController implements Initializable {
 
         private ObservableList<FirstLevelDivisions> divisionList = FXCollections.observableArrayList();
 
+        /** Loads the Customer Info screen with a tableview of all customers if the Cancel button is clicked.
+         * @param event
+         * */
         @FXML
         void cancelAddNewCustomer(ActionEvent event) throws IOException {
 
@@ -68,12 +71,19 @@ public class NewCustomerController implements Initializable {
 
         }
 
+        /** Sets items for the combo box drop down of countries and then the division combo box.
+         * First, an item is selected from the country list.
+         * The getAllDivisions method is called.
+         * A new observable list is created and filled with a list of divisions that match the selected country.
+         * @param event
+         */
+
         @FXML
         void countryComboBoxAction(ActionEvent event) throws SQLException {
 
                 try {
                         Countries selectedCountry = addNewCustomerCountry.getSelectionModel().getSelectedItem();
-                        divisionList = FirstLevelDivsionsDAO.getAllDivisions();
+                        divisionList = FirstLevelDivisionsDAO.getAllDivisions();
                         ObservableList<FirstLevelDivisions> divisionsByCountry = FXCollections.observableArrayList();
 
                         for(FirstLevelDivisions firstLevelDivsions : divisionList ){
@@ -91,8 +101,15 @@ public class NewCustomerController implements Initializable {
 
         }
 
+        /** Gets text from the New Customer form and creates a new customers object.
+         * Checks if fields are blank.
+         * If all fields are filled in, calls the addNewCustomer method to add the customer to the database.
+         * If added successfully, loads the Customer Info screen which shows all tableview list of all customers.
+         * @param event
+         * */
+
         @FXML
-        void saveAddNewCustomer(ActionEvent event) throws SQLException {
+        void saveAddNewCustomer(ActionEvent event) throws SQLException, IOException {
 
                 try {
                         int customerId = 0;
@@ -103,10 +120,17 @@ public class NewCustomerController implements Initializable {
                         String country = addNewCustomerCountry.getSelectionModel().getSelectedItem().toString();
                         int divisionId = addNewCustomerDivisionId.getSelectionModel().getSelectedItem().getDivisionID();
 
-                        Customers newCustomer = new Customers(customerId, customerName, phone, address, postalCode, divisionId, country);
+                        Customers newCustomer = new Customers(customerId, customerName, address, postalCode, phone, country, divisionId);
 
                         if (!customerName.isBlank() || !phone.isBlank() || !address.isBlank() || !postalCode.isBlank() || !divisionList.isEmpty() || !country.isBlank()) {
+
                                 CustomerDAO.addNewCustomer(newCustomer);
+
+                                Parent parent = FXMLLoader.load(getClass().getResource("/View/CustomerInfo.fxml"));
+                                Scene scene = new Scene(parent);
+                                Stage stage = (Stage) ((Button)event.getSource()).getScene().getWindow();
+                                stage.setScene(scene);
+                                stage.show();
                         }
                 }
 
@@ -123,6 +147,11 @@ public class NewCustomerController implements Initializable {
 
 
         }
+
+        /** Initializes this form with a combo box that drops down with a list of countries.
+         * @param url
+         * @param resourceBundle
+         * */
 
         @Override
         public void initialize(URL url, ResourceBundle resourceBundle) {

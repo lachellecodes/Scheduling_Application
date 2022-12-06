@@ -9,6 +9,13 @@ import java.time.LocalDateTime;
 
 public class CustomerDAO {
 
+    /** A method to get a list of all the customers.
+     * Declares an observable list of all customers.
+     * Uses a prepared statement to get a list of all customers currently in the database.
+     * Creates a new customer object and adds it to the list.
+     * @return  an observable list of all customers.
+     * */
+
 
     public static ObservableList<Customers> getAllCustomers() throws SQLException {
 
@@ -27,12 +34,16 @@ public class CustomerDAO {
             String  phone = rs.getString("Phone");
             String country = rs.getString("Country");
             int divisionId = rs.getInt("Division_ID");
-            Customers customer = new Customers( customerId, customerName, address, postalCode, phone, divisionId,  country );
+            Customers customer = new Customers( customerId, customerName, address, postalCode, phone,country, divisionId );
             allCustomers.add(customer);
 
         }
         return allCustomers;
     }
+
+    /** A method to add a new customer to the database.
+     * Uses a prepared statement to do a insert into the database with SQL insert statement.
+     * */
 
     public static void addNewCustomer(Customers customers) throws SQLException {
 

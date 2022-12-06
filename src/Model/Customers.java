@@ -20,7 +20,8 @@ public class Customers {
         this.country = country;
     }
 
-    public Customers( int customerId, String customerName, String address, String postalCode, String phone,  int divisionId, String country) {
+    /** The new customer constructor.*/
+    public Customers( int customerId, String customerName, String address, String postalCode, String phone, String country, int divisionId) {
         this.customerId=customerId;
         this.customerName = customerName;
         this.address = address;

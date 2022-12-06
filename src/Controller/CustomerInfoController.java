@@ -24,7 +24,7 @@ public class CustomerInfoController implements Initializable {
 
 
     @FXML
-    private TableView<Customers> customerTableView;
+    private  TableView<Customers> customerTableView;
 
     @FXML
     private TableColumn<Customers, String> customerTableAddress;
@@ -49,7 +49,12 @@ public class CustomerInfoController implements Initializable {
     @FXML
     private TableColumn<Customers, String> customerTablePostalCode;
 
+    private  Customers selectedCustomer;
 
+
+    /** Loads the Add New Customer screen when New button is clicked.
+     * @param event
+     * */
     @FXML
         void addCustomerButton(ActionEvent event) throws IOException {
             Parent parent = FXMLLoader.load(getClass().getResource("/View/AddCustomer.fxml"));
@@ -59,6 +64,10 @@ public class CustomerInfoController implements Initializable {
             stage.show();
 
         }
+
+        /** Loads the home screen of the application when the home button is clicked.
+         * @param event
+         * */
 
         @FXML
         void customerHomeButton(ActionEvent event) throws IOException {
@@ -87,7 +96,17 @@ public class CustomerInfoController implements Initializable {
 
         }
 
+        public Customers getSelectedCustomer(){
+            customerTableView.getSelectionModel().getSelectedItem();
+            return selectedCustomer;
 
+        }
+
+    /** Initializes the table view for this screen with all of the customer info.
+     * @param resourceBundle
+     * @param url
+     * Calls the getAllCustomers method to get customer info.
+     * The table columns are set to the appropriate values.*/
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -102,7 +121,7 @@ public class CustomerInfoController implements Initializable {
         customerTableAddress.setCellValueFactory(new PropertyValueFactory<>("address"));
         customerTablePostalCode.setCellValueFactory(new PropertyValueFactory<>("postalCode"));
         customerTablePhone.setCellValueFactory(new PropertyValueFactory<>("phone"));
-        customerTableDivisionId.setCellValueFactory(new PropertyValueFactory<>("divsionId"));
+        customerTableDivisionId.setCellValueFactory(new PropertyValueFactory<>("divisionId"));
         customerTableCountry.setCellValueFactory(new PropertyValueFactory<>("country"));
 
 

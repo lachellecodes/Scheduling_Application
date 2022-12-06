@@ -36,6 +36,8 @@ public class FirstLevelDivisions {
         this.firstLevelDivisionsCountryID = firstLevelDivisionsCountryID;
     }
 
+    /** Turns the list of divisions ID numbers into names.
+     */
     @Override
     public String toString (){
         return division;

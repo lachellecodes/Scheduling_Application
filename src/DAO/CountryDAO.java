@@ -11,7 +11,11 @@ import java.sql.SQLException;
 public class CountryDAO {
 
 
-
+    /** A method to create a list of countries.
+     * Declares an observable list of all countries.
+     * Uses a prepared statement to get a list of all countries from the database.
+     * Creates a new country object.
+     * @return an observable list of countries*/
 
     public static ObservableList<Countries> getAllCountries () throws SQLException {
 

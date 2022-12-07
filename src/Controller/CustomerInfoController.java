@@ -49,7 +49,9 @@ public class CustomerInfoController implements Initializable {
     @FXML
     private TableColumn<Customers, String> customerTablePostalCode;
 
-    private  Customers selectedCustomer;
+    Stage stage;
+    Parent scene;
+
 
 
     /** Loads the Add New Customer screen when New button is clicked.
@@ -87,20 +89,25 @@ public class CustomerInfoController implements Initializable {
 
         @FXML
         void updateCustomerButton(ActionEvent event) throws IOException {
-            Parent parent = FXMLLoader.load(getClass().getResource("/View/UpdateCustomer.fxml"));
-            Scene scene = new Scene(parent);
-            Stage stage = (Stage) ((Button)event.getSource()).getScene().getWindow();
-            stage.setScene(scene);
+
+           Customers selectedCustomer = customerTableView.getSelectionModel().getSelectedItem();
+
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("/View/UpdateCustomer.fxml"));
+            Parent root = loader.load();
+
+            UpdateCustomerController modifyCustomer = loader.getController();
+            modifyCustomer.setUpdatedCustomerValues(selectedCustomer);
+
+            stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
+            //Parent scene = loader.getRoot();
+            stage.setScene(new Scene(root));
             stage.show();
 
 
         }
 
-        public Customers getSelectedCustomer(){
-            customerTableView.getSelectionModel().getSelectedItem();
-            return selectedCustomer;
 
-        }
 
     /** Initializes the table view for this screen with all of the customer info.
      * @param resourceBundle

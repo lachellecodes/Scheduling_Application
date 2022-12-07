@@ -55,6 +55,8 @@ public class UpdateCustomerController implements Initializable {
         private ObservableList<FirstLevelDivisions> divisionList = FXCollections.observableArrayList();
 
 
+
+
         @FXML
         void cancelUpdateCustomerButton(ActionEvent event) throws IOException {
 
@@ -88,8 +90,17 @@ public class UpdateCustomerController implements Initializable {
 
         }
 
-        private  void setUpdatedCustomerValues(){
-                Customers selectedCustomer = CustomerInfoController.getSelectedCustomer();
+        public  void setUpdatedCustomerValues(Customers selectedCustomer){
+
+
+
+                updateCustomerId.setText(String.valueOf(selectedCustomer.getCustomerId()));
+                updateCustomerName.setText(String.valueOf(selectedCustomer.getCustomerName()));
+                updateCustomerPhone.setText(String.valueOf(selectedCustomer.getPhone()));
+                updateCustomerStreetAddress.setText(String.valueOf(selectedCustomer.getAddress()));
+                updateCustomerPostalCode.setText(String.valueOf(selectedCustomer.getPostalCode()));
+
+
         }
 
         @FXML
@@ -100,7 +111,7 @@ public class UpdateCustomerController implements Initializable {
         @Override
         public void initialize(URL url, ResourceBundle resourceBundle) {
 
-               setUpdatedCustomerValues();
+
 
                 try {
                         countryList = CountryDAO.getAllCountries();

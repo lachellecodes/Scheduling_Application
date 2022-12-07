@@ -86,7 +86,8 @@ public class CustomerInfoController implements Initializable {
         void deleteCustomerButton(ActionEvent event) {
 
         }
-
+        /** Gets the selected customer from the customers tableview and loads that customer into the update customers screen.
+         * @param event */
         @FXML
         void updateCustomerButton(ActionEvent event) throws IOException {
 
@@ -100,7 +101,6 @@ public class CustomerInfoController implements Initializable {
             modifyCustomer.setUpdatedCustomerValues(selectedCustomer);
 
             stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
-            //Parent scene = loader.getRoot();
             stage.setScene(new Scene(root));
             stage.show();
 

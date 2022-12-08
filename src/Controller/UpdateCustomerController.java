@@ -1,6 +1,7 @@
 package Controller;
 
 import DAO.CountryDAO;
+import DAO.CustomerDAO;
 import DAO.FirstLevelDivisionsDAO;
 import Model.Countries;
 import Model.Customers;
@@ -13,6 +14,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
@@ -99,12 +101,49 @@ public class UpdateCustomerController implements Initializable {
                 updateCustomerPhone.setText(String.valueOf(selectedCustomer.getPhone()));
                 updateCustomerStreetAddress.setText(String.valueOf(selectedCustomer.getAddress()));
                 updateCustomerPostalCode.setText(String.valueOf(selectedCustomer.getPostalCode()));
-
+                //TODO how to get the country and division ID here?
+                //updateCustomerCountry.setItems(updateCustomerCountry.getSelectionModel().getSelectedItem().toString());
+                //updateCustomerDivisionID.setItems(String.valueOf (updateCustomerDivisionID.getSelectionModel().getSelectedItem()));*/
 
         }
 
         @FXML
-        void updateCustomerSaveButton(ActionEvent event) {
+        void updateCustomerSaveButton(ActionEvent event) throws IOException {
+
+                try {
+                        int customerId = Integer.parseInt(updateCustomerId.getText());
+                        String customerName = updateCustomerName.getText();
+                        String phone = updateCustomerPhone.getText();
+                        String address = updateCustomerName.getText();
+                        String postalCode = updateCustomerPostalCode.getText();
+                        String country = updateCustomerCountry.getSelectionModel().getSelectedItem().toString();
+                        int divisionId = updateCustomerDivisionID.getSelectionModel().getSelectedItem().getDivisionID();
+
+                        Customers updatedCustomer = new Customers(customerId, customerName, address, postalCode, phone, country, divisionId);
+                        updatedCustomer.setCustomerId(customerId);
+
+                        if (!customerName.isBlank() || !phone.isBlank() || !address.isBlank() || !postalCode.isBlank() || !divisionList.isEmpty() || !country.isBlank()) {
+
+                                CustomerDAO.updateCustomer(updatedCustomer);
+
+                                Parent parent = FXMLLoader.load(getClass().getResource("/View/CustomerInfo.fxml"));
+                                Scene scene = new Scene(parent);
+                                Stage stage = (Stage) ((Button)event.getSource()).getScene().getWindow();
+                                stage.setScene(scene);
+                                stage.show();
+                        }
+                }
+
+                catch (NullPointerException e)     {
+                        Alert alert = new Alert(Alert.AlertType.ERROR);
+                        alert.setTitle("Error");
+                        alert.setHeaderText("Please enter a value for each field.");
+                        alert.show();
+
+                }
+                catch (SQLException throwables) {
+                        throwables.printStackTrace();
+                }
 
         }
 

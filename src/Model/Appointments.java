@@ -1,5 +1,7 @@
 package Model;
 
+import java.time.LocalDateTime;
+
 public class Appointments {
 
     int appointmentID;
@@ -7,8 +9,8 @@ public class Appointments {
     String description;
     String location;
     String type;
-    int startDateTime;
-    int endDateTime;
+    LocalDateTime startDateTime;
+    LocalDateTime endDateTime;
     int apptCustomerID;
     int apptUserID;
     int apptContactID;

@@ -114,7 +114,7 @@ public class UpdateCustomerController implements Initializable {
                         int customerId = Integer.parseInt(updateCustomerId.getText());
                         String customerName = updateCustomerName.getText();
                         String phone = updateCustomerPhone.getText();
-                        String address = updateCustomerName.getText();
+                        String address = updateCustomerStreetAddress.getText();
                         String postalCode = updateCustomerPostalCode.getText();
                         String country = updateCustomerCountry.getSelectionModel().getSelectedItem().toString();
                         int divisionId = updateCustomerDivisionID.getSelectionModel().getSelectedItem().getDivisionID();

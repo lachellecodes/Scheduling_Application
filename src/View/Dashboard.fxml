@@ -52,17 +52,15 @@
             <TableView fx:id="apptTableView" layoutX="50.0" layoutY="169.0" prefHeight="432.0" prefWidth="902.0">
               <columns>
                 <TableColumn fx:id="apptID" prefWidth="75.0" text="Appt ID" />
-                <TableColumn fx:id="apptTitle" prefWidth="75.0" text="Title" />
-                  <TableColumn fx:id="apptDescription" prefWidth="75.0" text="Description" />
-                  <TableColumn fx:id="apptLocation" prefWidth="75.0" text="Location" />
-                  <TableColumn fx:id="apptContact" prefWidth="75.0" text="Contact" />
-                  <TableColumn fx:id="apptType" prefWidth="75.0" text="Type" />
-                  <TableColumn fx:id="apptStartDate" prefWidth="75.0" text="Start Date" />
-                  <TableColumn fx:id="apptStartTime" prefWidth="75.0" text="Start Time" />
-                  <TableColumn fx:id="apptEndDate" prefWidth="75.0" text="End Date" />
-                  <TableColumn fx:id="apptEndTime" prefWidth="75.0" text="End Time" />
-                  <TableColumn fx:id="apptCustomerID" prefWidth="75.0" text="Customer ID" />
-                  <TableColumn fx:id="apptUserID" prefWidth="75.0" text="User ID" />
+                <TableColumn fx:id="apptTitle" prefWidth="94.0" text="Title" />
+                  <TableColumn fx:id="apptDescription" prefWidth="108.0" text="Description" />
+                  <TableColumn fx:id="apptLocation" minWidth="8.0" prefWidth="95.0" text="Location" />
+                  <TableColumn fx:id="apptContact" minWidth="3.0" prefWidth="73.0" text="Contact" />
+                  <TableColumn fx:id="apptType" minWidth="5.0" text="Type" />
+                  <TableColumn fx:id="apptStart" minWidth="0.0" prefWidth="109.0" text="Start" />
+                  <TableColumn fx:id="apptEnd" prefWidth="117.0" text="End" />
+                  <TableColumn fx:id="apptCustomerID" prefWidth="92.0" text="Customer ID" />
+                  <TableColumn fx:id="apptUserID" minWidth="0.0" prefWidth="58.0" text="User ID" />
               </columns>
                <effect>
                   <DropShadow />

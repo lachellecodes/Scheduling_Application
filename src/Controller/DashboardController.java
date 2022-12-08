@@ -18,6 +18,7 @@ import java.util.ResourceBundle;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
 
@@ -32,35 +33,31 @@ public class DashboardController implements Initializable {
     @FXML
     private TableColumn<Appointments, String> apptDescription;
 
-    @FXML
-    private TableColumn<Appointments, LocalDateTime> apptEndDate;
 
     @FXML
-    private TableColumn<?, ?> apptEndTime;
+    private TableColumn<Appointments, LocalDateTime> apptEnd;
 
     @FXML
-    private TableColumn<?, ?> apptID;
+    private TableColumn<Appointments, LocalDateTime> apptStart;
 
     @FXML
-    private TableColumn<?, ?> apptLocation;
+    private TableColumn<Appointments, Integer> apptID;
 
     @FXML
-    private TableColumn<?, ?> apptStartDate;
+    private TableColumn<Appointments, String> apptLocation;
+
 
     @FXML
-    private TableColumn<?, ?> apptStartTime;
+    private TableView<Appointments> apptTableView;
 
     @FXML
-    private TableView<?> apptTableView;
+    private TableColumn<Appointments, String> apptTitle;
 
     @FXML
-    private TableColumn<?, ?> apptTitle;
+    private TableColumn<Appointments, String> apptType;
 
     @FXML
-    private TableColumn<?, ?> apptType;
-
-    @FXML
-    private TableColumn<?, ?> apptUserID;
+    private TableColumn<Appointments, Integer> apptUserID;
 
 
 
@@ -127,7 +124,16 @@ public class DashboardController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-
+        apptID.setCellValueFactory(new PropertyValueFactory<>("appointmentID"));
+        apptTitle.setCellValueFactory(new PropertyValueFactory<>("title"));
+        apptDescription.setCellValueFactory(new PropertyValueFactory<>("description"));
+        apptLocation.setCellValueFactory(new PropertyValueFactory<>("location"));
+        apptContact.setCellValueFactory(new PropertyValueFactory<>("apptContactID"));
+        apptType.setCellValueFactory(new PropertyValueFactory<>("type"));
+        apptStart.setCellValueFactory(new PropertyValueFactory<>("startDateTime"));
+        apptEnd.setCellValueFactory(new PropertyValueFactory<>("endDateTime"));
+        apptCustomerID.setCellValueFactory(new PropertyValueFactory<>("apptCustomerID"));
+        apptUserID.setCellValueFactory(new PropertyValueFactory<>("apptUserID"));
 
     }
 }

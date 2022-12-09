@@ -20,7 +20,7 @@ public class NewAppointmentController {
         private ComboBox<?> newApptContact;
 
         @FXML
-        private ChoiceBox<?> newApptCustomerID;
+        private ComboBox<?> newApptCustomerID;
 
         @FXML
         private TextField newApptDescription;
@@ -29,22 +29,24 @@ public class NewAppointmentController {
         private DatePicker newApptEndDate;
 
         @FXML
-        private ChoiceBox<?> newApptEndTime;
+        private ComboBox<?> newApptEndTime;
 
         @FXML
         private DatePicker newApptStartDate;
 
         @FXML
-        private ChoiceBox<?> newApptStartTime;
+        private ComboBox<?> newApptStartTime;
 
         @FXML
         private TextField newApptTitle;
 
         @FXML
-        private ChoiceBox<?> newApptType;
+        private TextField newApptType;
 
         @FXML
-        private ChoiceBox<?> newApptUserId;
+        private ComboBox<?> newApptUserId;
+
+
 
         @FXML
         void cancelNewAppointment(ActionEvent event) throws IOException {

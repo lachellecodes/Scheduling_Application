@@ -2,6 +2,7 @@ package Controller;
 
 
 
+import DAO.AppointmentDAO;
 import DAO.DBConnection;
 import Model.Appointments;
 import javafx.event.ActionEvent;
@@ -12,6 +13,7 @@ import javafx.fxml.Initializable;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.util.ResourceBundle;
 
@@ -123,6 +125,12 @@ public class DashboardController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
+        try {
+            apptTableView.setItems(AppointmentDAO.getAllAppointments());
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
 
         apptID.setCellValueFactory(new PropertyValueFactory<>("appointmentID"));
         apptTitle.setCellValueFactory(new PropertyValueFactory<>("title"));

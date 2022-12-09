@@ -4,13 +4,12 @@ import Model.Appointments;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
+import java.time.LocalDateTime;
 
 public class AppointmentDAO {
 
-    public static ObservableList<Appointments> getAllAppointments () throws SQLException {
+    public static ObservableList<Appointments> getAllAppointments() throws SQLException {
 
         ObservableList<Appointments> allAppointments = FXCollections.observableArrayList();
 
@@ -18,10 +17,21 @@ public class AppointmentDAO {
 
         PreparedStatement ps = DBConnection.connection.prepareStatement(query);
         ResultSet rs = ps.executeQuery();
-        while(rs.next()){
+        while (rs.next()) {
             int appointmentID = rs.getInt("Appointment_ID");
-        }
+            String title = rs.getString("Title");
+            String description = rs.getString("Description");
+            String location = rs.getString("Location");
+            String type = rs.getString("Type");
+            LocalDateTime startDateTime = rs.getTimestamp("Start").toLocalDateTime();
+            LocalDateTime endDateTime = rs.getTimestamp("End").toLocalDateTime();
+            int apptCustomerID = rs.getInt("Customer_ID");
+            int apptContactID = rs.getInt("Contact_ID");
+            Appointments appointment = new Appointments(appointmentID, title, description, location, type, startDateTime, endDateTime, apptCustomerID, apptContactID, apptCustomerID);
+            allAppointments.add(appointment);}
 
-        return allAppointments;
+            return allAppointments;
+
+
     }
 }

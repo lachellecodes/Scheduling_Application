@@ -107,4 +107,9 @@ public class Appointments {
     public void setApptContactID(int apptContactID) {
         this.apptContactID = apptContactID;
     }
+
+    @Override
+    public String toString (){
+        return String.valueOf(startDateTime);
+    }
 }

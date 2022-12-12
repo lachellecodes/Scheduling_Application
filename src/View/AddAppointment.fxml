@@ -93,7 +93,7 @@
                   <Font size="18.0" />
                </font>
             </Text>
-            <ComboBox fx:id="newApptContact" layoutX="166.0" layoutY="262.0" prefHeight="25.0" prefWidth="208.0" />
+            <ComboBox fx:id="newApptContact" layoutX="166.0" layoutY="262.0" onAction="#newApptContactComboBox" prefHeight="25.0" prefWidth="208.0" />
             <TextField fx:id="newApptLocation" layoutX="165.0" layoutY="210.0" prefHeight="25.0" prefWidth="202.0" />
             <TextField fx:id="newApptType" layoutX="164.0" layoutY="308.0" prefHeight="25.0" prefWidth="210.0" />
             <Text layoutX="21.0" layoutY="419.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Start Time ">
@@ -101,7 +101,7 @@
                   <Font size="18.0" />
                </font>
             </Text>
-            <ComboBox fx:id="newApptStartTime" layoutX="171.0" layoutY="400.0" prefHeight="25.0" prefWidth="197.0" />
+            <ComboBox fx:id="newApptStartTime" layoutX="171.0" layoutY="400.0" onAction="#selectApptStartTime" prefHeight="25.0" prefWidth="197.0" />
             <ComboBox fx:id="newApptEndTime" layoutX="163.0" layoutY="496.0" prefHeight="25.0" prefWidth="210.0" />
             <ComboBox fx:id="newApptUserID" layoutX="166.0" layoutY="592.0" prefHeight="25.0" prefWidth="212.0" />
             <Text layoutX="21.0" layoutY="572.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Customer ID">

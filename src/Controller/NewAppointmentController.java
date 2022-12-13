@@ -1,5 +1,6 @@
 package Controller;
 
+import DAO.AppointmentDAO;
 import DAO.ContactsDAO;
 import DAO.CustomerDAO;
 import DAO.UserDaoImpl;
@@ -116,8 +117,9 @@ public class NewAppointmentController implements Initializable {
         }
 
         @FXML
-        void saveNewAppointment(ActionEvent event) {
+        void saveNewAppointment(ActionEvent event) throws IOException {
 
+                try {
                 int appointmentID= 0;
                 String title = newApptTitle.getText();
                 String description = newApptDescription.getText();
@@ -125,14 +127,28 @@ public class NewAppointmentController implements Initializable {
                 int apptContactId = newApptContact.getSelectionModel().getSelectedItem().getContactID();
                 String type = newApptType.getText();
                 //TODO how to initialize these times to show?
-                LocalDateTime startDate = getStartDateTime();
-                LocalDateTime startTime = getStartDateTime();
-                LocalDateTime endDate= getEndDateTime();
-                LocalDateTime endTime= getEndDateTime();
+                LocalDateTime startDateTime = getStartDateTime();
+                LocalDateTime endDateTime = getEndDateTime();
                 int apptCustomerID= newApptCustomerID.getSelectionModel().getSelectedItem().getCustomerId();
                 int apptUserID= newApptUserID.getSelectionModel().getSelectedItem().getUserID();
-                //TODO this constructor is not right
-                Appointments appointment = new Appointments(appointmentID, title, description, location, type, startDateTime, endDateTime, )
+                Appointments newAppointment = new Appointments(appointmentID, title, description, location, type, startDateTime, endDateTime, apptCustomerID, apptContactId,apptUserID);
+
+                if(!title.isBlank() || !description.isBlank() || !location.isBlank() || apptContactId < 1 || !type.isBlank() || !startDateTime.isEqual(null)
+                || !endDateTime.isEqual(null) || apptCustomerID<1 || apptUserID <1 ) {
+
+                        AppointmentDAO.addNewAppointment(newAppointment);
+
+
+                        Parent parent = FXMLLoader.load(getClass().getResource("/View/Dashboard.fxml"));
+                        Scene scene = new Scene(parent);
+                        Stage stage = (Stage) ((Button)event.getSource()).getScene().getWindow();
+                        stage.setScene(scene);
+                        stage.show();
+                }
+                        } catch (SQLException throwables) {
+                                throwables.printStackTrace();
+                        }
+
 
         }
 
@@ -147,10 +163,20 @@ public class NewAppointmentController implements Initializable {
                         newApptCustomerID.setItems(customerList);
 
                         usersList = UserDaoImpl.getAllUsers();
-                       newApptUserID.setItems(usersList);
+                        newApptUserID.setItems(usersList);
+
+                        LocalTime start = LocalTime.of(8, 0);
+                        LocalTime end = LocalTime.of(22, 0);
+                        while (start.isBefore(end)) {
+                                newApptStartTime.getItems().add(start);
+                                newApptEndTime.getItems().add(start);
+                                start = start.plusHours(1);
+                        }
+                }
 
 
-                } catch (SQLException throwables) {
+
+                 catch (SQLException throwables) {
                         throwables.printStackTrace();
                 }
 

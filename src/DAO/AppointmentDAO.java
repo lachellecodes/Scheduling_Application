@@ -34,4 +34,30 @@ public class AppointmentDAO {
 
 
     }
+
+    public static void addNewAppointment(Appointments appointments) throws SQLException {
+
+        try {
+            String newApptQuery = "INSERT INTO appointments ( Title, Description, Location, Type, Start, End, Create_Date, "+" " +
+                    "Created_By, Last_Update, Last_Updated_By, Customer_ID, User_ID, Contact_ID) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) ";
+
+            PreparedStatement ps =DBConnection.connection.prepareStatement(newApptQuery);
+            ps.setString(1, appointments.getTitle());
+            ps.setString(2, appointments.getDescription());
+            ps.setString(3, appointments.getLocation());
+            ps.setString(4,appointments.getType());
+            ps.setTimestamp(5, Timestamp.valueOf(appointments.getStartDateTime()));
+            ps.setTimestamp(6, Timestamp.valueOf(appointments.getEndDateTime()));
+            ps.setTimestamp(7, Timestamp.valueOf(LocalDateTime.now()));
+            ps.setString(8, "admin");
+            ps.setTimestamp(9, Timestamp.valueOf(LocalDateTime.now()));
+            ps.setString(10, "admin");
+            ps.setInt(11, appointments.getApptCustomerID());
+            ps.setInt(12, appointments.getApptUserID());
+            ps.setInt(13, appointments.getApptContactID());
+            ps.execute();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
 }

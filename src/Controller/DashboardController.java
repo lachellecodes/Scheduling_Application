@@ -112,10 +112,18 @@ public class DashboardController implements Initializable {
 
     @FXML
     void updateAppointment(ActionEvent event) throws IOException {
-        Parent parent = FXMLLoader.load(getClass().getResource("/View/UpdateAppointment.fxml"));
-        Scene scene = new Scene(parent);
+
+        Appointments selectedAppointment = apptTableView.getSelectionModel().getSelectedItem();
+        FXMLLoader loader= new FXMLLoader();
+        loader.setLocation(getClass().getResource("/View/UpdateAppointment.fxml"));
+        Parent root = loader.load();
+        UpdateAppointmentController modifyAppointment = loader.getController();
+        modifyAppointment.setUpdatedAppointmentValues(selectedAppointment);
+
+        //Parent parent = FXMLLoader.load(getClass().getResource("/View/UpdateAppointment.fxml"));
+        //Scene scene = new Scene(parent);
         Stage stage = (Stage) ((Button)event.getSource()).getScene().getWindow();
-        stage.setScene(scene);
+        stage.setScene(new Scene(root));
         stage.show();
 
     }

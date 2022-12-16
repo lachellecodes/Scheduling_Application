@@ -96,4 +96,16 @@ public class CustomerDAO {
 
 
     }
+
+    public static void deleteCustomer (int customerToDelete) throws SQLException {
+        getAllCustomers();
+
+        String deleteQuery = "DELETE FROM customers WHERE Customer_ID =?";
+        PreparedStatement ps = DBConnection.connection.prepareStatement(deleteQuery);
+        ps.setInt(1,customerToDelete);
+        ps.execute();
+
+    }
+
+
 }

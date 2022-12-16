@@ -1,5 +1,6 @@
 package Controller;
 
+import DAO.AppointmentDAO;
 import Model.Customers;
 import DAO.CustomerDAO;
 import javafx.event.ActionEvent;
@@ -8,9 +9,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
@@ -18,6 +17,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class CustomerInfoController implements Initializable {
@@ -83,9 +83,19 @@ public class CustomerInfoController implements Initializable {
         }
 
         @FXML
-        void deleteCustomerButton(ActionEvent event) {
+        void deleteCustomerButton(ActionEvent event) throws SQLException {
 
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Do you want to delete this customer and all appointments associated with this customer?");
+            Optional<ButtonType> confirm = alert.showAndWait();
+            if (confirm.isPresent() && confirm.get() == ButtonType.OK) {
+                int customerToDelete = customerTableView.getSelectionModel().getSelectedItem().getCustomerId();
+
+                AppointmentDAO.deleteAppointment(customerToDelete);
+                CustomerDAO.deleteCustomer(customerToDelete);
+
+            }
         }
+
         /** Gets the selected customer from the customers tableview and loads that customer into the update customers screen.
          * @param event */
         @FXML

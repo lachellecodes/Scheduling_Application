@@ -1,5 +1,6 @@
 package Controller;
 
+import DAO.AppointmentDAO;
 import DAO.ContactsDAO;
 import DAO.CustomerDAO;
 import DAO.UserDaoImpl;
@@ -99,7 +100,7 @@ public class UpdateAppointmentController implements Initializable {
         }
 
         @FXML
-        void saveUpdatedAppointment(ActionEvent event) {
+        void saveUpdatedAppointment(ActionEvent event) throws IOException {
 
                 try {
                         int appointmentID = Integer.parseInt(updateAppointmentId.getText());
@@ -119,12 +120,24 @@ public class UpdateAppointmentController implements Initializable {
                         if(appointmentID <1 || title.isBlank() || !description.isBlank() || !location.isBlank() || apptContactID <1 || type.isBlank() || !startDateTime.isEqual(null) || !endDateTime.isEqual(null) ||
                                 apptCustomerID <1 || apptUserID <1){
 
+                                AppointmentDAO.updateAppointment(updatedAppointment);
+
+                                Parent parent = FXMLLoader.load(getClass().getResource("/View/Dashboard.fxml"));
+                                Scene scene = new Scene(parent);
+                                Stage stage = (Stage) ((Button)event.getSource()).getScene().getWindow();
+                                stage.setScene(scene);
+                                stage.show();
+
                         }
                 } catch (NullPointerException e) {
                         Alert alert = new Alert(Alert.AlertType.ERROR);
                         alert.setTitle("Error");
                         alert.setHeaderText("Please enter a value for each field.");
                         alert.show();
+                }
+
+                catch (SQLException throwables){
+                        throwables.printStackTrace();
                 }
 
 

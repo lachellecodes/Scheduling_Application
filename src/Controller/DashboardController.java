@@ -5,6 +5,7 @@ package Controller;
 import DAO.AppointmentDAO;
 import DAO.DBConnection;
 import Model.Appointments;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -105,17 +106,20 @@ public class DashboardController implements Initializable {
 
     @FXML
     void weeklyViewSelected(ActionEvent event) throws SQLException {
+        //TODO this radio button does nothing?
 
-        ObservableList<Appointments> appointmentslist = AppointmentDAO.getAllAppointments();
-        ObservableList<Appointments> appointmentsByWeek ;
+        ObservableList<Appointments> appointmentsList = AppointmentDAO.getAllAppointments();
+        ObservableList<Appointments> appointmentsByWeek = FXCollections.observableArrayList();
 
         if(monthlyViewRadioButton.isSelected()){
 
-            LocalDate start =  LocalDate.now().minusWeeks(1);
-            LocalDate end = LocalDate.now().plusWeeks(1);
+           LocalDateTime start =  LocalDateTime.now().minusWeeks(1);
+            LocalDateTime end = LocalDateTime.now().plusWeeks(1);
 
-            for(Appointments appointments : appointmentslist){
+            for(Appointments appointments : appointmentsList){
                 if(appointments.getStartDateTime().isAfter(ChronoLocalDateTime.from(start)) && appointments.getStartDateTime().isBefore(ChronoLocalDateTime.from(end))){
+                    appointmentsByWeek.add(appointments);
+                    apptTableView.setItems(appointmentsList);
 
 
 

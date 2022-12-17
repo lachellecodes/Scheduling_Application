@@ -126,7 +126,6 @@ public class NewAppointmentController implements Initializable {
                 String location = newApptLocation.getText();
                 int apptContactId = newApptContact.getSelectionModel().getSelectedItem().getContactID();
                 String type = newApptType.getText();
-                //TODO how to initialize these times to show?
                 LocalDateTime startDateTime = getStartDateTime();
                 LocalDateTime endDateTime = getEndDateTime();
                 int apptCustomerID= newApptCustomerID.getSelectionModel().getSelectedItem().getCustomerId();

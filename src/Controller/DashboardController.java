@@ -5,6 +5,7 @@ package Controller;
 import DAO.AppointmentDAO;
 import DAO.DBConnection;
 import Model.Appointments;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -14,7 +15,10 @@ import javafx.fxml.Initializable;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.chrono.ChronoLocalDateTime;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 import javafx.scene.Parent;
@@ -61,6 +65,15 @@ public class DashboardController implements Initializable {
     @FXML
     private TableColumn<Appointments, Integer> apptUserID;
 
+    @FXML
+    private RadioButton monthlyViewRadioButton;
+
+    @FXML
+    private RadioButton viewAllRadioButton;
+
+    @FXML
+    private RadioButton weeklyViewRadioButton;
+
 
 
 
@@ -76,6 +89,48 @@ public class DashboardController implements Initializable {
     }
 
     @FXML
+    void viewAllSelected(ActionEvent event) throws SQLException {
+
+        try {
+            ObservableList<Appointments> appointmentsList = AppointmentDAO.getAllAppointments();
+
+            if(viewAllRadioButton.isSelected()){
+                apptTableView.setItems(appointmentsList);
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+    }
+
+    @FXML
+    void weeklyViewSelected(ActionEvent event) throws SQLException {
+
+        ObservableList<Appointments> appointmentslist = AppointmentDAO.getAllAppointments();
+        ObservableList<Appointments> appointmentsByWeek ;
+
+        if(monthlyViewRadioButton.isSelected()){
+
+            LocalDate start =  LocalDate.now().minusWeeks(1);
+            LocalDate end = LocalDate.now().plusWeeks(1);
+
+            for(Appointments appointments : appointmentslist){
+                if(appointments.getStartDateTime().isAfter(ChronoLocalDateTime.from(start)) && appointments.getStartDateTime().isBefore(ChronoLocalDateTime.from(end))){
+
+
+
+                }
+            }
+        }
+
+    }
+
+    @FXML
+    void monthlyViewSelected(ActionEvent event) {
+
+    }
+
+    @FXML
     void customersButtonClicked(ActionEvent event) throws IOException {
         Parent parent = FXMLLoader.load(getClass().getResource("/View/CustomerInfo.fxml"));
         Scene scene = new Scene(parent);
@@ -86,10 +141,21 @@ public class DashboardController implements Initializable {
     }
 
     @FXML
-    void deleteAppointment(ActionEvent event) {
+    void deleteAppointment(ActionEvent event) throws SQLException {
 
+        int appointmentID= apptTableView.getSelectionModel().getSelectedItem().getAppointmentID();
+        String appointmentType = apptTableView.getSelectionModel().getSelectedItem().getType();
+
+        Alert alert = new Alert(Alert.AlertType.WARNING, "Are you sure you want to delete Appointment ID : " +appointmentID+ " and Type :  " +appointmentType+ "  ?");
+        Optional<ButtonType> confirm = alert.showAndWait();
+        if (confirm.isPresent() && confirm.get() == ButtonType.OK) {
+            int appointmentToDelete = apptTableView.getSelectionModel().getSelectedItem().getAppointmentID();
+            AppointmentDAO.deleteSingleAppointment(appointmentToDelete);
+            AppointmentDAO.getAllAppointments();
+            apptTableView.refresh();
+
+        }
     }
-
 
     @FXML
     void exitButton(ActionEvent event) {
@@ -120,8 +186,6 @@ public class DashboardController implements Initializable {
         UpdateAppointmentController modifyAppointment = loader.getController();
         modifyAppointment.setUpdatedAppointmentValues(selectedAppointment);
 
-        //Parent parent = FXMLLoader.load(getClass().getResource("/View/UpdateAppointment.fxml"));
-        //Scene scene = new Scene(parent);
         Stage stage = (Stage) ((Button)event.getSource()).getScene().getWindow();
         stage.setScene(new Scene(root));
         stage.show();

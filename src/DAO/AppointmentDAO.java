@@ -42,6 +42,7 @@ public class AppointmentDAO {
                     "Created_By, Last_Update, Last_Updated_By, Customer_ID, User_ID, Contact_ID) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) ";
 
             PreparedStatement ps =DBConnection.connection.prepareStatement(newApptQuery);
+
             ps.setString(1, appointments.getTitle());
             ps.setString(2, appointments.getDescription());
             ps.setString(3, appointments.getLocation());
@@ -96,9 +97,20 @@ public class AppointmentDAO {
 
         getAllAppointments();
 
-        String deleteQuery = "DELETE from appointments WHERE Appointment_ID =?";
+        String deleteQuery = "DELETE from appointments WHERE Customer_ID =?";
         PreparedStatement ps = DBConnection.connection.prepareStatement(deleteQuery);
         ps.setInt(1, customerToDelete);
+        ps.execute();
+
+    }
+
+    public static void deleteSingleAppointment (int appointmentToDelete) throws SQLException {
+
+        getAllAppointments();
+
+        String deleteQuery = "DELETE from appointments WHERE Appointment_ID =?";
+        PreparedStatement ps = DBConnection.connection.prepareStatement(deleteQuery);
+        ps.setInt(1, appointmentToDelete);
         ps.execute();
     }
 }

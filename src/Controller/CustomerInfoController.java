@@ -93,6 +93,8 @@ public class CustomerInfoController implements Initializable {
                 AppointmentDAO.deleteAppointment(customerToDelete);
                 CustomerDAO.deleteCustomer(customerToDelete);
 
+                customerTableView.refresh();
+
             }
         }
 

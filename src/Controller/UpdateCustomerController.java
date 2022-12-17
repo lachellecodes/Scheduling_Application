@@ -101,9 +101,7 @@ public class UpdateCustomerController implements Initializable {
                 updateCustomerPhone.setText(String.valueOf(selectedCustomer.getPhone()));
                 updateCustomerStreetAddress.setText(String.valueOf(selectedCustomer.getAddress()));
                 updateCustomerPostalCode.setText(String.valueOf(selectedCustomer.getPostalCode()));
-                //TODO how to get the country and division ID here?
-                //updateCustomerCountry.setItems(updateCustomerCountry.getSelectionModel().getSelectedItem().toString());
-                //updateCustomerDivisionID.setItems(String.valueOf (updateCustomerDivisionID.getSelectionModel().getSelectedItem()));*/
+
 
         }
 

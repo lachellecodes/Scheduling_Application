@@ -131,11 +131,12 @@ public class NewAppointmentController implements Initializable {
                 LocalDateTime endDateTime = getEndDateTime();
                 int apptCustomerID= newApptCustomerID.getSelectionModel().getSelectedItem().getCustomerId();
                 int apptUserID= newApptUserID.getSelectionModel().getSelectedItem().getUserID();
-                Appointments newAppointment = new Appointments(appointmentID, title, description, location, type, startDateTime, endDateTime, apptCustomerID, apptContactId,apptUserID);
+                Appointments newAppointment = new Appointments(appointmentID, title, description, location, type, startDateTime, endDateTime, apptContactId, apptCustomerID,apptUserID);
 
                 if(!title.isBlank() || !description.isBlank() || !location.isBlank() || apptContactId < 1 || !type.isBlank() || !startDateTime.isEqual(null)
                 || !endDateTime.isEqual(null) || apptCustomerID<1 || apptUserID <1 ) {
 
+                        //TODO getting an error when i try to save a new appointment: Cannot add or update a child row: a foreign key constraint fails
                         AppointmentDAO.addNewAppointment(newAppointment);
 
 

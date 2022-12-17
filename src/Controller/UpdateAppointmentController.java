@@ -113,7 +113,7 @@ public class UpdateAppointmentController implements Initializable {
                         LocalDateTime endDateTime = getEndDateTime();
                         int apptCustomerID= updateApptCustomerID.getSelectionModel().getSelectedItem().getCustomerId();
                         int apptUserID= updateApptUserID.getSelectionModel().getSelectedItem().getUserID();
-                        Appointments updatedAppointment = new Appointments(appointmentID, title, description, location, type,startDateTime, endDateTime, apptCustomerID, apptContactID, apptUserID);
+                        Appointments updatedAppointment = new Appointments(appointmentID, title, description, location, type,startDateTime, endDateTime, apptCustomerID, apptUserID, apptContactID);
 
                         updatedAppointment.setAppointmentID(appointmentID);
 
@@ -159,15 +159,15 @@ public class UpdateAppointmentController implements Initializable {
                 updateApptTitle.setText(String.valueOf(selectedAppointment.getTitle()));
                 updateApptDescription.setText(String.valueOf(selectedAppointment.getDescription()));
                 updatedApptLocation.setText(String.valueOf(selectedAppointment.getLocation()));
-                //TODO why does these combo boxes and times not populate?
-                updateApptContact.getSelectionModel().getSelectedItem();
+                updateApptContact.getSelectionModel().select(selectedAppointment.getApptContactID());
                 updateApptType.setText(String.valueOf(selectedAppointment.getType()));
-                updateApptStartTime.setValue(updateApptStartTime.getValue());
-                updateApptStartDate.setValue(updateApptStartDate.getValue());
-                updateApptEndDate.setValue(updateApptEndDate.getValue());
-                updateApptEndTime.setValue(updateApptEndTime.getValue());
-                updateApptCustomerID.setValue(updateApptCustomerID.getValue());
-                updateApptUserID.setValue(updateApptUserID.getValue());
+                updateApptStartTime.setValue(selectedAppointment.getStartDateTime().toLocalTime());
+                updateApptStartDate.setValue(selectedAppointment.getStartDateTime().toLocalDate());
+                updateApptEndDate.setValue(selectedAppointment.getEndDateTime().toLocalDate());
+                updateApptEndTime.setValue(selectedAppointment.getEndDateTime().toLocalTime());
+                updateApptCustomerID.getSelectionModel().select(selectedAppointment.getApptCustomerID());
+                updateApptUserID.getSelectionModel().select(selectedAppointment.getApptUserID());
+
         }
 
 

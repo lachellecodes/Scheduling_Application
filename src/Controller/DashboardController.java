@@ -106,31 +106,48 @@ public class DashboardController implements Initializable {
 
     @FXML
     void weeklyViewSelected(ActionEvent event) throws SQLException {
-        //TODO this radio button does nothing?
+
 
         ObservableList<Appointments> appointmentsList = AppointmentDAO.getAllAppointments();
         ObservableList<Appointments> appointmentsByWeek = FXCollections.observableArrayList();
 
-        if(monthlyViewRadioButton.isSelected()){
+        if(weeklyViewRadioButton.isSelected()){
 
            LocalDateTime start =  LocalDateTime.now().minusWeeks(1);
             LocalDateTime end = LocalDateTime.now().plusWeeks(1);
 
             for(Appointments appointments : appointmentsList){
                 if(appointments.getStartDateTime().isAfter(ChronoLocalDateTime.from(start)) && appointments.getStartDateTime().isBefore(ChronoLocalDateTime.from(end))){
-                    appointmentsByWeek.add(appointments);
-                    apptTableView.setItems(appointmentsList);
+                    appointmentsByWeek.add(appointments);}
+                    apptTableView.setItems(appointmentsByWeek);
 
 
 
-                }
+
             }
         }
 
     }
 
     @FXML
-    void monthlyViewSelected(ActionEvent event) {
+    void monthlyViewSelected(ActionEvent event) throws SQLException {
+
+        ObservableList<Appointments> appointmentsList = AppointmentDAO.getAllAppointments();
+        ObservableList<Appointments> appointmentsByMonth = FXCollections.observableArrayList();
+
+        if(monthlyViewRadioButton.isSelected()) {
+            LocalDateTime start = LocalDateTime.now().minusMonths(1);
+            LocalDateTime end = LocalDateTime.now().plusMonths(1);
+
+            for(Appointments appointments: appointmentsList){
+                if(appointments.getStartDateTime().isAfter(ChronoLocalDateTime.from(start)) && appointments.getEndDateTime().isBefore(ChronoLocalDateTime.from(end))){
+                    appointmentsByMonth.add(appointments);
+                    apptTableView.setItems(appointmentsByMonth);
+                }
+            }
+
+
+        }
 
     }
 

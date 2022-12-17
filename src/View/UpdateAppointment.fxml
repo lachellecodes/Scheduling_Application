@@ -104,7 +104,7 @@
             <ComboBox fx:id="updateApptStartTime" layoutX="171.0" layoutY="400.0" onAction="#updateApptStartTime" prefHeight="25.0" prefWidth="197.0" />
             <ComboBox fx:id="updateApptEndTime" layoutX="163.0" layoutY="496.0" prefHeight="25.0" prefWidth="210.0" />
             <ComboBox fx:id="updateApptUserID" layoutX="166.0" layoutY="592.0" prefHeight="25.0" prefWidth="212.0" />
-            <Text layoutX="21.0" layoutY="572.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Customer ID">
+            <Text fx:id="updateApptCustomerId" layoutX="21.0" layoutY="572.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Customer ID">
                <font>
                   <Font size="18.0" />
                </font>

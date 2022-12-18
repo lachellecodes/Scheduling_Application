@@ -124,15 +124,15 @@ public class NewAppointmentController implements Initializable {
                 String title = newApptTitle.getText();
                 String description = newApptDescription.getText();
                 String location = newApptLocation.getText();
-                int apptContactId = newApptContact.getSelectionModel().getSelectedItem().getContactID();
+                int apptContactID = newApptContact.getSelectionModel().getSelectedItem().getContactID();
                 String type = newApptType.getText();
                 LocalDateTime startDateTime = getStartDateTime();
                 LocalDateTime endDateTime = getEndDateTime();
+                int apptUserID = newApptUserID.getSelectionModel().getSelectedItem().getUserID();
                 int apptCustomerID= newApptCustomerID.getSelectionModel().getSelectedItem().getCustomerId();
-                int apptUserID= newApptUserID.getSelectionModel().getSelectedItem().getUserID();
-                Appointments newAppointment = new Appointments(appointmentID, title, description, location, type, startDateTime, endDateTime, apptContactId, apptCustomerID,apptUserID);
+                Appointments newAppointment = new Appointments(appointmentID, title, description, location, type, startDateTime, endDateTime, apptCustomerID, apptUserID, apptContactID);
 
-                if(!title.isBlank() || !description.isBlank() || !location.isBlank() || apptContactId < 1 || !type.isBlank() || !startDateTime.isEqual(null)
+                if(!title.isBlank() || !description.isBlank() || !location.isBlank() || apptContactID < 1 || !type.isBlank() || !startDateTime.isEqual(null)
                 || !endDateTime.isEqual(null) || apptCustomerID<1 || apptUserID <1 ) {
 
                         //TODO getting an error when i try to save a new appointment: Cannot add or update a child row: a foreign key constraint fails

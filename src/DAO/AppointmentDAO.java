@@ -26,8 +26,9 @@ public class AppointmentDAO {
             LocalDateTime startDateTime = rs.getTimestamp("Start").toLocalDateTime();
             LocalDateTime endDateTime = rs.getTimestamp("End").toLocalDateTime();
             int apptCustomerID = rs.getInt("Customer_ID");
+            int apptUserID = rs.getInt("User_ID");
             int apptContactID = rs.getInt("Contact_ID");
-            Appointments appointment = new Appointments(appointmentID, title, description, location, type, startDateTime, endDateTime, apptCustomerID, apptContactID, apptCustomerID);
+            Appointments appointment = new Appointments(appointmentID, title, description, location, type, startDateTime, endDateTime, apptCustomerID, apptUserID, apptContactID);
             allAppointments.add(appointment);}
 
             return allAppointments;
@@ -39,14 +40,15 @@ public class AppointmentDAO {
 
         try {
             String newApptQuery = "INSERT INTO appointments ( Title, Description, Location, Type, Start, End, Create_Date, "+" " +
-                    "Created_By, Last_Update, Last_Updated_By, Customer_ID, User_ID, Contact_ID) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) ";
+                    "Created_By, Last_Update, Last_Updated_By, Customer_ID, User_ID, Contact_ID) VALUES ( ?,?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) ";
 
             PreparedStatement ps =DBConnection.connection.prepareStatement(newApptQuery);
 
+
             ps.setString(1, appointments.getTitle());
             ps.setString(2, appointments.getDescription());
-            ps.setString(3, appointments.getLocation());
-            ps.setString(4,appointments.getType());
+            ps.setString(3,appointments.getLocation());
+            ps.setString(4, appointments.getType());
             ps.setTimestamp(5, Timestamp.valueOf(appointments.getStartDateTime()));
             ps.setTimestamp(6, Timestamp.valueOf(appointments.getEndDateTime()));
             ps.setTimestamp(7, Timestamp.valueOf(LocalDateTime.now()));

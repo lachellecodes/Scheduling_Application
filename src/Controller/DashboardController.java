@@ -135,9 +135,10 @@ public class DashboardController implements Initializable {
         ObservableList<Appointments> appointmentsList = AppointmentDAO.getAllAppointments();
         ObservableList<Appointments> appointmentsByMonth = FXCollections.observableArrayList();
 
+        LocalDateTime start = LocalDateTime.now().minusMonths(1);
+        LocalDateTime end = LocalDateTime.now().plusMonths(1);
+
         if(monthlyViewRadioButton.isSelected()) {
-            LocalDateTime start = LocalDateTime.now().minusMonths(1);
-            LocalDateTime end = LocalDateTime.now().plusMonths(1);
 
             for(Appointments appointments: appointmentsList){
                 if(appointments.getStartDateTime().isAfter(ChronoLocalDateTime.from(start)) && appointments.getEndDateTime().isBefore(ChronoLocalDateTime.from(end))){

@@ -8,6 +8,7 @@ import Model.Appointments;
 import Model.Contacts;
 import Model.Customers;
 import Model.Users;
+import Resources.ValidateAppointment;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -120,34 +121,49 @@ public class NewAppointmentController implements Initializable {
         void saveNewAppointment(ActionEvent event) throws IOException {
 
                 try {
-                int appointmentID= 0;
-                String title = newApptTitle.getText();
-                String description = newApptDescription.getText();
-                String location = newApptLocation.getText();
-                int apptContactID = newApptContact.getSelectionModel().getSelectedItem().getContactID();
-                String type = newApptType.getText();
-                LocalDateTime startDateTime = getStartDateTime();
-                LocalDateTime endDateTime = getEndDateTime();
-                int apptUserID = newApptUserID.getSelectionModel().getSelectedItem().getUserID();
-                int apptCustomerID= newApptCustomerID.getSelectionModel().getSelectedItem().getCustomerId();
-                Appointments newAppointment = new Appointments(appointmentID, title, description, location, type, startDateTime, endDateTime, apptCustomerID, apptUserID, apptContactID);
+                        int appointmentID = 0;
+                        String title = newApptTitle.getText();
+                        String description = newApptDescription.getText();
+                        String location = newApptLocation.getText();
+                        int apptContactID = newApptContact.getSelectionModel().getSelectedItem().getContactID();
+                        String type = newApptType.getText();
+                        LocalDateTime startDateTime = getStartDateTime();
+                        LocalDateTime endDateTime = getEndDateTime();
+                        int apptUserID = newApptUserID.getSelectionModel().getSelectedItem().getUserID();
+                        int apptCustomerID = newApptCustomerID.getSelectionModel().getSelectedItem().getCustomerId();
+                        Appointments newAppointment = new Appointments(appointmentID, title, description, location, type, startDateTime, endDateTime, apptCustomerID, apptUserID, apptContactID);
 
-                if(!title.isBlank() || !description.isBlank() || !location.isBlank() || apptContactID < 1 || !type.isBlank() || !startDateTime.isEqual(null)
-                || !endDateTime.isEqual(null) || apptCustomerID<1 || apptUserID <1 ) {
+                        if (!title.isBlank() || !description.isBlank() || !location.isBlank() || apptContactID < 1 || !type.isBlank() || !startDateTime.isEqual(null)
+                                || !endDateTime.isEqual(null) || apptCustomerID < 1 || apptUserID < 1) {
 
-                        //TODO getting an error when i try to save a new appointment: Cannot add or update a child row: a foreign key constraint fails
-                        AppointmentDAO.addNewAppointment(newAppointment);
+                                if (ValidateAppointment.overlappingAppointmentCheck(newAppointment)) {
+                                        Alert alert = new Alert(Alert.AlertType.ERROR);
+                                        alert.setTitle("Error");
+                                        alert.setHeaderText("This appointment overlaps with another existing appointment for this customer.");
+                                        alert.showAndWait();
+                                } else if (!ValidateAppointment.overlappingAppointmentCheck(newAppointment)) {
+                                        AppointmentDAO.addNewAppointment(newAppointment);
 
 
-                        Parent parent = FXMLLoader.load(getClass().getResource("/View/Dashboard.fxml"));
-                        Scene scene = new Scene(parent);
-                        Stage stage = (Stage) ((Button)event.getSource()).getScene().getWindow();
-                        stage.setScene(scene);
-                        stage.show();
+                                        Parent parent = FXMLLoader.load(getClass().getResource("/View/Dashboard.fxml"));
+                                        Scene scene = new Scene(parent);
+                                        Stage stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
+                                        stage.setScene(scene);
+                                        stage.show();
+                                }
+                        }
                 }
-                        } catch (SQLException throwables) {
+
+                        catch(NullPointerException e){
+                                Alert alert = new Alert(Alert.AlertType.ERROR);
+                                alert.setTitle("Error");
+                                alert.setHeaderText("Please enter a value for each field.");
+                                alert.show();
+                        }
+                         catch(SQLException throwables){
                                 throwables.printStackTrace();
                         }
+
 
 
         }

@@ -8,6 +8,7 @@ import Model.Appointments;
 import Model.Contacts;
 import Model.Customers;
 import Model.Users;
+import Resources.ValidateAppointment;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -113,20 +114,30 @@ public class UpdateAppointmentController implements Initializable {
                         LocalDateTime endDateTime = getEndDateTime();
                         int apptCustomerID= updateApptCustomerID.getSelectionModel().getSelectedItem().getCustomerId();
                         int apptUserID= updateApptUserID.getSelectionModel().getSelectedItem().getUserID();
-                        Appointments updatedAppointment = new Appointments(appointmentID, title, description, location, type,startDateTime, endDateTime, apptCustomerID, apptUserID, apptContactID);
+                        Appointments newAppointment = new Appointments(appointmentID, title, description, location, type,startDateTime, endDateTime, apptCustomerID, apptUserID, apptContactID);
 
-                        updatedAppointment.setAppointmentID(appointmentID);
+                        newAppointment.setAppointmentID(appointmentID);
 
                         if(appointmentID <1 || title.isBlank() || !description.isBlank() || !location.isBlank() || apptContactID <1 || type.isBlank() || !startDateTime.isEqual(null) || !endDateTime.isEqual(null) ||
                                 apptCustomerID <1 || apptUserID <1){
 
-                                AppointmentDAO.updateAppointment(updatedAppointment);
+                                if(ValidateAppointment.overlappingAppointmentCheck(newAppointment)){
+                                        Alert alert = new Alert(Alert.AlertType.ERROR);
+                                        alert.setTitle("Error");
+                                        alert.setHeaderText("This appointment overlaps with another existing appointment for this customer.");
+                                        alert.showAndWait();
+                                }
 
-                                Parent parent = FXMLLoader.load(getClass().getResource("/View/Dashboard.fxml"));
-                                Scene scene = new Scene(parent);
-                                Stage stage = (Stage) ((Button)event.getSource()).getScene().getWindow();
-                                stage.setScene(scene);
-                                stage.show();
+                                else if (!ValidateAppointment.overlappingAppointmentCheck(newAppointment)) {
+
+                                        AppointmentDAO.updateAppointment(newAppointment);
+
+                                        Parent parent = FXMLLoader.load(getClass().getResource("/View/Dashboard.fxml"));
+                                        Scene scene = new Scene(parent);
+                                        Stage stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
+                                        stage.setScene(scene);
+                                        stage.show();
+                                }
 
                         }
                 } catch (NullPointerException e) {

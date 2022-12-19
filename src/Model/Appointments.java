@@ -28,6 +28,13 @@ public class Appointments {
         this.apptContactID = apptContactID;
     }
 
+    public Appointments(){
+
+    }
+
+
+
+
     public int getAppointmentID() {
         return appointmentID;
     }

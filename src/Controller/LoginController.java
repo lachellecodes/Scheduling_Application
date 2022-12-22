@@ -1,6 +1,11 @@
 package Controller;
 
+import DAO.AppointmentDAO;
 import DAO.DBConnection;
+import DAO.UserDaoImpl;
+import Model.Appointments;
+import Model.Users;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -17,6 +22,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Time;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.time.chrono.ChronoLocalDateTime;
 import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.TimeZone;
@@ -50,10 +59,17 @@ public class LoginController implements Initializable {
         @FXML
         private Button loginButton;
 
+        private ObservableList<Appointments> allAppointments= AppointmentDAO.getAllAppointments();
+
         /** Gets the default time zone for the user's locale.*/
         private  TimeZone userTimeZone = TimeZone.getDefault();
 
-        /** Loads the next screen (Dashboard) after log in if user is successfully verified. */
+        Users currentUser;
+
+    public LoginController() throws SQLException {
+    }
+
+    /** Loads the next screen (Dashboard) after log in if user is successfully verified. */
         public void loadDashboard (ActionEvent event) throws IOException {
             Parent parent = FXMLLoader.load(getClass().getResource("/View/Dashboard.fxml"));
             Scene scene = new Scene(parent);
@@ -71,6 +87,7 @@ public class LoginController implements Initializable {
             String user = userIDtext.getText();
             String password = passwordText.getText();
 
+
             String verifyLogin = "SELECT * FROM users WHERE User_Name = '" + user + "' AND Password  = '"+password + "'";
 
             try{
@@ -82,6 +99,7 @@ public class LoginController implements Initializable {
 
                  String userName = rs.getString("User_Name");
                  String userPassword = rs.getString("Password");
+
                  userVerified = true;}
 
             }
@@ -107,7 +125,46 @@ public class LoginController implements Initializable {
                 if (validateUser()) {
                     loadDashboard(event);
 
-                } else {
+                    for(Appointments appointments: allAppointments){
+
+                        String userName= userIDtext.getText();
+                        currentUser = UserDaoImpl.getUserById(userName);
+                        int currentUserID = currentUser.getUserID();
+                        LocalDateTime start = appointments.getStartDateTime();
+                        LocalDateTime now = LocalDateTime.now();
+                       // ZoneId zoneId= ZoneId.systemDefault();
+                       // ZonedDateTime zonedDateTime= ZonedDateTime.of(start, zoneId);
+
+                        //ZoneId  utcZone = ZoneId.of("UTC");
+                        //ZonedDateTime  utcZoneDT = ZonedDateTime.ofInstant(zonedDateTime.toInstant(), utcZone);
+                        boolean appointmentOverlap = false;
+
+
+                        if (currentUserID == appointments.getApptUserID() && start.isBefore(now.plusMinutes(15))){
+
+                            appointmentOverlap= true;}
+
+                        if (appointmentOverlap){
+
+
+                            Alert alert = new Alert(Alert.AlertType.WARNING);
+                            alert.setTitle("Warning");
+                            alert.setHeaderText(" You have an appointment starting within the next 15 minutes.");
+                            alert.show();
+
+                        }
+
+                        else {
+                            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                            alert.setHeaderText("You have no upcoming appointments within the next 15 minutes. ");
+                            alert.show();
+                            break;
+                        }
+
+                    }
+
+                }
+                    else {
                     Alert alert = new Alert(Alert.AlertType.ERROR);
                     alert.setTitle(rb.getString("alertTitle"));
                     alert.setHeaderText(rb.getString("errorMessage2"));
@@ -139,6 +196,14 @@ public class LoginController implements Initializable {
 
 
     }
+
+    /*public boolean appointmentReminderNotification ( Appointments appointments) throws SQLException {
+
+       ObservableList <Appointments> allAppointments = AppointmentDAO.getAllAppointments();
+
+        LocalDateTime currentTime = LocalDateTime.now();
+        Boolean appointmentNotify = false;
+    }*/
 
 
 

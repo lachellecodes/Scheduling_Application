@@ -13,6 +13,12 @@ public class Users {
 
     }
 
+
+
+    public Users() {
+
+    }
+
     public int getUserID() {
         return userID;
     }
@@ -42,4 +48,5 @@ public class Users {
       return " ["+ userID +" ]" +  userName;
 
     }
+
 }

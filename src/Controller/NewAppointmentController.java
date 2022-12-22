@@ -181,12 +181,12 @@ public class NewAppointmentController implements Initializable {
                         usersList = UserDaoImpl.getAllUsers();
                         newApptUserID.setItems(usersList);
 
-                        LocalTime start = LocalTime.of(8, 0);
+                        LocalTime start = LocalTime.of(6, 0);
                         LocalTime end = LocalTime.of(22, 0);
                         while (start.isBefore(end)) {
                                 newApptStartTime.getItems().add(start);
                                 newApptEndTime.getItems().add(start);
-                                start = start.plusHours(1);
+                                start = start.plusMinutes(30);
                         }
                 }
 

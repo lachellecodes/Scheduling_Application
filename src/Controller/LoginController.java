@@ -140,7 +140,7 @@ public class LoginController implements Initializable {
                         boolean appointmentOverlap = false;
 
 
-                        if (currentUserID == appointments.getApptUserID() && start.isBefore(now.plusMinutes(15))){
+                        if (currentUserID == appointments.getApptUserID() && start.isAfter(now) && start.isBefore(now.plusMinutes(15))){
 
                             appointmentOverlap= true;}
 
@@ -158,7 +158,7 @@ public class LoginController implements Initializable {
                             Alert alert = new Alert(Alert.AlertType.INFORMATION);
                             alert.setHeaderText("You have no upcoming appointments within the next 15 minutes. ");
                             alert.show();
-                            break;
+
                         }
 
                     }

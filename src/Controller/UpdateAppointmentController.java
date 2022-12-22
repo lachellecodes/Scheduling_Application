@@ -202,7 +202,7 @@ public class UpdateAppointmentController implements Initializable {
                         while (start.isBefore(end)) {
                                 updateApptStartTime.getItems().add(start);
                                 updateApptEndTime.getItems().add(start);
-                                start = start.plusMinutes(30);
+                                start = start.plusMinutes(15);
                         }
                 }
 

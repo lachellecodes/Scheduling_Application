@@ -1,8 +1,10 @@
 package Controller;
 
+import Model.Appointments;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -11,23 +13,25 @@ import javafx.scene.control.TableView;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
-public class ReportsByMonthController {
+public class ReportsByMonthController implements Initializable {
 
 
 
-
-        @FXML
-        private TableView<?> appointmentsByMonthTableView;
-
-        @FXML
-        private TableColumn<?, ?> apptTypeMonth;
 
         @FXML
-        private TableColumn<?, ?> monthName;
+        private TableView<Appointments> appointmentsByMonthTableView;
 
         @FXML
-        private TableColumn<?, ?> totalNumAppts;
+        private TableColumn<Appointments, String> apptTypeMonth;
+
+        @FXML
+        private TableColumn<Appointments, String> monthName;
+
+        @FXML
+        private TableColumn<Appointments, Integer> totalNumAppts;
 
         @FXML
         void backToReportsApptByMonth(ActionEvent event) throws IOException{
@@ -53,6 +57,10 @@ public class ReportsByMonthController {
 
         }
 
-    }
+        @Override
+        public void initialize(URL url, ResourceBundle resourceBundle) {
+
+        }
+}
 
 

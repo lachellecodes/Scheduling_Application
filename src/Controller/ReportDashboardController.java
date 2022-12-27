@@ -36,7 +36,7 @@ public class ReportDashboardController {
 
         @FXML
         void reportsApptsByUser(ActionEvent event) throws IOException {
-            Parent parent = FXMLLoader.load(getClass().getResource("/View/ReportsByUser.fxml"));
+            Parent parent = FXMLLoader.load(getClass().getResource("/View/ReportsByCountry.fxml"));
             Scene scene = new Scene(parent);
             Stage stage = (Stage) ((Button)event.getSource()).getScene().getWindow();
             stage.setScene(scene);

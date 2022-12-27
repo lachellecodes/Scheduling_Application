@@ -2,7 +2,6 @@ package Controller;
 
 import DAO.AppointmentDAO;
 import DAO.ContactsDAO;
-import Model.AppointmentByContact;
 import Model.Appointments;
 import Model.Contacts;
 import javafx.collections.FXCollections;
@@ -24,7 +23,6 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ResourceBundle;
 
@@ -32,7 +30,7 @@ public class ReportsByContactController implements Initializable {
 
 
         @FXML
-        private TableView<AppointmentByContact> appointmentsByContactTableView;
+        private TableView<Appointments> appointmentsByContactTableView;
 
         @FXML
         void backToReportsApptsByContact(ActionEvent event) throws IOException {
@@ -61,33 +59,33 @@ public class ReportsByContactController implements Initializable {
     private ComboBox <Contacts> contactsComboBox;
 
     @FXML
-    private TableColumn<AppointmentByContact, Integer> apptId;
+    private TableColumn<Appointments, Integer> apptId;
 
     @FXML
-    private TableColumn<AppointmentByContact, Integer> contact;
+    private TableColumn<Appointments, Integer> contact;
 
     @FXML
-    private TableColumn<?, Integer> customerId;
+    private TableColumn<Appointments, Integer> customerId;
 
     @FXML
-    private TableColumn<AppointmentByContact, String> description;
+    private TableColumn<Appointments, String> description;
 
     @FXML
-    private TableColumn<AppointmentByContact, LocalDate> start;
+    private TableColumn<Appointments, LocalDate> start;
 
     @FXML
-    private TableColumn<AppointmentByContact, LocalTime> end;
+    private TableColumn<Appointments, LocalTime> end;
 
 
     @FXML
-    private TableColumn<AppointmentByContact, String > title;
+    private TableColumn<Appointments, String > title;
 
     @FXML
-    private TableColumn<AppointmentByContact, String > type;
+    private TableColumn<Appointments, String > type;
 
     public ObservableList <Contacts> contactList = FXCollections.observableArrayList();
     public ObservableList <Appointments> appointments = FXCollections.observableArrayList();
-    public ObservableList<AppointmentByContact> contactScheduledAppointments = FXCollections.observableArrayList();
+    public ObservableList<Appointments> contactScheduledAppointments = FXCollections.observableArrayList();
 
 
 
@@ -96,23 +94,18 @@ public class ReportsByContactController implements Initializable {
     @FXML
     void contactScheduleComboBox(ActionEvent event) throws SQLException {
 
+        appointmentsByContactTableView.getItems().clear();
+
        int  selectedContactId = contactsComboBox.getSelectionModel().getSelectedItem().getContactID();
        appointments= AppointmentDAO.getAllAppointments();
+
+       Appointments newAppointment;
 
         for (Appointments contactAppointment : appointments){
             if ( contactAppointment.getApptContactID() == selectedContactId){
 
-                int apptContactID = contactAppointment.getApptContactID();
-                int appointmentID = contactAppointment.getAppointmentID();
-                String title = contactAppointment.getTitle();
-                String type = contactAppointment.getType();
-                String description = contactAppointment.getDescription();
-                LocalDateTime startDateTime = contactAppointment.getStartDateTime();
-                LocalDateTime endDateTime = contactAppointment.getEndDateTime();
-                int apptCustomerID = contactAppointment.getApptCustomerID();
 
-
-                AppointmentByContact newAppointment = new AppointmentByContact(apptContactID, appointmentID, title, type, description, startDateTime, endDateTime, apptCustomerID);
+                newAppointment = contactAppointment;
                 contactScheduledAppointments.add(newAppointment);
                 appointmentsByContactTableView.setItems(contactScheduledAppointments);
 

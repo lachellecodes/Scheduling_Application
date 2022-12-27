@@ -116,6 +116,37 @@ public class AppointmentDAO {
         ps.execute();
     }
 
+    public static ObservableList<Appointments> appointmentsByCountry(int selectedCountry) throws SQLException {
+
+        getAllAppointments();
+
+        ObservableList<Appointments> appointmentsByCountry = FXCollections.observableArrayList();
+
+        String query = "SELECT * from appointments join customers on appointments.Customer_ID = customers.Customer_ID join first_level_divisions on customers.Division_ID = first_level_divisions.Division_ID join countries on countries.Country_ID = first_level_divisions.Country_ID WHERE countries.Country_ID = ?;";
+
+        PreparedStatement ps = DBConnection.connection.prepareStatement(query);
+        ps.setInt(1, selectedCountry );
+
+        ResultSet rs = ps.executeQuery();
+        while (rs.next()) {
+            int appointmentID = rs.getInt("Appointment_ID");
+            String title = rs.getString("Title");
+            String description = rs.getString("Description");
+            String location = rs.getString("Location");
+            String type = rs.getString("Type");
+            LocalDateTime startDateTime = rs.getTimestamp("Start").toLocalDateTime();
+            LocalDateTime endDateTime = rs.getTimestamp("End").toLocalDateTime();
+            int apptCustomerID = rs.getInt("Customer_ID");
+            int apptUserID = rs.getInt("User_ID");
+            int apptContactID = rs.getInt("Contact_ID");
+            Appointments appointment = new Appointments(appointmentID, title, description, location, type, startDateTime, endDateTime, apptCustomerID, apptUserID, apptContactID);
+            appointmentsByCountry.add(appointment);}
+
+        return appointmentsByCountry;
+
+
+
+    }
 
 }
 

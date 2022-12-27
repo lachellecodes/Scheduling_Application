@@ -107,43 +107,24 @@ public class ReportsByMonthController implements Initializable {
                                 for (Appointments appointment : appointmentList) {
                                         if (appointment.getStartDateTime().getMonth() == month && appointment.getType() == type) {
                                                 count++;
+                                                //todo why does this keep counting and adding one for each appt? i have tried break ?
 
 
                                                 if (count > 0) {
                                                         MonthTypeReport monthType = new MonthTypeReport(month, type, count);
                                                         monthTypeReports.add(monthType);
+
+
                                                 }
                                         }
                                 }
+
                         }
 
 
-                        appointmentsByMonthTableView.setItems(monthTypeReports);
                 }
+                appointmentsByMonthTableView.setItems(monthTypeReports);
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
         @Override

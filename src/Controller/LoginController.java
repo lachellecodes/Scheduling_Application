@@ -13,7 +13,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -21,11 +20,7 @@ import java.net.URL;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Time;
 import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.time.ZonedDateTime;
-import java.time.chrono.ChronoLocalDateTime;
 import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.TimeZone;
@@ -66,7 +61,7 @@ public class LoginController implements Initializable {
      */
     private TimeZone userTimeZone = TimeZone.getDefault();
 
-    Users currentUser;
+    static Users currentUser;
 
     public LoginController() throws SQLException {
     }
@@ -189,7 +184,9 @@ public class LoginController implements Initializable {
         }
 
 
-
+    public static Users getCurrentUser(){
+        return currentUser;
+    }
 
 
 

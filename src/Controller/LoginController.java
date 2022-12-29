@@ -5,6 +5,7 @@ import DAO.DBConnection;
 import DAO.UserDaoImpl;
 import Model.Appointments;
 import Model.Users;
+import Utilities.UserActivity;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -61,10 +62,18 @@ public class LoginController implements Initializable {
      */
     private TimeZone userTimeZone = TimeZone.getDefault();
 
-    static Users currentUser;
+
 
     public LoginController() throws SQLException {
     }
+
+    public boolean successful = true;
+
+    public static Users currentUser;
+
+
+
+
 
     /**
      * Loads the next screen (Dashboard) after log in if user is successfully verified.
@@ -84,7 +93,7 @@ public class LoginController implements Initializable {
      */
     public Boolean validateUser() throws SQLException {
 
-        Boolean userVerified = false;
+         Boolean userVerified = false;
 
         String user = userIDtext.getText();
         String password = passwordText.getText();
@@ -103,6 +112,11 @@ public class LoginController implements Initializable {
                 String userPassword = rs.getString("Password");
 
                 userVerified = true;
+                currentUser = UserDaoImpl.getUserById(userName);
+
+
+
+
             }
 
         } catch (Exception e) {
@@ -110,6 +124,10 @@ public class LoginController implements Initializable {
         }
         return userVerified;
 
+    }
+
+    public static Users getCurrentUser(){
+        return  currentUser;
     }
 
     /**
@@ -129,12 +147,14 @@ public class LoginController implements Initializable {
         }
         else {
             if (validateUser()) {
+
+                UserActivity.updateUserLog(successful);
                 loadDashboard(event);
 
                 for (Appointments appointments : allAppointments) {
 
-                    String userName = userIDtext.getText();
-                    currentUser = UserDaoImpl.getUserById(userName);
+                    //String userName = userIDtext.getText();
+                    //currentUser = UserDaoImpl.getUserById(userName);
                     int currentUserID = currentUser.getUserID();
                     LocalDateTime start = appointments.getStartDateTime();
                     LocalDateTime now = LocalDateTime.now();
@@ -170,7 +190,9 @@ public class LoginController implements Initializable {
 
 
              else {
-
+                String userName = userIDtext.getText();
+                currentUser = UserDaoImpl.getUserById(userName);
+            UserActivity.updateUserLog(!successful);
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle(rb.getString("alertTitle"));
             alert.setHeaderText(rb.getString("errorMessage2"));
@@ -184,9 +206,7 @@ public class LoginController implements Initializable {
         }
 
 
-    public static Users getCurrentUser(){
-        return currentUser;
-    }
+
 
 
 

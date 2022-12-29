@@ -13,13 +13,13 @@ import java.time.format.DateTimeFormatter;
 
 public class UserActivity {
 
-    Users currentUser;
+    static Users currentUser;
 
-    ZoneId utcZone = ZoneId.of("UTC");
+    static ZoneId utcZone = ZoneId.of("UTC");
 
-    DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("MM-DD-YY at HH:mm:ss");
+    static DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'hh:mm:ss");
 
-    public void updateUserLog () throws IOException {
+    public static void updateUserLog (Boolean successful) throws IOException {
 
         LocalDateTime localDateTime= LocalDateTime.now();
         ZonedDateTime zonedDateTime = localDateTime.atZone(utcZone);
@@ -30,6 +30,16 @@ public class UserActivity {
 
         currentUser = LoginController.getCurrentUser();
         String userName = currentUser.getUserName();
+
+
+        if(successful){
+            printWriter.println(userName + " logged in successfully at" + dateTime );
+            printWriter.close();
+        }
+        if (!successful){
+            printWriter.println(userName + " was denied access at" + dateTime);
+            printWriter.close();
+        }
 
 
     }

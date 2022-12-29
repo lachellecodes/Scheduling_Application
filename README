@@ -1,0 +1,31 @@
+Timely Team Scheduling Application
+
+The scheduling application is an Java FX desktop application that allows a user to manage appointments for
+a consulting business that conducts business in multiple languages and office locations in various regions
+of the world.
+
+Appointments, contacts and customers can be created, updated or deleted via the application and stored in
+MySQL database.
+
+Author: Lachelle Allen
+Contact information: lall319@wgu.edu
+Application version: 1.0
+Date: 12/29/2022
+
+IDE: IntelliJ IDEA 2021.1.3 (Community Edition)
+Java Version 17.0.1 2021-10-19 LTS
+JavaFX Scene Builder 17.0.0
+
+Directions:
+Import project into IntelliJ IDEA.
+Run from main.
+A login in screen will appear first, username is admin, password is admin.
+
+Reports:
+A 3rd report was added to allow the user to view appointments by country. Viewing appointments by country
+will help the company with market analysis, track how well they are doing, allocate resources and plan for
+possible expansion or locate promising markets.
+This report uses a SQL query that joins multiple tables including appointments, first level divisions, customers
+and countries to filter and select the appointments by countries currently supported by the company.
+
+MySQL Connector Driver Version: mysql-connector-java-8.0.25

@@ -210,9 +210,6 @@ public class LoginController implements Initializable {
 
 
 
-
-
-
     /** Gets the users current locale. */
     Locale currentLocale = Locale.getDefault();
 
@@ -236,14 +233,6 @@ public class LoginController implements Initializable {
 
 
     }
-
-    /*public boolean appointmentReminderNotification ( Appointments appointments) throws SQLException {
-
-       ObservableList <Appointments> allAppointments = AppointmentDAO.getAllAppointments();
-
-        LocalDateTime currentTime = LocalDateTime.now();
-        Boolean appointmentNotify = false;
-    }*/
 
 
 

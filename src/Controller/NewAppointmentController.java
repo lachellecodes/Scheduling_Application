@@ -136,6 +136,9 @@ public class NewAppointmentController implements Initializable {
                         if (!title.isBlank() || !description.isBlank() || !location.isBlank() || apptContactID < 1 || !type.isBlank() || !startDateTime.isEqual(null)
                                 || !endDateTime.isEqual(null) || apptCustomerID < 1 || apptUserID < 1) {
 
+                                //todo getting an error that says 8:00 text could not be parsed
+                                ValidateAppointment.checkBusinessHours(newAppointment);
+
                                 if (ValidateAppointment.overlappingAppointmentCheck(newAppointment)) {
                                         Alert alert = new Alert(Alert.AlertType.ERROR);
                                         alert.setTitle("Error");

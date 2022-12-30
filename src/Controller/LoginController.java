@@ -155,6 +155,7 @@ public class LoginController implements Initializable {
 
                 UserActivity.updateUserLog(successful);
                 loadDashboard(event);
+                boolean upcoming = false;
 
                 for (Appointments appointments : allAppointments) {
 
@@ -173,42 +174,36 @@ public class LoginController implements Initializable {
 
                     if (currentUserID == appointments.getApptUserID() && start.isAfter(now) && start.isBefore(now.plusMinutes(15))) {
 
-
-                    Alert alert = new Alert(Alert.AlertType.WARNING);
-                    alert.setTitle("Warning");
-                    alert.setHeaderText(" You have an appointment starting within the next 15 minutes.");
-                    alert.show();
-
-                    break;
-                    //TODO  how do i stop this from cycling through the rest of the appointments and showing the alert more than once?
-
-                }
-
-                    else {
-                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                        alert.setHeaderText("You have no upcoming appointments within the next 15 minutes. ");
+                        upcoming= true;
+                        Alert alert = new Alert(Alert.AlertType.WARNING);
+                        alert.setTitle("Warning");
+                        alert.setHeaderText(" You have an appointment starting within the next 15 minutes.");
                         alert.show();
-
+                        break;
+                        //TODO  how do i stop this from cycling through the rest of the appointments and showing the alert more than once?
                     }
                 }
+                if(!upcoming){
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setHeaderText("You have no upcoming appointments within the next 15 minutes. ");
+                    alert.show();
+                }
             }
-
-
-             else {
+            else {
                 String userName = userIDtext.getText();
                 currentUser = UserDaoImpl.getUserById(userName);
-            UserActivity.updateUserLog(!successful);
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle(rb.getString("alertTitle"));
-            alert.setHeaderText(rb.getString("errorMessage2"));
-            alert.show();
+                UserActivity.updateUserLog(!successful);
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle(rb.getString("alertTitle"));
+                alert.setHeaderText(rb.getString("errorMessage2"));
+                alert.show();
 
 
+            }
         }
+
+
     }
-
-
-        }
 
 
 

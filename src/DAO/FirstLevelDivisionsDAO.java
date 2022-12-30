@@ -38,4 +38,24 @@ public class FirstLevelDivisionsDAO {
         return allDivisions;
 
     }
+
+    public static ObservableList<FirstLevelDivisions> getDivisionsByCountry (int countryId) throws SQLException {
+        ObservableList <FirstLevelDivisions> list = FXCollections.observableArrayList();
+        for(FirstLevelDivisions divisions : getAllDivisions()){
+            if (divisions.getFirstLevelDivisionsCountryID() == countryId){
+                list.add(divisions);
+            }
+        }
+        return list;
+    }
+
+    public static FirstLevelDivisions getDivision (int divisionId) throws SQLException {
+
+        for(FirstLevelDivisions divisions : getAllDivisions()){
+            if (divisions.getDivisionID() == divisionId){
+                return divisions;
+            }
+        }
+        return null;
+    }
 }

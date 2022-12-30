@@ -1,6 +1,7 @@
 package DAO;
 
 import Model.Countries;
+import Model.FirstLevelDivisions;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -34,5 +35,21 @@ public class CountryDAO {
         }
         return allCountries;
 
+    }
+
+    public static Countries getCountryByDivision (int divisionId) throws  SQLException{
+        System.out.println("search division id = " + divisionId);
+        for(FirstLevelDivisions divisions : FirstLevelDivisionsDAO.getAllDivisions()){
+            System.out.println("division = " + divisions.getDivisionID()+ " , " + divisions.getFirstLevelDivisionsCountryID());
+            if(divisions.getDivisionID() == divisionId){
+                for(Countries country : getAllCountries()){
+                    System.out.println("country = " + country.getCountryId()+ " , " + country.getCountry());
+                    if(country.getCountryId() == divisions.getFirstLevelDivisionsCountryID()){
+                        return country;
+                    }
+                }
+            }
+        }
+        return null;
     }
 }

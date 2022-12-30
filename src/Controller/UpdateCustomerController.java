@@ -104,16 +104,22 @@ public class UpdateCustomerController implements Initializable {
         public  void setUpdatedCustomerValues(Customers selectedCustomer){
 
 
+                try {
+                        Countries country = CountryDAO.getCountryByDivision(selectedCustomer.getDivisionId());
+                        FirstLevelDivisions divisions = FirstLevelDivisionsDAO.getDivision(selectedCustomer.getDivisionId());
+                        updateCustomerId.setText(String.valueOf(selectedCustomer.getCustomerId()));
+                        updateCustomerName.setText(String.valueOf(selectedCustomer.getCustomerName()));
+                        updateCustomerPhone.setText(String.valueOf(selectedCustomer.getPhone()));
+                        updateCustomerStreetAddress.setText(String.valueOf(selectedCustomer.getAddress()));
+                        updateCustomerPostalCode.setText(String.valueOf(selectedCustomer.getPostalCode()));
+                        updateCustomerCountry.setItems(CountryDAO.getAllCountries());
+                        updateCustomerCountry.setValue(country);
+                        updateCustomerDivisionID.setItems(FirstLevelDivisionsDAO.getDivisionsByCountry(country.getCountryId()));
+                        updateCustomerDivisionID.setValue(divisions);
 
-                updateCustomerId.setText(String.valueOf(selectedCustomer.getCustomerId()));
-                updateCustomerName.setText(String.valueOf(selectedCustomer.getCustomerName()));
-                updateCustomerPhone.setText(String.valueOf(selectedCustomer.getPhone()));
-                updateCustomerStreetAddress.setText(String.valueOf(selectedCustomer.getAddress()));
-                updateCustomerPostalCode.setText(String.valueOf(selectedCustomer.getPostalCode()));
-                //updateCustomerCountry.getSelectionModel().select(selectedCustomer.getCountry());
-                //todo bring over the info from combo boxes
-
-
+                } catch (SQLException throwables) {
+                        throwables.printStackTrace();
+                }
         }
 
         /** Gets text from the Update Customer form and updates the selected customer object.

@@ -77,12 +77,14 @@ public class ReportsByMonthController implements Initializable {
                 ObservableList<MonthTypeReport> monthTypeReports = FXCollections.observableArrayList();
 
                 appointmentList.forEach(appointments -> {
-                        Month month = appointments.getStartDateTime().getMonth();
-                        if (!months.contains(month)) {
-                                months.add(month);
-                        }
+                                Month month = appointments.getStartDateTime().getMonth();
 
-                });
+                                if (!months.contains(month)) {
+                                        months.add(month);
+                                }
+                        });
+
+
 
                 appointmentList.forEach(appointments -> {
                         String type = appointments.getType();

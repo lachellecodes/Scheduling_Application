@@ -197,8 +197,8 @@ public class UpdateAppointmentController implements Initializable {
                         usersList = UserDaoImpl.getAllUsers();
                         updateApptUserID.setItems(usersList);
 
-                        LocalTime start = LocalTime.of(8, 0);
-                        LocalTime end = LocalTime.of(22, 0);
+                        LocalTime start = LocalTime.of(00, 0);
+                        LocalTime end = LocalTime.of(24, 0);
                         while (start.isBefore(end)) {
                                 updateApptStartTime.getItems().add(start);
                                 updateApptEndTime.getItems().add(start);

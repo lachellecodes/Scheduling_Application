@@ -7,8 +7,11 @@ import javafx.scene.control.Alert;
 
 import java.sql.SQLException;
 import java.time.*;
+import java.time.format.DateTimeFormatter;
 
 public class ValidateAppointment {
+
+    private DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'hh:mm:ss");
 
     public static boolean overlappingAppointmentCheck(Appointments newAppointment) throws SQLException {
 
@@ -40,29 +43,17 @@ public class ValidateAppointment {
             if ((newApptCustomerID == apptCustomerID) && proposedStart.isEqual(start) && proposedEnd.isEqual(end)) {
                 overlap = true;
                 break;
-            }
-
-
-            else if((newApptCustomerID == apptCustomerID) && proposedStart.isBefore(start) && proposedEnd.isAfter(start)){
-                overlap=true;
-                break;
-            }
-
-
-            else if ((newApptCustomerID == apptCustomerID) && proposedStart.isBefore(start) && proposedEnd.isEqual(end)){
+            } else if ((newApptCustomerID == apptCustomerID) && proposedStart.isBefore(start) && proposedEnd.isAfter(start)) {
                 overlap = true;
                 break;
-            }
-
-
-
-            else if ((newApptCustomerID == apptCustomerID) && proposedStart.isEqual(start) && proposedEnd.isAfter(start)){
-                overlap=true;
+            } else if ((newApptCustomerID == apptCustomerID) && proposedStart.isBefore(start) && proposedEnd.isEqual(end)) {
+                overlap = true;
                 break;
-            }
-
-            else if ((newApptCustomerID == apptCustomerID) && proposedStart.isAfter(start) && proposedEnd.isEqual(end)){
-                overlap=true;
+            } else if ((newApptCustomerID == apptCustomerID) && proposedStart.isEqual(start) && proposedEnd.isAfter(start)) {
+                overlap = true;
+                break;
+            } else if ((newApptCustomerID == apptCustomerID) && proposedStart.isAfter(start) && proposedEnd.isEqual(end)) {
+                overlap = true;
                 break;
             }
 
@@ -71,39 +62,51 @@ public class ValidateAppointment {
         return overlap;
     }
 
-    public static void checkBusinessHours (Appointments newAppointment){
+    public static Boolean checkBusinessHours(Appointments newAppointment) throws SQLException {
 
-        LocalTime businessStart = LocalTime.parse("8:00");
-        LocalDate businessDateStart = LocalDate.now();
-        LocalDateTime businessStartTime = LocalDateTime.of(businessDateStart, businessStart);
-        ZonedDateTime zonedBusinessStart = businessStartTime.atZone(ZoneId.systemDefault());
-        ZonedDateTime zonedEstBusinesStart = zonedBusinessStart.withZoneSameInstant(ZoneId.of("America/New_York"));
-
-        LocalDateTime apptStart = newAppointment.getStartDateTime();
-        //LocalDate apptDate = newAppointment.getStartDateTime().toLocalDate();
-        ZonedDateTime zonedStartDateTime = apptStart.atZone(ZoneId.systemDefault());
-        ZonedDateTime zonedEstStart = zonedStartDateTime.withZoneSameInstant(ZoneId.of("America/New_York"));
-
-        LocalTime businessEnd = LocalTime.parse("22:00");
-        LocalDate businessDateEnd = LocalDate.now();
-        LocalDateTime businessEndTime = LocalDateTime.of(businessDateEnd, businessEnd);
-        ZonedDateTime zonedBusinessEnd = businessEndTime.atZone(ZoneId.systemDefault());
-        ZonedDateTime zonedEstBusinessEnd = zonedBusinessEnd.withZoneSameInstant(ZoneId.of("America/New_York"));
-
-        LocalDateTime apptEnd = newAppointment.getEndDateTime();
-        ZonedDateTime zonedEndDateTime = apptEnd.atZone(ZoneId.systemDefault());
-        ZonedDateTime zonedEstEnd = zonedEndDateTime.withZoneSameInstant(ZoneId.of("America/New_York"));
+        ObservableList<Appointments> appointmentList = AppointmentDAO.getAllAppointments();
 
         Boolean outsideBusinessHours = false;
 
-        if(zonedEstStart.isBefore(zonedEstBusinesStart) || zonedEstEnd.isAfter(zonedEstBusinessEnd)){
-            outsideBusinessHours = true;
+        Appointments proposedAppointment = new Appointments();
 
-            Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setTitle("Warning");
-            alert.setHeaderText(" The appointment is outside of scheduled business hours. Business hours are from 8:00 AM to 22:00 PM EST.");
-            alert.show();
+        for (Appointments appointments : appointmentList) {
+
+            if (appointments.getAppointmentID() == newAppointment.getAppointmentID()) {
+                continue;
+            }
+
+            proposedAppointment = appointments;
+
+            LocalTime businessStart = LocalTime.of(8, 00);
+            LocalDate businessDateStart = LocalDate.now();
+            LocalDateTime businessStartTime = LocalDateTime.of(businessDateStart, businessStart);
+            ZonedDateTime zonedBusinessStart = businessStartTime.atZone(ZoneId.systemDefault());
+            ZonedDateTime zonedEstBusinesStart = zonedBusinessStart.withZoneSameInstant(ZoneId.of("America/New_York"));
+
+            LocalDateTime apptStart = proposedAppointment.getStartDateTime();
+            //LocalDate apptDate = newAppointment.getStartDateTime().toLocalDate();
+            ZonedDateTime zonedStartDateTime = apptStart.atZone(ZoneId.systemDefault());
+            ZonedDateTime zonedEstStart = zonedStartDateTime.withZoneSameInstant(ZoneId.of("America/New_York"));
+
+            LocalTime businessEnd = LocalTime.of(22, 00);
+            LocalDate businessDateEnd = LocalDate.now();
+            LocalDateTime businessEndTime = LocalDateTime.of(businessDateEnd, businessEnd);
+            ZonedDateTime zonedBusinessEnd = businessEndTime.atZone(ZoneId.systemDefault());
+            ZonedDateTime zonedEstBusinessEnd = zonedBusinessEnd.withZoneSameInstant(ZoneId.of("America/New_York"));
+
+            LocalDateTime apptEnd = proposedAppointment.getEndDateTime();
+            ZonedDateTime zonedEndDateTime = apptEnd.atZone(ZoneId.systemDefault());
+            ZonedDateTime zonedEstEnd = zonedEndDateTime.withZoneSameInstant(ZoneId.of("America/New_York"));
+
+
+            if (zonedEstStart.isBefore(zonedEstBusinesStart) || zonedEstEnd.isAfter(zonedEstBusinessEnd)) {
+                outsideBusinessHours = true;
+
+
+            }
         }
+        return outsideBusinessHours;
     }
 }
 

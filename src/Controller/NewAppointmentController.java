@@ -136,15 +136,22 @@ public class NewAppointmentController implements Initializable {
                         if (!title.isBlank() || !description.isBlank() || !location.isBlank() || apptContactID < 1 || !type.isBlank() || !startDateTime.isEqual(null)
                                 || !endDateTime.isEqual(null) || apptCustomerID < 1 || apptUserID < 1) {
 
-                                //todo getting an error that says 8:00 text could not be parsed
-                                ValidateAppointment.checkBusinessHours(newAppointment);
+
+
+                                if(ValidateAppointment.checkBusinessHours(newAppointment)){
+                                        Alert alert = new Alert(Alert.AlertType.WARNING);
+                                        alert.setTitle("Warning");
+                                        alert.setHeaderText(" The appointment is outside of scheduled business hours. Business hours are from 8:00 AM to 22:00 PM EST.");
+                                        alert.showAndWait();
+                                }
 
                                 if (ValidateAppointment.overlappingAppointmentCheck(newAppointment)) {
                                         Alert alert = new Alert(Alert.AlertType.ERROR);
                                         alert.setTitle("Error");
                                         alert.setHeaderText("This appointment overlaps with another existing appointment for this customer.");
                                         alert.showAndWait();
-                                } else if (!ValidateAppointment.overlappingAppointmentCheck(newAppointment)) {
+
+                                } else if (!ValidateAppointment.overlappingAppointmentCheck(newAppointment) && !ValidateAppointment.checkBusinessHours(newAppointment)) {
                                         AppointmentDAO.addNewAppointment(newAppointment);
 
 
@@ -184,8 +191,8 @@ public class NewAppointmentController implements Initializable {
                         usersList = UserDaoImpl.getAllUsers();
                         newApptUserID.setItems(usersList);
 
-                        LocalTime start = LocalTime.of(6, 0);
-                        LocalTime end = LocalTime.of(22, 0);
+                        LocalTime start = LocalTime.of(00, 0);
+                        LocalTime end = LocalTime.of(24, 0);
                         while (start.isBefore(end)) {
                                 newApptStartTime.getItems().add(start);
                                 newApptEndTime.getItems().add(start);

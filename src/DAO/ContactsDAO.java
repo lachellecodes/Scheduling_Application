@@ -9,9 +9,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/** A DAO class for interacting with data on the contacts table in the database. */
+
 public class ContactsDAO {
 
-
+    /** A method to return a list of all contacts.
+     * @throws SQLException*/
 
     public static ObservableList<Contacts> getAllContacts () throws SQLException {
 

@@ -2,6 +2,8 @@ package Model;
 
 import java.time.LocalDateTime;
 
+/** A class to model the data on the appointments table in the database. */
+
 public class Appointments {
 
     int appointmentID;
@@ -14,6 +16,19 @@ public class Appointments {
     int apptCustomerID;
     int apptUserID;
     int apptContactID;
+
+    /**Creates a new appointment object.
+     * @param appointmentID
+     * @param title
+     * @param description
+     * @param location
+     * @param type
+     * @param startDateTime
+     * @param endDateTime
+     * @param apptCustomerID
+     * @param apptUserID
+     * @param apptContactID
+     * */
 
     public Appointments(int appointmentID, String title, String description, String location, String type, LocalDateTime startDateTime, LocalDateTime endDateTime, int apptCustomerID, int apptUserID, int apptContactID) {
         this.appointmentID = appointmentID;
@@ -28,6 +43,7 @@ public class Appointments {
         this.apptContactID = apptContactID;
     }
 
+    /** No argument constructor for an appointment object. */
     public Appointments() {
 
     }
@@ -112,7 +128,8 @@ public class Appointments {
     public void setApptContactID(int apptContactID) {
         this.apptContactID = apptContactID;
     }
-
+    /** Turns the start time of the appointment into a string.
+     * */
     @Override
     public String toString (){
         return String.valueOf(startDateTime);

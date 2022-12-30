@@ -1,10 +1,18 @@
 package Model;
 
+/** A class to model the information on the first level divisions table in the database. */
+
 public class FirstLevelDivisions {
 
     int divisionID;
     String division;
     int firstLevelDivisionsCountryID;
+
+    /** Creates a new first level division object.
+     * @param divisionID
+     * @param division
+     * @param firstLevelDivisionsCountryID
+     * */
 
     public FirstLevelDivisions(int divisionID, String division, int firstLevelDivisionsCountryID) {
         this.divisionID = divisionID;
@@ -36,7 +44,7 @@ public class FirstLevelDivisions {
         this.firstLevelDivisionsCountryID = firstLevelDivisionsCountryID;
     }
 
-    /** Turns the list of divisions ID numbers into names.
+    /** Turns the list of divisions ID numbers into names for the combo box.
      */
     @Override
     public String toString (){

@@ -11,10 +11,13 @@ import javafx.stage.Stage;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
+/** The main entry point for the application. */
+
 public class Main extends Application {
 
 
-
+/** Displays the login screen for the application
+ * @throws Exception*/
     @Override
     public void start(Stage primaryStage) throws Exception{
 
@@ -25,7 +28,8 @@ public class Main extends Application {
         primaryStage.show();
     }
 
-
+/** Opens the database connection when the application is started and closes the database connection
+ * when the application is closed. */
 
     public static void main(String[] args) {
 

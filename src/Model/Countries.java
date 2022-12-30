@@ -1,9 +1,15 @@
 package Model;
 
+/** A class to model the countries table in the database. */
+
 public class Countries {
 
     int countryId;
     String countryName;
+
+    /** Creates a new country object.
+     * @param countryId
+     * @param countryName*/
 
     public Countries(int countryId, String countryName) {
         this.countryId = countryId;

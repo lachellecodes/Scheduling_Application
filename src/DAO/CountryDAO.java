@@ -8,6 +8,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/** A DAO class to interact with the country table in the database. */
+
 public class CountryDAO {
 
 

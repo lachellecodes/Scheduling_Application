@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+/** A JDBC class to connect the application to a MySQL databse. */
+
 public abstract class DBConnection {
 
     private static final String protocol = "jdbc";

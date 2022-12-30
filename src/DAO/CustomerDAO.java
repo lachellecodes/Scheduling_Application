@@ -7,6 +7,8 @@ import javafx.collections.ObservableList;
 import java.sql.*;
 import java.time.LocalDateTime;
 
+/** A DAO class to interact with the customer table in the database.  */
+
 public class CustomerDAO {
 
     /** A method to get a list of all the customers.
@@ -14,6 +16,7 @@ public class CustomerDAO {
      * Uses a prepared statement to get a list of all customers currently in the database.
      * Creates a new customer object and adds it to the list.
      * @return  an observable list of all customers.
+     * @throws SQLException
      * */
 
 
@@ -43,7 +46,8 @@ public class CustomerDAO {
 
     /** A method to add a new customer to the database.
      * Uses a prepared statement to do a insert into the database with SQL insert statement.
-     * */
+     * @param customers
+     * @throws  SQLException*/
 
     public static void addNewCustomer(Customers customers) throws SQLException {
 
@@ -67,6 +71,12 @@ public class CustomerDAO {
             throwables.printStackTrace();
         }
     }
+
+    /** A method to update an existing customer in the database.
+     * Uses a prepared statement to do an update on the customer in the database.
+     * @param customers
+     * @throws SQLException
+     * */
 
     public static void updateCustomer(Customers customers) throws SQLException {
 
@@ -96,6 +106,12 @@ public class CustomerDAO {
 
 
     }
+
+    /** A method to delete a customer from the database.
+     * @param customerToDelete  takes in the customer ID of the selected customer.
+     * Uses a prepared statement to delete a specific customer from the database by ID number.
+     * @throws  SQLException
+     * */
 
     public static void deleteCustomer (int customerToDelete) throws SQLException {
         getAllCustomers();

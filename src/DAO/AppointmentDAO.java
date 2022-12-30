@@ -7,7 +7,15 @@ import javafx.collections.ObservableList;
 import java.sql.*;
 import java.time.LocalDateTime;
 
+/** A DAO class for performing operations on the appointment table in the database. */
+
 public class AppointmentDAO {
+
+    /** This method returns an observable list of all the appointments in the database.
+     *
+     * @return a list of all appointments
+     * @throws SQLException
+     * */
 
     public static ObservableList<Appointments> getAllAppointments() throws SQLException {
 
@@ -36,6 +44,11 @@ public class AppointmentDAO {
 
     }
 
+    /** Adds a new appointment to the appointment table.
+     * @param appointments
+     * @throws SQLException
+     * */
+
     public static void addNewAppointment(Appointments appointments) throws SQLException {
 
         try {
@@ -63,6 +76,11 @@ public class AppointmentDAO {
             throwables.printStackTrace();
         }
     }
+
+    /** Updates an existing appointment in the database.
+     * @param appointments
+     * @throws SQLException
+     * */
 
 
     public static void updateAppointment(Appointments appointments) throws SQLException {
@@ -95,6 +113,11 @@ public class AppointmentDAO {
 
     }
 
+    /** Deletes all appointments associated with a specific customer.
+     * @param customerToDelete takes the in the customer ID of the appointment.
+     * @throws SQLException from querying the database for appointments by customer ID.
+     * */
+
     public static void deleteAppointment (int customerToDelete) throws SQLException {
 
         getAllAppointments();
@@ -106,6 +129,10 @@ public class AppointmentDAO {
 
     }
 
+    /** Deletes a single appointment from the main table view by appointment ID.
+     * @param appointmentToDelete  takes in the appointment ID number.
+     * */
+
     public static void deleteSingleAppointment (int appointmentToDelete) throws SQLException {
 
         getAllAppointments();
@@ -116,6 +143,10 @@ public class AppointmentDAO {
         ps.execute();
     }
 
+    /** Returns a list of appointments filetered by country ID
+     * @param selectedCountry takes in the country ID from the combo box
+     * @throws SQLException from the query on 4 tables in the database.
+     * */
     public static ObservableList<Appointments> appointmentsByCountry(int selectedCountry) throws SQLException {
 
         getAllAppointments();

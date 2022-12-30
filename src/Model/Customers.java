@@ -1,5 +1,6 @@
 package Model;
 
+/** A class to model the information on the customer table in the database. */
 public class Customers {
 
     int customerId;
@@ -20,7 +21,15 @@ public class Customers {
         this.country = country;
     }
 
-    /** The new customer constructor.*/
+    /** The constructor for a new customer object.
+     * @param customerId
+     * @param customerName
+     * @param address
+     * @param postalCode
+     * @param phone
+     * @param divisionId
+     * @param country
+     * */
     public Customers( int customerId, String customerName, String address, String postalCode, String phone, String country, int divisionId) {
         this.customerId=customerId;
         this.customerName = customerName;
@@ -84,6 +93,7 @@ public class Customers {
         this.divisionId = divisionId;
     }
 
+    /** Displays the customer ID and name as a string in the customer combo box. */
     @Override
     public String toString (){
 

@@ -8,7 +8,14 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/** A DAO class for interacting with the user table in the database. */
+
 public class UserDaoImpl {
+
+    /** A method to get a list of all users in the database.
+     * @return an observable list of all users in the database.
+     * @throws SQLException
+     **/
 
     public static ObservableList<Users> getAllUsers() throws SQLException {
 
@@ -30,7 +37,10 @@ public class UserDaoImpl {
 
 
     }
-
+    /** A method to return a speccific user by ID numner.
+     * @param currentUserName  takes in the user name string
+     * @return a user
+     * @throws SQLException*/
 
 
     public static Users getUserById (String currentUserName) throws SQLException {

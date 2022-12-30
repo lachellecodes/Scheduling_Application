@@ -9,13 +9,17 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/** A DAO class to interact with the first level divisions class in the database. */
+
 public class FirstLevelDivisionsDAO {
 
     /** A method to create a list of division IDs.
      * Creates an observable list , uses a prepared statement to execute a query that retrieves all division IDs from the database.
      * Creates new division object and adds it to the observable list.
      *
-     * @return the observable list of division IDs */
+     * @return the observable list of division IDs
+     * @throws SQLException
+     * */
 
     public static ObservableList<FirstLevelDivisions> getAllDivisions () throws SQLException {
 

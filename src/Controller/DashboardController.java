@@ -29,6 +29,8 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
 
+/** A controller class that provider logic for the dashboard screen, the main screen for the application.*/
+
 public class DashboardController implements Initializable {
 
     @FXML

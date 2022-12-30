@@ -121,6 +121,13 @@ public class UpdateAppointmentController implements Initializable {
                         if(appointmentID <1 || title.isBlank() || !description.isBlank() || !location.isBlank() || apptContactID <1 || type.isBlank() || !startDateTime.isEqual(null) || !endDateTime.isEqual(null) ||
                                 apptCustomerID <1 || apptUserID <1){
 
+                                if(ValidateAppointment.checkBusinessHours(newAppointment)){
+                                        Alert alert = new Alert(Alert.AlertType.WARNING);
+                                        alert.setTitle("Warning");
+                                        alert.setHeaderText(" The appointment is outside of scheduled business hours. Business hours are from 8:00 AM to 22:00 PM EST.");
+                                        alert.showAndWait();
+                                }
+
                                 if(ValidateAppointment.overlappingAppointmentCheck(newAppointment)){
                                         Alert alert = new Alert(Alert.AlertType.ERROR);
                                         alert.setTitle("Error");
@@ -128,7 +135,7 @@ public class UpdateAppointmentController implements Initializable {
                                         alert.showAndWait();
                                 }
 
-                                else if (!ValidateAppointment.overlappingAppointmentCheck(newAppointment)) {
+                                else if (!ValidateAppointment.overlappingAppointmentCheck(newAppointment) && !ValidateAppointment.checkBusinessHours(newAppointment))  {
 
                                         AppointmentDAO.updateAppointment(newAppointment);
 

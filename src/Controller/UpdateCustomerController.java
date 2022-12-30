@@ -26,6 +26,9 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
+/** A controller class that provides logic for the update customer screen, allows user to update an existing customer's information
+ * or cancel the action. */
+
 public class UpdateCustomerController implements Initializable {
 
         @FXML
@@ -49,15 +52,14 @@ public class UpdateCustomerController implements Initializable {
         @FXML
         private TextField updateCustomerStreetAddress;
 
-        @FXML
-        private AnchorPane updateName;
 
         private ObservableList<Countries> countryList = FXCollections.observableArrayList();
 
         private ObservableList<FirstLevelDivisions> divisionList = FXCollections.observableArrayList();
 
-
-
+        /** Takes user back to the customer dashboard table view if the cancel button is clicked.
+         * @param event
+         * */
 
         @FXML
         void cancelUpdateCustomerButton(ActionEvent event) throws IOException {
@@ -69,6 +71,10 @@ public class UpdateCustomerController implements Initializable {
                 stage.show();
 
         }
+
+        /** Populates the country combo box with countries based on the first level divisions.
+         * @param event
+         * */
 
         @FXML
         void onUpdateCountryComboAction(ActionEvent event) {
@@ -92,6 +98,9 @@ public class UpdateCustomerController implements Initializable {
 
         }
 
+        /** Gets the selected customer to update and loads their information into the update customer screen.
+         * @param selectedCustomer*/
+
         public  void setUpdatedCustomerValues(Customers selectedCustomer){
 
 
@@ -101,9 +110,18 @@ public class UpdateCustomerController implements Initializable {
                 updateCustomerPhone.setText(String.valueOf(selectedCustomer.getPhone()));
                 updateCustomerStreetAddress.setText(String.valueOf(selectedCustomer.getAddress()));
                 updateCustomerPostalCode.setText(String.valueOf(selectedCustomer.getPostalCode()));
+                //updateCustomerCountry.getSelectionModel().select(selectedCustomer.getCountry());
+                //todo bring over the info from combo boxes
 
 
         }
+
+        /** Gets text from the Update Customer form and updates the selected customer object.
+         * Checks if fields are blank.
+         * If all fields are filled in, calls the updateCustomer method to add the customer to the database.
+         * If added successfully, loads the Customer Info screen which shows all tableview list of all customers.
+         * @param event
+         * */
 
         @FXML
         void updateCustomerSaveButton(ActionEvent event) throws IOException {
@@ -145,6 +163,10 @@ public class UpdateCustomerController implements Initializable {
 
         }
 
+        /** Initializes this update customer screen with the items in the country and first division drop down combo box list.
+         * @param url
+         * @param resourceBundle */
+
         @Override
         public void initialize(URL url, ResourceBundle resourceBundle) {
 
@@ -153,6 +175,7 @@ public class UpdateCustomerController implements Initializable {
                 try {
                         countryList = CountryDAO.getAllCountries();
                         updateCustomerCountry.setItems(countryList);
+
                 } catch (SQLException throwables) {
                         throwables.printStackTrace();
                 }

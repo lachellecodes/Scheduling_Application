@@ -72,9 +72,6 @@ public class LoginController implements Initializable {
     public static Users currentUser;
 
 
-
-
-
     /**
      * Loads the next screen (Dashboard) after log in if user is successfully verified.
      */
@@ -90,6 +87,7 @@ public class LoginController implements Initializable {
      * A method to verify if user enters the correct information. Gets text entered into the username and password field on
      * the log in form. Uses a SQL prepared statement to match these strings against database. If there is a match, returns
      * a true Boolean variable.
+     * @return userVerified boolean
      */
     public Boolean validateUser() throws SQLException {
 
@@ -126,6 +124,10 @@ public class LoginController implements Initializable {
 
     }
 
+    /** A method to get the current logged in user and pass this user to other controllers.
+     * @return currentUser
+     * */
+
     public static Users getCurrentUser(){
         return  currentUser;
     }
@@ -133,7 +135,10 @@ public class LoginController implements Initializable {
     /**
      * Method that handles the login in button action. Displays an alert message if the user ID and password fields are blank.
      * Calls the validateUser method to validate credentials. If user is validated calls the loadDashboard method to go
-     * to the next screen. If user is not validated, displays an error message to enter a valid user ID and password.
+     * to the next screen. If user is not validated, displays an error message to enter a valid user ID and password. Logs both
+     * successful and unsuccessful login attempts with the updateUserLog method.
+     *
+     * @param event
      */
     @FXML
     void loginButton(ActionEvent event) throws SQLException, IOException {
@@ -175,7 +180,7 @@ public class LoginController implements Initializable {
                     alert.show();
 
                     break;
-                    //TODO  how do i stop this from cycling through the rest of the appointments
+                    //TODO  how do i stop this from cycling through the rest of the appointments and showing the alert more than once?
 
                 }
 
@@ -208,8 +213,6 @@ public class LoginController implements Initializable {
 
 
 
-
-
     /** Gets the users current locale. */
     Locale currentLocale = Locale.getDefault();
 
@@ -222,7 +225,7 @@ public class LoginController implements Initializable {
         return userTimeZone;
     }
 
-    /** A method to get the language on the login in screen to users locale. */
+    /** A method to set the language on the login in screen to users locale. */
     private void setLanguage () {
 
             userIdLabel.setText(rb.getString("userIdLabel"));
@@ -236,8 +239,11 @@ public class LoginController implements Initializable {
 
 
 
-    /** Upon initialization of the login screen calls the setLanguage method to set Text to default locale language.
-     * Calls method to get users Time Zone and sets the text in the Time Zone box to that. */
+    /** Upon initialization of the login screen calls the setLanguage method to set text to default locale language.
+     * Calls method to get users Time Zone and sets the text in the Time Zone box to that.
+     * @param url
+     * @param resourceBundle
+     * */
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

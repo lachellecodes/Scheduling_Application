@@ -24,6 +24,9 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
+/** A controller class for the Reports By Country screen, shows a list of appointments in a tableview by country selected
+ * from a drop down combo box.*/
+
 public class ReportsByCountryController implements Initializable {
 
 
@@ -61,6 +64,8 @@ public class ReportsByCountryController implements Initializable {
     private ObservableList<Appointments> appointments = FXCollections.observableArrayList();
     private ObservableList<FirstLevelDivisions> firstLevelDivisions= FXCollections.observableArrayList();
 
+    /** Takes user back to the report dashboard screen if button is clicked.
+     * @param event */
 
     @FXML
     void backToReports(ActionEvent event) throws IOException {
@@ -72,6 +77,10 @@ public class ReportsByCountryController implements Initializable {
         stage.show();
 
     }
+
+    /** When user selects a country from the drop down combo box, a list of appointments for the selected country is
+     * displayed in the tableview.
+     * @param event */
 
     @FXML
     void countryComboBox(ActionEvent event) throws SQLException {
@@ -85,6 +94,9 @@ public class ReportsByCountryController implements Initializable {
 
     }
 
+    /** Takes user back to the main home dashboard when button is clicked.
+     * @param event */
+
     @FXML
     void homeButton(ActionEvent event) throws IOException {
 
@@ -97,7 +109,9 @@ public class ReportsByCountryController implements Initializable {
     }
 
 
-
+    /** Initializes this screen with a list of countries in the drop down combo box.
+     * @param resourceBundle
+     * @param url */
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

@@ -23,6 +23,8 @@ import java.sql.SQLException;
 import java.time.Month;
 import java.util.ResourceBundle;
 
+/** A controller class that provides logic for the Reports By Month screen, shows a list of appointments count by month.*/
+
 public class ReportsByMonthController implements Initializable {
 
 
@@ -44,6 +46,9 @@ public class ReportsByMonthController implements Initializable {
         Integer count;
         Appointments appointment;
 
+        /** Takes user back to the reports dashboard if button is clicked.
+         * @param event
+         * */
 
         @FXML
         void backToReportsApptByMonth(ActionEvent event) throws IOException{
@@ -57,6 +62,10 @@ public class ReportsByMonthController implements Initializable {
 
         }
 
+        /** Takes user back to the main dashboard screen if button is clicked.
+         * @param event
+         * */
+
         @FXML
         void homeButtonApptsByMonth(ActionEvent event) throws IOException {
 
@@ -68,6 +77,10 @@ public class ReportsByMonthController implements Initializable {
 
 
         }
+
+        /** Sets the tableview to a list of appointment types and the count for each type. Creates a list of months and types. Loops
+         * through the entire appointment list to determine the type and month of each appointment. Increases each type count by 1.
+         * Adds the type and count to the tableview.*/
 
         public void viewMonthTypeReport() throws SQLException {
 
@@ -127,6 +140,12 @@ public class ReportsByMonthController implements Initializable {
                 }
                 appointmentsByMonthTableView.setItems(monthTypeReports);
         }
+
+        /** Initializes this screen with the appointment type and and count in the table view. Calls the @viewMonthType report
+         * method to set the items in the table view.
+         * @param url
+         * @param resourceBundle
+         * */
 
 
         @Override

@@ -76,7 +76,10 @@ public class DashboardController implements Initializable {
     private RadioButton weeklyViewRadioButton;
 
 
-
+/** Loads the report dashboard once the user clicks on the reports button.
+ *
+ * @param event
+ * */
 
     @FXML
     void ReportsButtonClicked(ActionEvent event) throws IOException {
@@ -88,6 +91,12 @@ public class DashboardController implements Initializable {
 
 
     }
+
+    /** Displays all appointments in the dashboard table view if the all radio button is selected.
+     *
+     * @param event
+     *
+     * */
 
     @FXML
     void viewAllSelected(ActionEvent event) throws SQLException {
@@ -103,6 +112,11 @@ public class DashboardController implements Initializable {
         }
 
     }
+
+    /** Sets the dashboard table view to all appointments within a week of the current date when user
+     * selects the weekly view radio button.
+     * @param event
+     * */
 
     @FXML
     void weeklyViewSelected(ActionEvent event) throws SQLException {
@@ -129,6 +143,11 @@ public class DashboardController implements Initializable {
 
     }
 
+    /** Sets the dashboard table view to all upcoming appointments within a month of the current date when
+     * user selects the monthly view radio button.
+     * @param event
+     * */
+
     @FXML
     void monthlyViewSelected(ActionEvent event) throws SQLException {
 
@@ -152,6 +171,10 @@ public class DashboardController implements Initializable {
 
     }
 
+    /** Takes user to the customer dashboard view the customers button is clicked.
+     * @param event
+     * */
+
     @FXML
     void customersButtonClicked(ActionEvent event) throws IOException {
         Parent parent = FXMLLoader.load(getClass().getResource("/View/CustomerInfo.fxml"));
@@ -161,6 +184,14 @@ public class DashboardController implements Initializable {
         stage.show();
 
     }
+
+    /** Deletes the appointment selected by the user in the main dashboard appointment table view.
+     * User must confirm if they want to delete the appointment type before the appointment is deleted.
+     * Refreshes the dashboard appointment table view with the rest of the appointments after the selected
+     * appointment is deleted.
+     * @param event
+     *
+     * */
 
     @FXML
     void deleteAppointment(ActionEvent event) throws SQLException {
@@ -179,6 +210,10 @@ public class DashboardController implements Initializable {
         }
     }
 
+    /** Closes the application when user selects the Exit button.
+     * @param event
+     * */
+
     @FXML
     void exitButton(ActionEvent event) {
         DBConnection.closeConnection();
@@ -186,6 +221,10 @@ public class DashboardController implements Initializable {
         System.exit(0);
 
     }
+
+    /** Loads the add new appointment screen when the New Appointment button is clicked.
+     * @param event
+     * */
 
     @FXML
     void newAppointmentButton(ActionEvent event) throws IOException {
@@ -197,6 +236,11 @@ public class DashboardController implements Initializable {
 
 
     }
+
+    /** Loads the Update Appointment screen when the users selects an appointment and then clicks the
+     * update appointment button.
+     * @param event
+     * */
 
     @FXML
     void updateAppointment(ActionEvent event) throws IOException {
@@ -213,6 +257,12 @@ public class DashboardController implements Initializable {
         stage.show();
 
     }
+
+
+    /** Initializes the dashboard screen with the tableview set to a list of all the appointments.
+     * @param resourceBundle
+     * @param url
+     * */
 
 
 

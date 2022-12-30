@@ -10,7 +10,12 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+/** A controller class that providers logic for the report dashboard, allows user to click on one of 3 reports to view report.*/
+
 public class ReportDashboardController {
+
+    /** Takes user to the Report By Contact screen when button is selected.
+     * @param event */
 
 
         @FXML
@@ -24,6 +29,9 @@ public class ReportDashboardController {
 
         }
 
+        /** Takes user to the Report By Month and Type screen once button is clicked.
+         * @param event */
+
         @FXML
         void reportsApptsByTypeMonth(ActionEvent event) throws IOException {
             Parent parent = FXMLLoader.load(getClass().getResource("/View/ReportsByMonthType.fxml"));
@@ -34,6 +42,9 @@ public class ReportDashboardController {
 
         }
 
+        /** Takes user to the Report by Country once button is clicked.
+         * @param event */
+
         @FXML
         void reportsApptsByUser(ActionEvent event) throws IOException {
             Parent parent = FXMLLoader.load(getClass().getResource("/View/ReportsByCountry.fxml"));
@@ -43,6 +54,9 @@ public class ReportDashboardController {
             stage.show();
 
         }
+
+        /** Takes user back to the main dashboard if button is clicked.
+         * @param event */
 
         @FXML
         void reportsHomeButton(ActionEvent event) throws IOException {

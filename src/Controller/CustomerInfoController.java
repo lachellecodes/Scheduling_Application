@@ -20,6 +20,9 @@ import java.time.LocalDateTime;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
+/** This class is a controller for the customer dashboard screen that provides logic for displaying, adding, deleting and updating
+ * the customer tableview.*/
+
 public class CustomerInfoController implements Initializable {
 
 
@@ -81,6 +84,12 @@ public class CustomerInfoController implements Initializable {
 
 
         }
+        /** Deletes the selected customer and all appointments associated with this customer.
+         * User must confirm delete.
+         * Refreshes the customer table view after the customer is deleted.
+         * @param event
+         *
+         * */
 
         @FXML
         void deleteCustomerButton(ActionEvent event) throws SQLException {

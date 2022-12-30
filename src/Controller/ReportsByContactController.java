@@ -26,11 +26,17 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ResourceBundle;
 
+/** A controller class for the Report By Contact tableview which displays appointment count by month.*/
+
 public class ReportsByContactController implements Initializable {
+
 
 
         @FXML
         private TableView<Appointments> appointmentsByContactTableView;
+
+        /** Takes user back to the report dashboard once button is clicked.
+         * @param event */
 
         @FXML
         void backToReportsApptsByContact(ActionEvent event) throws IOException {
@@ -41,6 +47,9 @@ public class ReportsByContactController implements Initializable {
             stage.show();
 
         }
+
+        /** Takes user back to main dashboard once button is clicked.
+         * @param event */
 
         @FXML
         void homeButtonApptsByContact(ActionEvent event) throws IOException{
@@ -89,7 +98,8 @@ public class ReportsByContactController implements Initializable {
 
 
 
-
+    /**Shows appointments in a tableview for the selected contact from the drop down combo box.
+     * @param event */
 
     @FXML
     void contactScheduleComboBox(ActionEvent event) throws SQLException {
@@ -118,7 +128,9 @@ public class ReportsByContactController implements Initializable {
 
     }
 
-
+    /** Initalizes this screen with a list of contacts to selected from the contact drop down combo box.
+     * @param url
+     * @param resourceBundle */
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

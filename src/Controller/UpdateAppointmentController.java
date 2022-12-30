@@ -28,6 +28,9 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ResourceBundle;
 
+/** A controller class that provides logic for the update appointment controller, allows user to udpate a selected appointment or cancel
+ * the action. */
+
 public class UpdateAppointmentController implements Initializable {
 
 
@@ -71,6 +74,10 @@ public class UpdateAppointmentController implements Initializable {
         private ObservableList<Customers> customerList = FXCollections.observableArrayList();
         private ObservableList<Users> usersList= FXCollections.observableArrayList();
 
+        /** A method that combines the appointment local start date and local start time together from the add appointment form
+         * text fields into a LocalTimeDate object for saving into the database.
+         * @return LocalDateTime */
+
         private LocalDateTime getStartDateTime() {
 
                 LocalDate startDate = updateApptStartDate.getValue();
@@ -80,6 +87,10 @@ public class UpdateAppointmentController implements Initializable {
                 return startDateTime;
         }
 
+        /** A method that combines the appointment local end date and local end time together from the add appointment form
+         * text fields into a LocalTimeDate object for saving into the database.
+         * @return LocalDateTime */
+
         private LocalDateTime getEndDateTime(){
                 LocalDate endDate = updateApptEndDate.getValue();
                 LocalTime endTime = updateApptEndTime.getValue();
@@ -87,6 +98,11 @@ public class UpdateAppointmentController implements Initializable {
 
                 return endDateTime;
         }
+
+        /** Takes user back to the dashboard if they decide not to update the selected appointment and the
+         * cancelled button is clicked.
+         * @param event
+         * */
 
         @FXML
         void cancelUpdateAppt(ActionEvent event) throws IOException {
@@ -99,6 +115,16 @@ public class UpdateAppointmentController implements Initializable {
 
 
         }
+
+        /** Updates an existing appointment in the database. Checks that the user has entered a value into each field on the new
+         * appointment form. If no fields are blank the checkBusinessHours function checks if the proposed appointment is
+         * outside of business hours. If it is outside of business hours an alert is shown to the user to alert them that
+         * the appointment is outside of EST business hours. If the appointment is within business hours the
+         * overlappingAppointmentCheck makes sure that the appointment does not conflict with another existing appointment.
+         * If both checks return a false Boolean value, the appointment can be saved into the database. Once the
+         * appointment is saved successfully, the user is taken back to the main dashboard.
+         * @param event
+         * */
 
         @FXML
         void saveUpdatedAppointment(ActionEvent event) throws IOException {
@@ -172,6 +198,10 @@ public class UpdateAppointmentController implements Initializable {
 
         }
 
+        /** Gets the values for the selected appointment and loads them onto the Update Appointment screen when the screen
+         * is loaded.
+         * @param selectedAppointment */
+
         public void setUpdatedAppointmentValues (Appointments selectedAppointment){
                 updateAppointmentId.setText(String.valueOf(selectedAppointment.getAppointmentID()));
                 updateApptTitle.setText(String.valueOf(selectedAppointment.getTitle()));
@@ -185,10 +215,15 @@ public class UpdateAppointmentController implements Initializable {
                 updateApptEndTime.setValue(selectedAppointment.getEndDateTime().toLocalTime());
                 updateApptCustomerID.getSelectionModel().select(selectedAppointment.getApptCustomerID());
                 updateApptUserID.getSelectionModel().select(selectedAppointment.getApptUserID());
+                //todo bring info over from combo boxes?
 
         }
 
-
+        /** Initializes the update appointment screen combo boxes with a list of contacts, customers and users. Sets the combo
+         * boxes time with the hours in 15 minute increments.
+         * @param resourceBundle
+         * @param url
+         *  */
 
         @Override
         public void initialize(URL url, ResourceBundle resourceBundle) {

@@ -25,13 +25,13 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
+/** A controller class that provides logic for the new customer screen to update a customer info or cancel the action. */
+
 public class NewCustomerController implements Initializable {
 
 
         @FXML
         private TextField addNewCustomerAddress;
-
-
 
         @FXML
         private ComboBox<Countries> addNewCustomerCountry;
@@ -57,7 +57,7 @@ public class NewCustomerController implements Initializable {
 
         private ObservableList<FirstLevelDivisions> divisionList = FXCollections.observableArrayList();
 
-        /** Loads the Customer Info screen with a tableview of all customers if the Cancel button is clicked.
+        /** Takes the user back to the Customer Info screen with a tableview of all customers if the Cancel button is clicked.
          * @param event
          * */
         @FXML

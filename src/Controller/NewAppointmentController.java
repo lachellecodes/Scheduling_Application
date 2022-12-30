@@ -28,6 +28,8 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ResourceBundle;
 
+/** A controller class for the New Appointment screen, provides logic to save a new appointment or cancel adding a new appointment.*/
+
 public class NewAppointmentController implements Initializable {
 
 
@@ -72,7 +74,9 @@ public class NewAppointmentController implements Initializable {
         private ObservableList<Customers> customerList = FXCollections.observableArrayList();
         private ObservableList<Users> usersList= FXCollections.observableArrayList();
 
-
+        /** Takes user back to the main screen if they click the cancel on the add new appointment screen.
+         * @param event
+         * */
 
 
         @FXML
@@ -93,12 +97,9 @@ public class NewAppointmentController implements Initializable {
 
         }
 
-        @FXML
-        void selectApptStartTime(ActionEvent event) {
-
-
-
-        }
+     /** A method that combines the appointment local start date and local start time together from the add appointment form
+      * text fields into a LocalTimeDate object for saving into the database.
+      * @return LocalDateTime */
 
         private LocalDateTime getStartDateTime() {
 
@@ -109,6 +110,10 @@ public class NewAppointmentController implements Initializable {
                 return startDateTime;
         }
 
+        /** A method that combines the appointment local end date and local end time together from the add appointment form
+         * text fields into a LocalTimeDate object for saving into the database.
+         * @return LocalDateTime */
+
         private LocalDateTime getEndDateTime(){
                 LocalDate endDate = newApptEndDate.getValue();
                 LocalTime endTime = newApptEndTime.getValue();
@@ -116,6 +121,15 @@ public class NewAppointmentController implements Initializable {
 
                 return endDateTime;
         }
+
+        /** Saves a new appointment into the database. Checks that the user has entered a value into each field on the new
+         * appointment form. If no fields are blank the checkBusinessHours function checks if the proposed appointment is
+         * outside of business hours. If it is outside of business hours an alert is shown to the user to alert them that
+         * the appointment is outside of EST business hours. If the appointment is within business hours the
+         * overlappingAppointmentCheck makes sure that the appointment does not conflict with another existing appointment.
+         * If both checks return a false Boolean value, the appointment can be saved into the database. Once the
+         * appointment is saved successfully, the user is taken back to the main dashboard.
+         * @param event */
 
         @FXML
         void saveNewAppointment(ActionEvent event) throws IOException {
@@ -177,6 +191,12 @@ public class NewAppointmentController implements Initializable {
 
 
         }
+
+        /** Initializes the new appointment screen combo boxes with a list of contacts, customers and users. Sets the combo
+         * boxes time with the hours in 15 minute increments.
+         * @param url
+         * @param resourceBundle
+         * */
 
         @Override
         public void initialize(URL url, ResourceBundle resourceBundle) {

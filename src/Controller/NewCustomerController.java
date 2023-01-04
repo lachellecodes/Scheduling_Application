@@ -71,10 +71,10 @@ public class NewCustomerController implements Initializable {
 
         }
 
-        /** Sets items for the combo box drop down of countries and then the division combo box.
-         * First, an item is selected from the country list.
-         * The getAllDivisions method is called.
-         * A new observable list is created and filled with a list of divisions that match the selected country.
+        /** Sets items for the combo box drop down of countries and then the division combo box by country.
+         *Lambda expression filters the entire first level division list by country ID against the country ID
+         * from the country list. Returns true if object belongs in the filtered list.
+         * Returns false if the object does not belong in the filtered list.
          * @param event
          */
 
@@ -84,16 +84,21 @@ public class NewCustomerController implements Initializable {
                 try {
                         Countries selectedCountry = addNewCustomerCountry.getSelectionModel().getSelectedItem();
                         divisionList = FirstLevelDivisionsDAO.getAllDivisions();
-                        ObservableList<FirstLevelDivisions> divisionsByCountry = FXCollections.observableArrayList();
-                        //TODO lambda can be used here instead of for loop preview email
+                        ObservableList<FirstLevelDivisions> divisionsByCountry = divisionList.filtered( d->{
+                                if (d.getFirstLevelDivisionsCountryID()==selectedCountry.getCountryId())
+                                        return true;
+                                return false;
+                        });
+                        /*ObservableList<FirstLevelDivisions> divisionsByCountry = FXCollections.observableArrayList();
+                        //TODO lambda can be used here instead of for loop review email
                         for(FirstLevelDivisions firstLevelDivsions : divisionList ){
 
-                                if(firstLevelDivsions.getFirstLevelDivisionsCountryID() == selectedCountry.getCountryId()){
+                                if(firstLevelDivisions.getFirstLevelDivisionsCountryID() == selectedCountry.getCountryId()){
                                         divisionsByCountry.add(firstLevelDivsions);
-                                }
+                                }*/
                                 addNewCustomerDivisionId.setItems(divisionsByCountry);
 
-                        }
+
                 } catch (SQLException throwables) {
                         throwables.printStackTrace();
                 }

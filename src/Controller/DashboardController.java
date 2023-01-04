@@ -278,6 +278,7 @@ public class DashboardController implements Initializable {
             throwables.printStackTrace();
         }
 
+
         apptID.setCellValueFactory(new PropertyValueFactory<>("appointmentID"));
         apptTitle.setCellValueFactory(new PropertyValueFactory<>("title"));
         apptDescription.setCellValueFactory(new PropertyValueFactory<>("description"));

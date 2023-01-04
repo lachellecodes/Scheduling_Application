@@ -106,27 +106,29 @@ public class ReportsByContactController implements Initializable {
 
         appointmentsByContactTableView.getItems().clear();
 
-       int  selectedContactId = contactsComboBox.getSelectionModel().getSelectedItem().getContactID();
-       appointments= AppointmentDAO.getAllAppointments();
+        int selectedContactId = contactsComboBox.getSelectionModel().getSelectedItem().getContactID();
+        appointments = AppointmentDAO.getAllAppointments();
 
-       Appointments newAppointment;
+        Appointments newAppointment;
 
-        for (Appointments contactAppointment : appointments){
-            if ( contactAppointment.getApptContactID() == selectedContactId){
+
+
+        for (Appointments contactAppointment : appointments) {
+            if (contactAppointment.getApptContactID() == selectedContactId) {
 
 
                 newAppointment = contactAppointment;
-                contactScheduledAppointments.add(newAppointment);
+                contactScheduledAppointments.add(newAppointment) ;
                 appointmentsByContactTableView.setItems(contactScheduledAppointments);
-
-
 
 
             }
         }
-
-
     }
+
+
+
+
 
     /** Initalizes this screen with a list of contacts to selected from the contact drop down combo box.
      * @param url

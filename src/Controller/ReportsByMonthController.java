@@ -3,6 +3,9 @@ package Controller;
 import DAO.AppointmentDAO;
 import Model.Appointments;
 import Model.MonthTypeReport;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -79,8 +82,9 @@ public class ReportsByMonthController implements Initializable {
         }
 
 
-        /** Initializes this screen with the appointment type and and count in the table view. Calls the @viewMonthType report
-         * method to set the items in the table view.
+        /** Initializes this screen with the appointment type and and count in the table view.
+         * Calls the @viewMonthType report method to set the items in the table view.
+         * Table columns are set by lambda to determine the objects in the fields.
          * @param url
          * @param resourceBundle
          * */
@@ -96,9 +100,12 @@ public class ReportsByMonthController implements Initializable {
                 }
 
 
-                monthName.setCellValueFactory(new PropertyValueFactory<>("month"));
-                apptTypeMonth.setCellValueFactory(new PropertyValueFactory<>("type"));
-                totalNumAppts.setCellValueFactory(new PropertyValueFactory<>("count"));
+                monthName.setCellValueFactory(cellData->new SimpleStringProperty(cellData.getValue().getMonth()));
+                apptTypeMonth.setCellValueFactory(cellData->new SimpleStringProperty(cellData.getValue().getType()));
+                totalNumAppts.setCellValueFactory(cellData ->new SimpleObjectProperty<>(cellData.getValue().getCount()));
+                //monthName.setCellValueFactory(new PropertyValueFactory<>("month"));
+                //apptTypeMonth.setCellValueFactory(new PropertyValueFactory<>("type"));
+                //totalNumAppts.setCellValueFactory(new PropertyValueFactory<>("count"));
 
         }
 }

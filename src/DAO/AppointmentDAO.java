@@ -145,7 +145,7 @@ public class AppointmentDAO {
         ps.execute();
     }
 
-    /** Returns a list of appointments filetered by country ID
+    /** Returns a list of appointments filtered by country ID
      * @param selectedCountry takes in the country ID from the combo box
      * @throws SQLException from the query on 4 tables in the database.
      * */

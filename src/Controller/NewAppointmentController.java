@@ -212,7 +212,7 @@ public class NewAppointmentController implements Initializable {
                         newApptUserID.setItems(usersList);
 
                         LocalTime start = LocalTime.of(00, 0);
-                        LocalTime end = LocalTime.of(24, 0);
+                        LocalTime end = LocalTime.of(23, 0);
                         while (start.isBefore(end)) {
                                 newApptStartTime.getItems().add(start);
                                 newApptEndTime.getItems().add(start);

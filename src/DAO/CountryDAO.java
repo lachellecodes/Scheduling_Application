@@ -38,12 +38,12 @@ public class CountryDAO {
     }
 
     public static Countries getCountryByDivision (int divisionId) throws  SQLException{
-        System.out.println("search division id = " + divisionId);
+
         for(FirstLevelDivisions divisions : FirstLevelDivisionsDAO.getAllDivisions()){
-            System.out.println("division = " + divisions.getDivisionID()+ " , " + divisions.getFirstLevelDivisionsCountryID());
+
             if(divisions.getDivisionID() == divisionId){
                 for(Countries country : getAllCountries()){
-                    System.out.println("country = " + country.getCountryId()+ " , " + country.getCountry());
+
                     if(country.getCountryId() == divisions.getFirstLevelDivisionsCountryID()){
                         return country;
                     }

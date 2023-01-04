@@ -157,6 +157,8 @@ public class LoginController implements Initializable {
                 loadDashboard(event);
                 boolean upcoming = false;
 
+
+
                 for (Appointments appointments : allAppointments) {
 
                     //String userName = userIDtext.getText();

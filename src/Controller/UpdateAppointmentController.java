@@ -203,6 +203,7 @@ public class UpdateAppointmentController implements Initializable {
          * @param selectedAppointment */
 
         public void setUpdatedAppointmentValues (Appointments selectedAppointment){
+
                 updateAppointmentId.setText(String.valueOf(selectedAppointment.getAppointmentID()));
                 updateApptTitle.setText(String.valueOf(selectedAppointment.getTitle()));
                 updateApptDescription.setText(String.valueOf(selectedAppointment.getDescription()));
@@ -240,7 +241,7 @@ public class UpdateAppointmentController implements Initializable {
                         updateApptUserID.setItems(usersList);
 
                         LocalTime start = LocalTime.of(00, 0);
-                        LocalTime end = LocalTime.of(24, 0);
+                        LocalTime end = LocalTime.of(23, 0);
                         while (start.isBefore(end)) {
                                 updateApptStartTime.getItems().add(start);
                                 updateApptEndTime.getItems().add(start);

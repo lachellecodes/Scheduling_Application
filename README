@@ -5,7 +5,8 @@ a consulting business that conducts business in multiple languages and office lo
 of the world.
 
 Appointments, contacts and customers can be created, updated or deleted via the application and stored in
-MySQL database.
+MySQL database. Reports can be viewed that shows appointments by contact, appointments by country and the total count
+of each type of appointment.
 
 Author: Lachelle Allen
 Contact information: lall319@wgu.edu
@@ -29,3 +30,6 @@ This report uses a SQL query that joins multiple tables including appointments, 
 and countries to filter and select the appointments by countries currently supported by the company.
 
 MySQL Connector Driver Version: mysql-connector-java-8.0.25
+
+Lambda #1 is found at NewCustomerController.countryComboBoxAction()
+Lambda #2 is found at ReportsByMonthController.initialize

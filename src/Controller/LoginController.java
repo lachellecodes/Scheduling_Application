@@ -180,7 +180,7 @@ public class LoginController implements Initializable {
                         alert.setHeaderText(" You have an appointment starting within the next 15 minutes.");
                         alert.show();
                         break;
-                        //TODO  how do i stop this from cycling through the rest of the appointments and showing the alert more than once?
+
                     }
                 }
                 if(!upcoming){

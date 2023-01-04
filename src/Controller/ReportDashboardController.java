@@ -1,5 +1,6 @@
 package Controller;
 
+import DAO.AppointmentDAO;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -9,6 +10,7 @@ import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 /** A controller class that providers logic for the report dashboard, allows user to click on one of 3 reports to view report.*/
 
@@ -33,7 +35,8 @@ public class ReportDashboardController {
          * @param event */
 
         @FXML
-        void reportsApptsByTypeMonth(ActionEvent event) throws IOException {
+        void reportsApptsByTypeMonth(ActionEvent event) throws IOException, SQLException {
+            AppointmentDAO.appointmentsByType();
             Parent parent = FXMLLoader.load(getClass().getResource("/View/ReportsByMonthType.fxml"));
             Scene scene = new Scene(parent);
             Stage stage = (Stage) ((Button)event.getSource()).getScene().getWindow();

@@ -33,7 +33,7 @@ public class ReportsByMonthController implements Initializable {
         private TableView<MonthTypeReport> appointmentsByMonthTableView;
 
         @FXML
-        private TableColumn<MonthTypeReport, Month> apptTypeMonth;
+        private TableColumn<MonthTypeReport, String> apptTypeMonth;
 
         @FXML
         private TableColumn<MonthTypeReport, String> monthName;
@@ -78,68 +78,6 @@ public class ReportsByMonthController implements Initializable {
 
         }
 
-        /** Sets the tableview to a list of appointment types and the count for each type. Creates a list of months and types. Loops
-         * through the entire appointment list to determine the type and month of each appointment. Increases each type count by 1.
-         * Adds the type and count to the tableview.*/
-
-        public void viewMonthTypeReport() throws SQLException {
-
-                ObservableList<Appointments> appointmentList = AppointmentDAO.getAllAppointments();
-                ObservableList<Month> months = FXCollections.observableArrayList();
-                ObservableList<String> types = FXCollections.observableArrayList();
-                ObservableList<MonthTypeReport> monthTypeReports = FXCollections.observableArrayList();
-
-                appointmentList.forEach(appointments -> {
-                                Month month = appointments.getStartDateTime().getMonth();
-
-                                if (!months.contains(month)) {
-                                        months.add(month);
-                                }
-                        });
-
-
-
-                appointmentList.forEach(appointments -> {
-                        String type = appointments.getType();
-                        if (!types.contains(type)) {
-                                types.add(type);
-                                count = 0;
-
-                        }
-                });
-
-                for (int i = 0; i < months.size(); i++) {
-                        month = months.get(i);
-
-
-                        for (int j = 0; j < types.size(); j++) {
-                                type = types.get(j);
-
-
-                                /*for (int k = 0; k < appointmentList.size(); k++) {
-                                        appointment = appointmentList.get(k);*/
-
-                                for (Appointments appointment : appointmentList) {
-                                        if (appointment.getStartDateTime().getMonth() == month && appointment.getType() == type) {
-                                                count++;
-                                                //todo why does this keep counting and adding one for each appt? i have tried break ?
-
-
-                                                if (count > 0) {
-                                                        MonthTypeReport monthType = new MonthTypeReport(month, type, count);
-                                                        monthTypeReports.add(monthType);
-
-
-                                                }
-                                        }
-                                }
-
-                        }
-
-
-                }
-                appointmentsByMonthTableView.setItems(monthTypeReports);
-        }
 
         /** Initializes this screen with the appointment type and and count in the table view. Calls the @viewMonthType report
          * method to set the items in the table view.
@@ -152,7 +90,7 @@ public class ReportsByMonthController implements Initializable {
         public void initialize(URL url, ResourceBundle resourceBundle) {
 
                 try {
-                        viewMonthTypeReport();
+                        appointmentsByMonthTableView.setItems(AppointmentDAO.appointmentsByType());
                 } catch (SQLException throwables) {
                         throwables.printStackTrace();
                 }

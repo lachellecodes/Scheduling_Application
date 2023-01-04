@@ -85,7 +85,7 @@ public class NewCustomerController implements Initializable {
                         Countries selectedCountry = addNewCustomerCountry.getSelectionModel().getSelectedItem();
                         divisionList = FirstLevelDivisionsDAO.getAllDivisions();
                         ObservableList<FirstLevelDivisions> divisionsByCountry = FXCollections.observableArrayList();
-
+                        //TODO lambda can be used here instead of for loop preview email
                         for(FirstLevelDivisions firstLevelDivsions : divisionList ){
 
                                 if(firstLevelDivsions.getFirstLevelDivisionsCountryID() == selectedCountry.getCountryId()){

@@ -1,33 +1,33 @@
 package Model;
 
+import java.time.LocalDateTime;
 import java.time.Month;
 
 /** A class to model the appointment count by month and type for the report. */
 
 public class MonthTypeReport {
 
-    Month month;
+    String month;
     String type;
-    Integer count;
+    int count;
 
     /** Creates a new month type object.
      * @param month
      * @param type
-     * @param count
-     * */
+     * @param count   */
 
 
-    public MonthTypeReport(Month month, String type, Integer count) {
+    public MonthTypeReport(String month, String type, Integer count) {
         this.month = month;
         this.type = type;
         this.count = count;
     }
 
-    public Month getMonth() {
+    public String getMonth() {
         return month;
     }
 
-    public void setMonth(Month month) {
+    public void setMonth(String month) {
         this.month = month;
     }
 

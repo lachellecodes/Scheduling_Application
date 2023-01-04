@@ -1,11 +1,13 @@
 package DAO;
 
 import Model.Appointments;
+import Model.MonthTypeReport;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 import java.sql.*;
 import java.time.LocalDateTime;
+import java.time.Month;
 
 /** A DAO class for performing operations on the appointment table in the database. */
 
@@ -179,6 +181,30 @@ public class AppointmentDAO {
 
     }
 
-}
+    public static ObservableList<MonthTypeReport> appointmentsByType() throws SQLException {
+
+        getAllAppointments();
+
+        ObservableList<MonthTypeReport> appointmentsByType = FXCollections.observableArrayList();
+        String query = "select monthname(start),type,  COUNT(*) as total  FROM client_schedule.appointments group by monthname(start), type";
+
+        PreparedStatement ps = DBConnection.connection.prepareStatement(query);
+        ResultSet rs = ps.executeQuery();
+
+        while(rs.next()){
+            String month = rs.getString("monthname(start)");
+            String type = rs.getString("type");
+            int count = rs.getInt("total");
+
+            MonthTypeReport monthTypeReport = new MonthTypeReport(month, type, count);
+            appointmentsByType.add(monthTypeReport); }
+
+        return appointmentsByType;
+        }
+
+    }
+
+
+
 
 

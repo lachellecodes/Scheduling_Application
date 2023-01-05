@@ -84,19 +84,19 @@ public class ValidateAppointment {
      * before saving the appointment to the database.*/
     public static Boolean checkBusinessHours(Appointments newAppointment) throws SQLException {
 
-        ObservableList<Appointments> appointmentList = AppointmentDAO.getAllAppointments();
+        //ObservableList<Appointments> appointmentList = AppointmentDAO.getAllAppointments();
 
-        Boolean outsideBusinessHours = false;
+        boolean outsideBusinessHours = false;
 
         Appointments proposedAppointment = new Appointments();
 
-        for (Appointments appointments : appointmentList) {
+        /*for (Appointments appointments : appointmentList) {
 
             if (appointments.getAppointmentID() == newAppointment.getAppointmentID()) {
                 continue;
-            }
+            }*/
 
-            proposedAppointment = appointments;
+            proposedAppointment = newAppointment;
 
             LocalTime businessStart = LocalTime.of(8, 00);
             LocalDate businessDateStart = LocalDate.now();
@@ -109,8 +109,8 @@ public class ValidateAppointment {
             ZonedDateTime zonedEstStart = zonedStartDateTime.withZoneSameInstant(ZoneId.of("America/New_York"));
 
             LocalTime businessEnd = LocalTime.of(22, 00);
-            LocalDate businessDateEnd = LocalDate.now();
-            LocalDateTime businessEndTime = LocalDateTime.of(businessDateEnd, businessEnd);
+            //LocalDate businessDateEnd = LocalDate.now();
+            LocalDateTime businessEndTime = LocalDateTime.of(businessDateStart, businessEnd);
             ZonedDateTime zonedBusinessEnd = businessEndTime.atZone(ZoneId.systemDefault());
             ZonedDateTime zonedEstBusinessEnd = zonedBusinessEnd.withZoneSameInstant(ZoneId.of("America/New_York"));
 
@@ -124,7 +124,7 @@ public class ValidateAppointment {
 
 
             }
-        }
+
         return outsideBusinessHours;
     }
 }

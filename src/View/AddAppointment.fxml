@@ -101,7 +101,7 @@
                   <Font size="18.0" />
                </font>
             </Text>
-            <ComboBox fx:id="newApptStartTime" layoutX="171.0" layoutY="400.0" onAction="#selectApptStartTime" prefHeight="25.0" prefWidth="197.0" />
+            <ComboBox fx:id="newApptStartTime" layoutX="171.0" layoutY="400.0"  prefHeight="25.0" prefWidth="197.0" />
             <ComboBox fx:id="newApptEndTime" layoutX="163.0" layoutY="496.0" prefHeight="25.0" prefWidth="210.0" />
             <ComboBox fx:id="newApptUserID" layoutX="166.0" layoutY="592.0" prefHeight="25.0" prefWidth="212.0" />
             <Text layoutX="21.0" layoutY="572.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Customer ID">

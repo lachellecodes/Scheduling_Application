@@ -27,7 +27,7 @@ public class ValidateAppointment {
 
         boolean overlap = false;
 
-        Appointments proposedAppointment = new Appointments();
+        //Appointments proposedAppointment = new Appointments();
 
         for (Appointments appointments : appointmentList) {
 
@@ -44,25 +44,29 @@ public class ValidateAppointment {
             LocalDateTime start = appointments.getStartDateTime();
             LocalDateTime end = appointments.getEndDateTime();
 
-            proposedAppointment = appointments;
+            //proposedAppointment = newAppointment;
 
 
             //new appointment is the same time as another appointment
             if ((newApptCustomerID == apptCustomerID) && proposedStart.isEqual(start) && proposedEnd.isEqual(end)) {
                 overlap = true;
                 break;
-            // new appointment starts before but ends during another appointment
-            } else if ((newApptCustomerID == apptCustomerID) && proposedStart.isBefore(start) && proposedEnd.isAfter(start)) {
+            }
+
+            // new appointment starts before but ends after another appointment
+            else if ((newApptCustomerID == apptCustomerID) && proposedStart.isBefore(start) && proposedEnd.isAfter(end)) {
+                overlap = true;
+                break;
+            }
+
+                // new appointment ends at the same time as another appointment
+             else if ((newApptCustomerID == apptCustomerID) && proposedStart.isBefore(start) && proposedEnd.isEqual(end)) {
                 overlap = true;
                 break;
 
-            // new appointment ends at the same time as another appointment
-            } else if ((newApptCustomerID == apptCustomerID) && proposedStart.isBefore(start) && proposedEnd.isEqual(end)) {
-                overlap = true;
-                break;
 
-               // new appointment starts at the same time as another appointment
-            } else if ((newApptCustomerID == apptCustomerID) && proposedStart.isEqual(start) && proposedEnd.isAfter(start)) {
+                // new appointment starts at the same time as another appointment and ends during another appointment
+            } else if ((newApptCustomerID == apptCustomerID) && proposedStart.isEqual(start) && proposedEnd.isBefore(end)) {
                 overlap = true;
                 break;
 
@@ -70,6 +74,22 @@ public class ValidateAppointment {
             } else if ((newApptCustomerID == apptCustomerID) && proposedStart.isAfter(start) && proposedEnd.isEqual(end)) {
                 overlap = true;
                 break;
+
+                //new appointment starts and ends during another appointment
+            } else if ((newApptCustomerID == apptCustomerID) && proposedStart.isAfter(start) && proposedEnd.isBefore(end)) {
+                overlap = true;
+                break;
+
+                //new appointment starts after and ends after another appointment
+            } else if ((newApptCustomerID == apptCustomerID) && proposedStart.isAfter(start) && proposedEnd.isAfter(end)) {
+                overlap = true;
+                break;
+
+                //new appointment starts at the same time and ends after existing appointment
+            } else if ((newApptCustomerID == apptCustomerID) && proposedStart.isEqual(start) && proposedEnd.isAfter(end)) {
+                overlap = true;
+
+
             }
 
 
@@ -98,19 +118,21 @@ public class ValidateAppointment {
 
             proposedAppointment = newAppointment;
 
+            LocalDateTime apptStart = proposedAppointment.getStartDateTime();
+            LocalDate apptStartDate = proposedAppointment.getStartDateTime().toLocalDate();
+            ZonedDateTime zonedStartDateTime = apptStart.atZone(ZoneId.systemDefault());
+            ZonedDateTime zonedEstStart = zonedStartDateTime.withZoneSameInstant(ZoneId.of("America/New_York"));
+
             LocalTime businessStart = LocalTime.of(8, 00);
-            LocalDate businessDateStart = LocalDate.now();
+            LocalDate businessDateStart = apptStartDate;
             LocalDateTime businessStartTime = LocalDateTime.of(businessDateStart, businessStart);
             ZonedDateTime zonedBusinessStart = businessStartTime.atZone(ZoneId.systemDefault());
             ZonedDateTime zonedEstBusinesStart = zonedBusinessStart.withZoneSameInstant(ZoneId.of("America/New_York"));
 
-            LocalDateTime apptStart = proposedAppointment.getStartDateTime();
-            ZonedDateTime zonedStartDateTime = apptStart.atZone(ZoneId.systemDefault());
-            ZonedDateTime zonedEstStart = zonedStartDateTime.withZoneSameInstant(ZoneId.of("America/New_York"));
 
             LocalTime businessEnd = LocalTime.of(22, 00);
             //LocalDate businessDateEnd = LocalDate.now();
-            LocalDateTime businessEndTime = LocalDateTime.of(businessDateStart, businessEnd);
+            LocalDateTime businessEndTime = LocalDateTime.of(apptStartDate, businessEnd);
             ZonedDateTime zonedBusinessEnd = businessEndTime.atZone(ZoneId.systemDefault());
             ZonedDateTime zonedEstBusinessEnd = zonedBusinessEnd.withZoneSameInstant(ZoneId.of("America/New_York"));
 

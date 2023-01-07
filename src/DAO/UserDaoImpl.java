@@ -1,5 +1,7 @@
 package DAO;
 
+import Model.Appointments;
+import Model.Contacts;
 import Model.Users;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -37,7 +39,7 @@ public class UserDaoImpl {
 
 
     }
-    /** A method to return a speccific user by ID numner.
+    /** A method to return a specific user by ID numner.
      * @param currentUserName  takes in the user name string
      * @return a user
      * @throws SQLException*/
@@ -66,5 +68,27 @@ public class UserDaoImpl {
             }
 
         return currentUser ;
+    }
+
+
+    /** A method to pass the user info to the user combo box on the update appointment screen.
+     * @param selectedAppointment
+     * @return users object
+     * @throws SQLException
+     * */
+    public static Users getUser (Appointments selectedAppointment) throws SQLException {
+
+        for (Appointments appointments : AppointmentDAO.getAllAppointments()) {
+            if(appointments.getApptUserID() == selectedAppointment.getApptUserID()){
+                for (Users users : getAllUsers()){
+                    if(users.getUserID()==selectedAppointment.getApptUserID()){
+                        return  users;
+                    }
+                }
+            }
+
+        }
+        return null;
+
     }
 }

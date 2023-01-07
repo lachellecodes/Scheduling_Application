@@ -1,5 +1,7 @@
 package DAO;
 
+import Model.Appointments;
+import Model.Contacts;
 import Model.Customers;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -120,6 +122,28 @@ public class CustomerDAO {
         PreparedStatement ps = DBConnection.connection.prepareStatement(deleteQuery);
         ps.setInt(1,customerToDelete);
         ps.execute();
+
+    }
+
+    /** A method to pass the customer info to the customer combo box on the update appointment screen.
+     * @param selectedAppointment
+     * @return customers object
+     * @throws SQLException
+     * */
+
+    public static Customers getCustomersById (Appointments selectedAppointment) throws SQLException {
+
+        for (Appointments appointments : AppointmentDAO.getAllAppointments()) {
+            if(appointments.getApptCustomerID() == selectedAppointment.getApptCustomerID()){
+                for (Customers customers : getAllCustomers()){
+                    if(customers.getCustomerId()==selectedAppointment.getApptCustomerID()){
+                        return  customers;
+                    }
+                }
+            }
+
+        }
+        return null;
 
     }
 

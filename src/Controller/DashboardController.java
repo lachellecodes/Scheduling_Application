@@ -29,7 +29,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
 
-/** A controller class that provider logic for the dashboard screen, the main screen for the application.*/
+/** A controller class that provider logic for the dashboard screen, the main screen for the application. */
 
 public class DashboardController implements Initializable {
 
@@ -261,7 +261,7 @@ public class DashboardController implements Initializable {
     }
 
 
-    /** Initializes the dashboard screen with the tableview set to a list of all the appointments.
+    /** Initializes the dashboard screen with the tableview set to a list of all the appointments. 
      * @param resourceBundle
      * @param url
      * */

@@ -1,5 +1,6 @@
 package DAO;
 
+import Model.Appointments;
 import Model.Contacts;
 import Model.Countries;
 import javafx.collections.FXCollections;
@@ -31,6 +32,28 @@ public class ContactsDAO {
             allContacts.add(contact);
         }
         return allContacts;
+
+    }
+
+    /** A method to pass the contact info to the contact combo box on the update appointment screen.
+     * @param selectedAppointment
+     * @return contacts object
+     * @throws SQLException
+     * */
+
+    public static Contacts getContactById (Appointments selectedAppointment) throws SQLException {
+
+        for (Appointments appointments : AppointmentDAO.getAllAppointments()) {
+            if(appointments.getApptContactID() == selectedAppointment.getApptContactID()){
+                for (Contacts contacts : getAllContacts()){
+                    if(contacts.getContactID()==selectedAppointment.getApptContactID()){
+                        return  contacts;
+                    }
+                }
+            }
+
+        }
+        return null;
 
     }
 }

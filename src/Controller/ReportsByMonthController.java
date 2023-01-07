@@ -26,7 +26,7 @@ import java.sql.SQLException;
 import java.time.Month;
 import java.util.ResourceBundle;
 
-/** A controller class that provides logic for the Reports By Month screen, shows a list of appointments count by month.*/
+/** A controller class that provides logic for the Reports By Month screen, shows a list of appointments count by month. */
 
 public class ReportsByMonthController implements Initializable {
 

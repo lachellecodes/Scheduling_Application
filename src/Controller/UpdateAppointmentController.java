@@ -204,18 +204,28 @@ public class UpdateAppointmentController implements Initializable {
 
         public void setUpdatedAppointmentValues (Appointments selectedAppointment){
 
-                updateAppointmentId.setText(String.valueOf(selectedAppointment.getAppointmentID()));
-                updateApptTitle.setText(String.valueOf(selectedAppointment.getTitle()));
-                updateApptDescription.setText(String.valueOf(selectedAppointment.getDescription()));
-                updatedApptLocation.setText(String.valueOf(selectedAppointment.getLocation()));
-                updateApptContact.getSelectionModel().select(selectedAppointment.getApptContactID());
-                updateApptType.setText(String.valueOf(selectedAppointment.getType()));
-                updateApptStartTime.setValue(selectedAppointment.getStartDateTime().toLocalTime());
-                updateApptStartDate.setValue(selectedAppointment.getStartDateTime().toLocalDate());
-                updateApptEndDate.setValue(selectedAppointment.getEndDateTime().toLocalDate());
-                updateApptEndTime.setValue(selectedAppointment.getEndDateTime().toLocalTime());
-                updateApptCustomerID.getSelectionModel().select(selectedAppointment.getApptCustomerID());
-                updateApptUserID.getSelectionModel().select(selectedAppointment.getApptUserID());
+                try {
+
+                        updateAppointmentId.setText(String.valueOf(selectedAppointment.getAppointmentID()));
+                        updateApptTitle.setText(String.valueOf(selectedAppointment.getTitle()));
+                        updateApptDescription.setText(String.valueOf(selectedAppointment.getDescription()));
+                        updatedApptLocation.setText(String.valueOf(selectedAppointment.getLocation()));
+                        //updateApptContact.getSelectionModel().select(selectedAppointment.getApptContactID());
+                        updateApptContact.setItems(contactList);
+                        updateApptContact.setValue(ContactsDAO.getContactById(selectedAppointment));
+                        updateApptType.setText(String.valueOf(selectedAppointment.getType()));
+                        updateApptStartTime.setValue(selectedAppointment.getStartDateTime().toLocalTime());
+                        updateApptStartDate.setValue(selectedAppointment.getStartDateTime().toLocalDate());
+                        updateApptEndDate.setValue(selectedAppointment.getEndDateTime().toLocalDate());
+                        updateApptEndTime.setValue(selectedAppointment.getEndDateTime().toLocalTime());
+                        updateApptCustomerID.setItems(customerList);
+                        updateApptCustomerID.setValue(CustomerDAO.getCustomersById(selectedAppointment));
+                        updateApptUserID.setItems(usersList);
+                        updateApptUserID.setValue(UserDaoImpl.getUser(selectedAppointment));
+                        //updateApptUserID.getSelectionModel().select(selectedAppointment.getApptUserID());
+                } catch (SQLException throwables) {
+                        throwables.printStackTrace();
+                }
 
                 //todo bring info over from combo boxes?
 

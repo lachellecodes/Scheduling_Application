@@ -169,7 +169,7 @@ public class UpdateCustomerController implements Initializable {
 
         }
 
-        /** Initializes this update customer screen with the items in the country and first division drop down combo box list.
+        /** Initializes this update customer screen with the items in the country and first division drop down combo box list. 
          * @param url
          * @param resourceBundle */
 

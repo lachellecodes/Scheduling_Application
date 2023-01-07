@@ -57,7 +57,7 @@ public class NewCustomerController implements Initializable {
 
         private ObservableList<FirstLevelDivisions> divisionList = FXCollections.observableArrayList();
 
-        /** Takes the user back to the Customer Info screen with a tableview of all customers if the Cancel button is clicked.
+        /**Takes the user back to the Customer Info screen with a tableview of all customers if the Cancel button is clicked.
          * @param event
          * */
         @FXML
@@ -71,9 +71,8 @@ public class NewCustomerController implements Initializable {
 
         }
 
-        /** Sets items for the combo box drop down of countries and then the division combo box by country.
-         *Lambda expression filters the entire first level division list by country ID against the country ID
-         * from the country list. Returns true if object belongs in the filtered list.
+        /**Sets items for the combo box drop down of countries and then the division combo box by country. Lambda expression filters the entire first level division list by country ID against the country ID
+         * from the country list. Returns true if object belongs in the filtered list. 
          * Returns false if the object does not belong in the filtered list. By using a lambda expression, the amount
          * of code needed to filter a list of objects is reduced. This particular example uses the lambda expression to
          * filter out a list of divisions and return those that match a given country ID. This saves time and resources by
@@ -82,7 +81,7 @@ public class NewCustomerController implements Initializable {
          */
 
         @FXML
-        void countryComboBoxAction(ActionEvent event) throws SQLException {
+        public void countryComboBoxAction(ActionEvent event) throws SQLException {
 
                 try {
                         Countries selectedCountry = addNewCustomerCountry.getSelectionModel().getSelectedItem();
@@ -109,7 +108,7 @@ public class NewCustomerController implements Initializable {
 
         }
 
-        /** Gets text from the New Customer form and creates a new customers object.
+        /**Gets text from the New Customer form and creates a new customers object.
          * Checks if fields are blank.
          * If all fields are filled in, calls the addNewCustomer method to add the customer to the database.
          * If added successfully, loads the Customer Info screen which shows all tableview list of all customers.
@@ -156,7 +155,7 @@ public class NewCustomerController implements Initializable {
 
         }
 
-        /** Initializes this form with a combo box that drops down with a list of countries.
+        /**Initializes this form with a combo box that drops down with a list of countries.
          * @param url
          * @param resourceBundle
          * */

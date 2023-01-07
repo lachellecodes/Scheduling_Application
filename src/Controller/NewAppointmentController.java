@@ -28,7 +28,7 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ResourceBundle;
 
-/** A controller class for the New Appointment screen, provides logic to save a new appointment or cancel adding a new appointment.*/
+/** A controller class for the New Appointment screen, provides logic to save a new appointment or cancel adding a new appointment. */
 
 public class NewAppointmentController implements Initializable {
 

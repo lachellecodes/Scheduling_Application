@@ -25,7 +25,7 @@ import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 /** A controller class for the Reports By Country screen, shows a list of appointments in a tableview by country selected
- * from a drop down combo box.*/
+ * from a drop down combo box. */
 
 public class ReportsByCountryController implements Initializable {
 

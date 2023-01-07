@@ -130,7 +130,7 @@ public class CustomerInfoController implements Initializable {
 
 
 
-    /** Initializes the table view for this screen with all of the customer info.
+    /** Initializes the table view for this screen with all of the customer info. 
      * @param resourceBundle
      * @param url
      * Calls the getAllCustomers method to get customer info.

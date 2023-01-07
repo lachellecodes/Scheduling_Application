@@ -206,8 +206,9 @@ public class DashboardController implements Initializable {
         if (confirm.isPresent() && confirm.get() == ButtonType.OK) {
             int appointmentToDelete = apptTableView.getSelectionModel().getSelectedItem().getAppointmentID();
             AppointmentDAO.deleteSingleAppointment(appointmentToDelete);
-            AppointmentDAO.getAllAppointments();
-            apptTableView.refresh();
+            apptTableView.getItems().clear();
+            apptTableView.setItems(AppointmentDAO.getAllAppointments());
+
 
         }
     }

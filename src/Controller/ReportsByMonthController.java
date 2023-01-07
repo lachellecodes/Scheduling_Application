@@ -84,7 +84,9 @@ public class ReportsByMonthController implements Initializable {
 
         /** Initializes this screen with the appointment type and and count in the table view.
          * Calls the @viewMonthType report method to set the items in the table view.
-         * Table columns are set by lambda to determine the objects in the fields.
+         * Table columns are set by lambda to determine the objects in the fields. In this particular example,
+         * the use of lambda expression simplifies the code to retrieve data from the database and feed it into
+         * the tableview.
          * @param url
          * @param resourceBundle
          * */

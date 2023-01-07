@@ -216,6 +216,7 @@ public class UpdateAppointmentController implements Initializable {
                 updateApptEndTime.setValue(selectedAppointment.getEndDateTime().toLocalTime());
                 updateApptCustomerID.getSelectionModel().select(selectedAppointment.getApptCustomerID());
                 updateApptUserID.getSelectionModel().select(selectedAppointment.getApptUserID());
+
                 //todo bring info over from combo boxes?
 
         }

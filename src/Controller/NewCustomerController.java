@@ -74,7 +74,10 @@ public class NewCustomerController implements Initializable {
         /** Sets items for the combo box drop down of countries and then the division combo box by country.
          *Lambda expression filters the entire first level division list by country ID against the country ID
          * from the country list. Returns true if object belongs in the filtered list.
-         * Returns false if the object does not belong in the filtered list.
+         * Returns false if the object does not belong in the filtered list. By using a lambda expression, the amount
+         * of code needed to filter a list of objects is reduced. This particular example uses the lambda expression to
+         * filter out a list of divisions and return those that match a given country ID. This saves time and resources by
+         * avoiding the need to loop through an entire loop.
          * @param event
          */
 

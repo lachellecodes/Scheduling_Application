@@ -29,12 +29,14 @@ public class ValidateAppointment {
 
         //Appointments proposedAppointment = new Appointments();
 
+
         for (Appointments appointments : appointmentList) {
 
-            if (appointments.getAppointmentID() == newAppointment.getAppointmentID()) {
+            if(appointments.getAppointmentID() == newAppointment.getAppointmentID()){
                 continue;
             }
 
+            //TODO this is checking the proposed appointment against itself
 
             int newApptCustomerID = newAppointment.getApptCustomerID();
             LocalDateTime proposedStart = newAppointment.getStartDateTime();
@@ -44,15 +46,34 @@ public class ValidateAppointment {
             LocalDateTime start = appointments.getStartDateTime();
             LocalDateTime end = appointments.getEndDateTime();
 
+            //proposedAppointment = appointments;
+
+           if(appointments.getApptCustomerID() != newAppointment.getApptCustomerID())
+           {
+               continue;
+           }
+           /* if (appointments.getAppointmentID() == newAppointment.getAppointmentID()) {
+                continue;
+            }*/
+
+
+            /*int newApptCustomerID = newAppointment.getApptCustomerID();
+            LocalDateTime proposedStart = newAppointment.getStartDateTime();
+            LocalDateTime proposedEnd = newAppointment.getEndDateTime();
+
+            int apptCustomerID = appointments.getApptCustomerID();
+            LocalDateTime start = appointments.getStartDateTime();
+            LocalDateTime end = appointments.getEndDateTime();*/
+
             //proposedAppointment = newAppointment;
             //proposed start == start
             //proposed end == end
             //proposed start > start && proposed start is < end
             //proposed end > start && proposed end < end
             //proposed start < start && proposed end > end
-            if ((newApptCustomerID != apptCustomerID)){
+            /*if ((newApptCustomerID != apptCustomerID)){
                 continue;
-            }
+            }*/
             //new appointment begins at the same time as another appointment
             if ((newApptCustomerID == apptCustomerID) && proposedStart.isEqual(start)) {
                 overlap = true;
@@ -77,7 +98,7 @@ public class ValidateAppointment {
                 break;
 
                 //
-            } else if ((newApptCustomerID == apptCustomerID) && proposedStart.isAfter(start) && proposedEnd.isAfter(end)) {
+            } else if ((newApptCustomerID == apptCustomerID) && proposedStart.isAfter(start) && proposedStart.isBefore(end)) {
                 overlap = true;
                 break;
 

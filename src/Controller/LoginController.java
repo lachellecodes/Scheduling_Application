@@ -21,6 +21,7 @@ import java.net.URL;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Locale;
 import java.util.ResourceBundle;
@@ -176,10 +177,14 @@ public class LoginController implements Initializable {
 
                     if (currentUserID == appointments.getApptUserID() && start.isAfter(now) && start.isBefore(now.plusMinutes(15))) {
 
+                        int apptId = appointments.getAppointmentID();
+                        LocalDateTime upcomingApptTime = appointments.getStartDateTime();
+
+
                         upcoming= true;
                         Alert alert = new Alert(Alert.AlertType.WARNING);
                         alert.setTitle("Warning");
-                        alert.setHeaderText(" You have an appointment starting within the next 15 minutes.");
+                        alert.setHeaderText(" You have an appointment starting within the next 15 minutes: Appointment ID [ " +apptId+ " ] "+upcomingApptTime+" ");
                         alert.show();
                         break;
 

@@ -45,50 +45,41 @@ public class ValidateAppointment {
             LocalDateTime end = appointments.getEndDateTime();
 
             //proposedAppointment = newAppointment;
+            //proposed start == start
+            //proposed end == end
+            //proposed start > start && proposed start is < end
+            //proposed end > start && proposed end < end
+            //proposed start < start && proposed end > end
+            if ((newApptCustomerID != apptCustomerID)){
+                continue;
+            }
+            //new appointment begins at the same time as another appointment
+            if ((newApptCustomerID == apptCustomerID) && proposedStart.isEqual(start)) {
+                overlap = true;
+                break;
+            }
 
-
-            //new appointment is the same time as another appointment
-            if ((newApptCustomerID == apptCustomerID) && proposedStart.isEqual(start) && proposedEnd.isEqual(end)) {
+            // new appointment ends at the same time as another appointment
+            else if ((newApptCustomerID == apptCustomerID) && proposedEnd.isEqual(end)) {
                 overlap = true;
                 break;
             }
 
             // new appointment starts before but ends after another appointment
-            else if ((newApptCustomerID == apptCustomerID) && proposedStart.isBefore(start) && proposedEnd.isAfter(end)) {
-                overlap = true;
-                break;
-            }
-
-                // new appointment ends at the same time as another appointment
-             else if ((newApptCustomerID == apptCustomerID) && proposedStart.isBefore(start) && proposedEnd.isEqual(end)) {
+             else if ((newApptCustomerID == apptCustomerID) && proposedStart.isBefore(start) && proposedEnd.isAfter(end)) {
                 overlap = true;
                 break;
 
 
-                // new appointment starts at the same time as another appointment and ends during another appointment
-            } else if ((newApptCustomerID == apptCustomerID) && proposedStart.isEqual(start) && proposedEnd.isBefore(end)) {
+                // new appointment starts and ends during another appointment
+            } else if ((newApptCustomerID == apptCustomerID) && proposedEnd.isAfter(start) && proposedEnd.isBefore(end)) {
                 overlap = true;
                 break;
 
-                //new appointment starts after and ends at the same time as another appointment
-            } else if ((newApptCustomerID == apptCustomerID) && proposedStart.isAfter(start) && proposedEnd.isEqual(end)) {
-                overlap = true;
-                break;
-
-                //new appointment starts and ends during another appointment
-            } else if ((newApptCustomerID == apptCustomerID) && proposedStart.isAfter(start) && proposedEnd.isBefore(end)) {
-                overlap = true;
-                break;
-
-                //new appointment starts after and ends after another appointment
+                //
             } else if ((newApptCustomerID == apptCustomerID) && proposedStart.isAfter(start) && proposedEnd.isAfter(end)) {
                 overlap = true;
                 break;
-
-                //new appointment starts at the same time and ends after existing appointment
-            } else if ((newApptCustomerID == apptCustomerID) && proposedStart.isEqual(start) && proposedEnd.isAfter(end)) {
-                overlap = true;
-
 
             }
 

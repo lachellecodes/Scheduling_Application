@@ -19,7 +19,7 @@ public class ValidateAppointment {
      * @param newAppointment
      * @return  a true or false boolean that the appointment overlaps.
      * Goes through the list of all existing appointments and checks the appointment's proposed start and end time
-     * agaisnt all current appointments in the database before saving the new appointment.*/
+     * against all current appointments in the database before saving the new appointment.*/
 
     public static boolean overlappingAppointmentCheck(Appointments newAppointment) throws SQLException {
 
@@ -36,7 +36,6 @@ public class ValidateAppointment {
                 continue;
             }
 
-            //TODO this is checking the proposed appointment against itself
 
             int newApptCustomerID = newAppointment.getApptCustomerID();
             LocalDateTime proposedStart = newAppointment.getStartDateTime();
@@ -74,6 +73,7 @@ public class ValidateAppointment {
             /*if ((newApptCustomerID != apptCustomerID)){
                 continue;
             }*/
+
             //new appointment begins at the same time as another appointment
             if ((newApptCustomerID == apptCustomerID) && proposedStart.isEqual(start)) {
                 overlap = true;
@@ -103,6 +103,7 @@ public class ValidateAppointment {
                 break;
 
             }
+
 
 
         }

@@ -202,6 +202,25 @@ public class AppointmentDAO {
         return appointmentsByType;
         }
 
+
+
+    public static ObservableList<Appointments> searchAppointments (int query) throws SQLException {
+        ObservableList <Appointments> allAppointments= getAllAppointments();
+
+        ObservableList<Appointments> matchingAppointments = FXCollections.observableArrayList();
+
+        for(int i=0; i<allAppointments.size(); i++ ){
+            Appointments matchingAppt = allAppointments.get(i);
+            if(matchingAppt.getApptCustomerID()== query){
+                matchingAppointments.add(matchingAppt);
+
+            }
+        }
+        return matchingAppointments;
+    }
+
+
+
     }
 
 

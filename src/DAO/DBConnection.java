@@ -4,7 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-/** A JDBC class to connect the application to a MySQL databse. */
+/** A JDBC class to connect the application to a MySQL database. */
 
 public abstract class DBConnection {
 

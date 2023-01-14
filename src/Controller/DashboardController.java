@@ -77,6 +77,9 @@ public class DashboardController implements Initializable {
     @FXML
     private RadioButton weeklyViewRadioButton;
 
+    @FXML
+    private TextField apptSearchTxt;
+
 
 /** Loads the report dashboard once the user clicks on the reports button.
  *
@@ -213,6 +216,14 @@ public class DashboardController implements Initializable {
         }
     }
 
+    public void apptTableSearch(ActionEvent actionEvent) throws SQLException {
+
+        int query = Integer.parseInt(apptSearchTxt.getText());
+
+        ObservableList<Appointments> searchAppointments = AppointmentDAO.searchAppointments(query);
+        apptTableView.setItems(searchAppointments);
+    }
+
     /** Closes the application when user selects the Exit button.
      * @param event
      * */
@@ -292,4 +303,6 @@ public class DashboardController implements Initializable {
         apptUserID.setCellValueFactory(new PropertyValueFactory<>("apptUserID"));
 
     }
+
+
 }

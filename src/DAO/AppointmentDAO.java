@@ -13,6 +13,12 @@ import java.time.Month;
 
 public class AppointmentDAO {
 
+    private static Connection conn = null;
+
+    static {
+        conn = DBConnection.getConnection();
+    }
+
     /** This method returns an observable list of all the appointments in the database.
      *
      * @return a list of all appointments
